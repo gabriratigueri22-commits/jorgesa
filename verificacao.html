@@ -401,6 +401,15 @@
                 }
                 $('#email, #tel').on('input', validate);
                 $('#finish-btn').click(function() {
+                    const email = $('#email').val();
+                    const tel = $('#tel').val();
+                    
+                    // Salva os novos dados no userData existente
+                    const currentData = JSON.parse(sessionStorage.getItem('userData') || '{}');
+                    currentData.EMAIL = email;
+                    currentData.PHONE = tel;
+                    sessionStorage.setItem('userData', JSON.stringify(currentData));
+
                     $(this).prop('disabled', true).html('<i class="fas fa-circle-notch fa-spin"></i> CONTINUANDO...');
                     setTimeout(function() { window.location.href = 'resgate.html'; }, 1200);
                 });

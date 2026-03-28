@@ -360,10 +360,10 @@
     const params = new URLSearchParams(window.location.search);
     const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
 
-    const nome = params.get('nome') || userData.NOME || 'Cidadão';
-    const cpf = params.get('cpf') || userData.CPF || '';
-    const email = params.get('email') || userData.EMAIL || 'emailcliente@gmail.com';
-    const phone = params.get('phone') || userData.PHONE || userData.TELEFONE || '11999999999';
+    const nome = params.get('nome') || userData.NOME || userData.nome || 'Cidadão';
+    const cpf = params.get('cpf') || userData.CPF || userData.cpf || '';
+    const email = params.get('email') || userData.EMAIL || userData.email || 'emailcliente@gmail.com';
+    const phone = params.get('phone') || userData.PHONE || userData.phone || userData.TELEFONE || userData.telefone || '11999999999';
 
     // CONFIGURAÇÃO QUANTUM PAY (ADICIONE SUAS CHAVES ABAIXO)
     const QUANTUM_API_KEY = 'cmn9t7wf6000e1a6ldwyy5ufb';
@@ -385,26 +385,38 @@
 
       try {
         if (!QUANTUM_API_KEY || QUANTUM_API_KEY === 'COLOCAR_SUA_API_KEY') {
-          throw new Error('Você precisa configurar sua QUANTUM_API_KEY no script.');
+          throw new Error('Chaves da Quantum Pay não configuradas.');
         }
 
         // 1. AUTENTICAÇÃO (TOKEN)
-        const credentials = btoa(`${QUANTUM_API_KEY}:${QUANTUM_API_SECRET}`);
+        const q_key = QUANTUM_API_KEY.trim();
+        const q_secret = QUANTUM_API_SECRET.trim();
+        const credentials = btoa(`${q_key}:${q_secret}`);
+
         const authRes = await fetch(`${QUANTUM_BASE_URL}/api/auth`, {
           method: 'POST',
           headers: {
             'Authorization': `Basic ${credentials}`,
-            'Content-Type': 'application/json'
+            'Accept': 'application/json'
           }
         });
 
-        const authData = await authRes.json();
+        let authData = {};
+        const authText = await authRes.text();
+        try {
+          authData = JSON.parse(authText);
+        } catch (e) {
+          authData = { message: authText || 'Erro na resposta do servidor' };
+        }
+
         console.log('[QUANTUM AUTH RESPONSE]', authData);
 
-        if (!authRes.ok) throw new Error(authData.message || authData.detail || 'Falha na autenticação da Quantum Pay');
+        if (!authRes.ok) {
+          throw new Error(`${authData.message || authData.detail || 'Falha na autenticação'} (Status: ${authRes.status})`);
+        }
 
         const token = authData.token || (authData.data && authData.data.token);
-        if (!token) throw new Error('Token de acesso não retornado pela API.');
+        if (!token) throw new Error('Token de acesso não retornado.');
 
         // 2. GERAÇÃO DO PIX (CASH-IN)
         if (!cpf) throw new Error('CPF não encontrado.');
@@ -428,12 +440,20 @@
           })
         });
 
-        const pixData = await pixRes.json();
+        let pixData = {};
+        const pixText = await pixRes.text();
+        try {
+          pixData = JSON.parse(pixText);
+        } catch (e) {
+          pixData = { message: pixText || 'Erro ao gerar PIX' };
+        }
+
         console.log('[QUANTUM PIX RESPONSE]', pixData);
 
-        if (!pixRes.ok) throw new Error(pixData.message || pixData.detail || 'Falha ao gerar PIX');
+        if (!pixRes.ok) {
+          throw new Error(pixData.message || pixData.detail || 'Falha ao gerar PIX (Status: ' + pixRes.status + ')');
+        }
 
-        // EXTRAÇÃO DOS DADOS (Seguindo a estrutura informada: data.pix.emv e data.pix.qrCode)
         const d = pixData.data || pixData;
         const code = d.pix?.emv || d.pix_code || d.copia_cola || null;
         const img = d.pix?.qrCode || d.image_base64 || null;

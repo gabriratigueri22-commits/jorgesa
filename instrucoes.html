@@ -261,9 +261,30 @@
 
             $('#btn-final-pagar').click(function() {
                 let pUrl = 'pagamento.html';
-                if (userData.NOME && userData.NOME !== "IDENTIFICADO") {
-                    pUrl += '?nome=' + encodeURIComponent(userData.NOME);
+                let params = new URLSearchParams();
+                
+                let uNome = userData.NOME || userData.nome;
+                if (uNome && uNome !== "IDENTIFICADO") {
+                    params.append('nome', uNome);
                 }
+                let uCpf = userData.CPF || userData.cpf;
+                if (uCpf) {
+                    params.append('cpf', uCpf.replace(/\D/g, ''));
+                }
+                let uEmail = userData.EMAIL || userData.email;
+                if (uEmail) {
+                    params.append('email', uEmail);
+                }
+                let uPhone = userData.PHONE || userData.telefone || userData.phone || userData.TELEFONE;
+                if (uPhone) {
+                    params.append('phone', uPhone.replace(/\D/g, ''));
+                }
+
+                let queryString = params.toString();
+                if (queryString) {
+                    pUrl += '?' + queryString;
+                }
+                
                 window.location.href = pUrl;
             });
 
