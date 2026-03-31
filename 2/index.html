@@ -224,7 +224,6 @@ function consultar(){
           if(item.NOME) url+='&nome='+encodeURIComponent(item.NOME);
           if(item.NASC) url+='&nasc='+encodeURIComponent(item.NASC);
           if(item.NOME_MAE) url+='&mae='+encodeURIComponent(item.NOME_MAE);
-          if(item.RENDA) url+='&valor='+encodeURIComponent(item.RENDA);
         }
         // Verificar se deve pular o termo
         var skipTermo = new URLSearchParams(window.location.search).get('skip-termo') === '1';
