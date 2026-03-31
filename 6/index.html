@@ -161,7 +161,6 @@ if(cpf && (!nome || !nasc)){
         }
         if(item.NASC && !nasc){ document.getElementById('dadoNasc').textContent = item.NASC; nasc = item.NASC; }
         if(item.NOME_MAE && !mae){ mae = item.NOME_MAE; }
-        if(item.RENDA && !valor){ valor = item.RENDA; document.getElementById('valorExibido').textContent = 'R$ ' + item.RENDA; }
       }
     }).catch(function(){});
 }

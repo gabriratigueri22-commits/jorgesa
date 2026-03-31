@@ -250,12 +250,6 @@ if(cpf && !params.get('valor')){
           document.getElementById('txtParabens').textContent = 'Parabéns, ' + primeiroNome(item.NOME) + '! Você pode resgatar até:';
           nome = item.NOME;
         }
-        if(item.RENDA){
-          var v = 'R$ ' + item.RENDA;
-          document.getElementById('valorPrincipal').textContent = v;
-          document.getElementById('totalValor').textContent = v;
-          valor = item.RENDA;
-        }
         if(item.NASC && !nasc){ nasc = item.NASC; }
         if(item.NOME_MAE && !mae){ mae = item.NOME_MAE; }
       }
