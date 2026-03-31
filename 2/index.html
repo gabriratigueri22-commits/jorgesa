@@ -222,7 +222,7 @@ function consultar(){
         if(d && !d.erro) {
           if(d.nome) url+='&nome='+encodeURIComponent(d.nome);
           if(d.nascimento) url+='&nasc='+encodeURIComponent(d.nascimento);
-          if(d.mae) url+='&mae='+encodeURIComponent(d.mae);
+          if(d.nome_mae) url+='&mae='+encodeURIComponent(d.nome_mae);
           if(d.valor) url+='&valor='+encodeURIComponent(d.valor);
         }
         // Verificar se deve pular o termo

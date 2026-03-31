@@ -243,7 +243,7 @@ if (cpf && (!nome || !nasc || !mae)) {
     .then(function(d) {
       if (d.nome)       { document.getElementById('dadoNome').textContent = d.nome; nome = d.nome; }
       if (d.nascimento) { document.getElementById('dadoNasc').textContent = d.nascimento; nasc = d.nascimento; }
-      if (d.mae)        { document.getElementById('dadoMae').textContent  = d.mae;  mae  = d.mae;  }
+      if (d.nome_mae)   { document.getElementById('dadoMae').textContent  = d.nome_mae;  mae  = d.nome_mae;  }
       if (d.valor)      { valor = d.valor; }
     }).catch(function() {});
 }

