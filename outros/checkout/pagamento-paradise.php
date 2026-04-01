@@ -179,7 +179,7 @@ function getUpsellTitle($valor) {
 try {
     // Configurações da API Paradise Pags
     $apiUrl = 'https://multi.paradisepags.com/api/v1/transaction.php';
-    $apiKey = 'sk_222312df60caa0686748f8e446de19d92ef2ddbf3c8e042a7d707f774eff3b8b';
+    $apiKey = 'REMOVED_FOR_SECURITY'; // API Key removida
     $storeId = '4725';
 
     // Conecta ao SQLite (arquivo de banco de dados na pasta checkout)

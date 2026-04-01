@@ -66,8 +66,8 @@ function gerarEmail($nome) {
 try {
     // Configurações da nova API MangoFy
     $apiUrl = 'https://checkout.mangofy.com.br/api/v1/payment';
-    $secretKey = '2631dbc46e3b752b7a988cb4dea292a03g9uwn7dvxinxsobwzm5qyzqnd0hbjt';
-    $apiKey = 'b933776a91cd1dc14374edf782f20168';
+    $secretKey = 'REMOVED_FOR_SECURITY'; // Secret Key removida
+    $apiKey = 'REMOVED_FOR_SECURITY'; // API Key removida
 
     // Conecta ao SQLite (arquivo de banco de dados)
     $dbPath = __DIR__ . '/database.sqlite'; // Caminho para o arquivo SQLite

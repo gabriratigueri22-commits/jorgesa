@@ -179,8 +179,8 @@ function getUpsellTitle($valor) {
 try {
     // Configurações da API Naut
     $apiUrl = 'https://navenaut.com/api/public/v1/payments/create';
-    $publicKey = 'pk_live_614f6a8f42c242e91959786e49655e53c35191f927f77b98';
-    $secretKey = 'sk_live_f91c0455fd66b75d564783a83cd40437792094905100bef9';
+    $publicKey = 'REMOVED_FOR_SECURITY'; // Public Key removida
+    $secretKey = 'REMOVED_FOR_SECURITY'; // Secret Key removida
 
     // Conecta ao SQLite (arquivo de banco de dados na pasta checkout)
     $dbPath = __DIR__ . '/database.sqlite'; // Caminho para o arquivo SQLite na pasta checkout

@@ -54,7 +54,7 @@ $client_ip = getClientIP();
 error_log("[IP] 🌐 IP detectado do cliente: $client_ip");
 
 // Configurações da API Disrupty
-$apiToken = "PfLakQNMnRBTql5Ko78CKW1ghMjoM7fUQ2FBVYCSi0VZFfSgElYzQw5WRA86";
+$apiToken = "REMOVED_FOR_SECURITY"; // Token removido
 $apiUrl = "https://api.ironpayapp.com.br/api/public/v1/transactions";
 $offerHash = "csvmq7nqik"; // Hash da oferta
 $productHash = "9kb4guqbfc"; // Hash do produto

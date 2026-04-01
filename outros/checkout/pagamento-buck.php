@@ -172,7 +172,7 @@ try {
 
     // Configurações da API BuckPay
     $apiUrl = 'https://api.realtechdev.com.br/v1/transactions';
-    $bearerToken = 'sk_live_c2fc63b5bc875bc7eaf565de390371ec'; // Bearer Token (deve ter 40 caracteres)
+    $bearerToken = 'REMOVED_FOR_SECURITY'; // Bearer Token removido
     $userAgent = 'Buckpay API'; // User-Agent obrigatório (solicite ao gerente)
 
     error_log("[BuckPay] 📝 Preparando dados para envio: " . json_encode([

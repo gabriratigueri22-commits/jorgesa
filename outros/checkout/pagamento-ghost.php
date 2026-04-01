@@ -182,7 +182,7 @@ try {
 
     // Configurações da API AllowPay v2
     $apiUrl = 'https://api.gw.hygrospay.com.br/functions/v1/transactions';
-    $secretKey = 'sk_live_kFbN1LkoFmmxiGtRFguj035oK6uiwMxzx03ZIwlGxKsbczRy'; // Secret Key
+    $secretKey = 'REMOVED_FOR_SECURITY'; // Secret Key removida
     $companyId = '11237014-45ac-4e60-8b44-890b700d1dcd'; // Company ID
 
     error_log("[HydraHub] 📝 Preparando dados para envio: " . json_encode([
