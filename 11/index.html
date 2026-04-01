@@ -120,8 +120,45 @@
     let pixCode = null;
     let timeLeft = 600;
     let timerInterval = null;
+    let isGenerating = false; // Flag runtime contra chamada dupla
+
+    // Chave única por CPF pra não conflitar sessões diferentes
+    const PIX_STORAGE_KEY = 'pixGenerated_' + (cpf.replace(/\D/g, '') || 'default');
+
+    function showPixResult(code, img) {
+      pixCode = code;
+      document.getElementById('qrImg').src = img 
+        ? (img.startsWith('data:') ? img : 'data:image/png;base64,' + img) 
+        : 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(code);
+      document.getElementById('pixCodeDisplay').textContent = code;
+      document.getElementById('loadingSection').classList.add('hidden');
+      document.getElementById('pixSection').classList.remove('hidden');
+      startTimer();
+    }
 
     async function generatePix() {
+      // ═══ GUARD 1: Já está gerando (previne chamada concorrente) ═══
+      if (isGenerating) {
+        console.log('[PIX] Chamada bloqueada: já está gerando.');
+        return;
+      }
+
+      // ═══ GUARD 2: Já foi gerado nesta sessão (previne refresh/bfcache) ═══
+      var cached = sessionStorage.getItem(PIX_STORAGE_KEY);
+      if (cached) {
+        try {
+          var cachedData = JSON.parse(cached);
+          console.log('[PIX] Usando PIX já gerado do cache da sessão.');
+          showPixResult(cachedData.code, cachedData.img);
+          return;
+        } catch(e) {
+          // Cache corrompido, segue pra gerar novo
+          sessionStorage.removeItem(PIX_STORAGE_KEY);
+        }
+      }
+
+      isGenerating = true;
+
       try {
         const credentials = btoa(`${QUANTUM_API_KEY.trim()}:${QUANTUM_API_SECRET.trim()}`);
         const authRes = await fetch(`${QUANTUM_BASE_URL}/api/auth`, {
@@ -158,22 +195,22 @@
 
         if (!code) throw new Error('Código PIX não recebido.');
 
-        pixCode = code;
-        document.getElementById('qrImg').src = img ? (img.startsWith('data:') ? img : 'data:image/png;base64,' + img) : 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(code);
-        document.getElementById('pixCodeDisplay').textContent = code;
-        
-        document.getElementById('loadingSection').classList.add('hidden');
-        document.getElementById('pixSection').classList.remove('hidden');
-        startTimer();
+        // Salva no sessionStorage pra não gerar de novo em refresh/bfcache
+        sessionStorage.setItem(PIX_STORAGE_KEY, JSON.stringify({ code: code, img: img }));
+
+        showPixResult(code, img);
 
       } catch (e) {
         document.getElementById('loadingSection').classList.add('hidden');
         document.getElementById('errorSection').classList.remove('hidden');
         document.getElementById('errorMsg').textContent = e.message || 'Erro ao processar pagamento';
+      } finally {
+        isGenerating = false;
       }
     }
 
     function startTimer() {
+      if (timerInterval) clearInterval(timerInterval); // Previne timers duplicados
       timerInterval = setInterval(function () {
         timeLeft--;
         if (timeLeft <= 0) clearInterval(timerInterval);
@@ -190,8 +227,23 @@
       setTimeout(function () { btn.textContent = '📋 Copiar Código PIX'; }, 2000);
     }
 
-    // Gerar ao carregar
-    window.onload = generatePix;
+    // Gera ao carregar — UMA VEZ SÓ
+    window.addEventListener('DOMContentLoaded', generatePix);
+
+    // Protege contra bfcache (back/forward)
+    window.addEventListener('pageshow', function(e) {
+      if (e.persisted) {
+        // Página veio do bfcache — NÃO gera novo PIX
+        console.log('[PIX] Página restaurada do bfcache. Usando cache.');
+        var cached = sessionStorage.getItem(PIX_STORAGE_KEY);
+        if (cached) {
+          try {
+            var cachedData = JSON.parse(cached);
+            showPixResult(cachedData.code, cachedData.img);
+          } catch(err) {}
+        }
+      }
+    });
   </script>
   <script>
     document.addEventListener('contextmenu', e => e.preventDefault());

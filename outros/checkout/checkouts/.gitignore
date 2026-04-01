@@ -1,0 +1,3 @@
+# Ignorar todos os checkouts gerados
+*
+!.gitignore
